@@ -370,6 +370,9 @@ class QuadrotorEnvMulti(gym.Env):
             obs.append(observation)
             self.pos[i, :] = e.dynamics.pos
 
+        # Convert obs to numpy array for consistency
+        obs = np.array(obs)
+
         # Neighbors
         if self.num_use_neighbor_obs > 0:
             obs = self.add_neighborhood_obs(obs)
@@ -408,21 +411,27 @@ class QuadrotorEnvMulti(gym.Env):
             self.quads_formation_size = self.scenario.formation_size
             self.all_collisions = {val: [0.0 for _ in range(len(self.envs))] for val in ['drone', 'ground', 'obstacle']}
 
-        return obs
+        return np.array(obs)
 
     def step(self, actions):
-        obs, rewards, dones, infos = [], [], [], []
+        obs, dones, infos = [], [], []
+        rewards = np.zeros(self.num_agents, dtype=np.float32)
 
-        for i, a in enumerate(actions):
+        assert len(actions) == self.num_agents, \
+            f"Expected {self.num_agents} actions, got {len(actions)}"
+
+        for i in range(self.num_agents):
             self.envs[i].rew_coeff = self.rew_coeff
-
-            observation, reward, done, info = self.envs[i].step(a)
+            observation, reward, done, info = self.envs[i].step(actions[i])
             obs.append(observation)
-            rewards.append(reward)
+            rewards[i] = float(reward)
             dones.append(done)
             infos.append(info)
 
             self.pos[i, :] = self.envs[i].dynamics.pos
+
+        # Convert obs to numpy array for consistency
+        obs = np.array(obs)
 
         # 1. Calculate collisions: 1) between drones 2) with obstacles 3) with room
         # 1) Collisions between drones
@@ -596,7 +605,7 @@ class QuadrotorEnvMulti(gym.Env):
             self.vel[i, :] = self.envs[i].dynamics.vel
 
         if self_state_update_flag:
-            obs = [e.state_vector(e) for e in self.envs]
+            obs = np.array([e.state_vector(e) for e in self.envs])
 
         # Concatenate observations of neighbor drones
         if self.num_use_neighbor_obs > 0:
@@ -717,11 +726,20 @@ class QuadrotorEnvMulti(gym.Env):
                     infos[i]['episode_extra_stats']['metric/agent_obst_col_rate'] = agent_obst_col_ratio
                     infos[i]['episode_extra_stats'][f'{scenario_name}/agent_obst_col_rate'] = agent_obst_col_ratio
 
-            obs = self.reset()
+            obs = self.reset()  # already returns numpy array
             # terminate the episode for all "sub-envs"
             dones = [True] * len(dones)
 
-        return obs, rewards, dones, infos
+        # Convert dones to list (not numpy array) for wrapper compatibility
+        dones_list = list(dones)  # Keep as list for multi-agent processing
+
+        # Ensure obs is a numpy array
+        if not isinstance(obs, np.ndarray):
+            obs = np.array(obs)
+
+        # Return with dones as list for multi-agent environments
+        # The reward_shaping wrapper expects this multi-agent format
+        return obs, rewards, dones_list, infos
 
     def render(self, verbose=False):
         models = tuple(e.dynamics.model for e in self.envs)
