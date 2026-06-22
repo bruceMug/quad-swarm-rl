@@ -1,5 +1,6 @@
 from typing import Any, Dict, Optional, Tuple
 
+import numpy as np
 import gymnasium as gym
 from gymnasium.core import ObsType
 from gymnasium.utils.step_api_compatibility import convert_to_terminated_truncated_step_api
@@ -17,6 +18,11 @@ class QuadEnvCompatibility(gym.Wrapper):
             env (LegacyEnv): the env to wrap, implemented with the old API
         """
         gym.Wrapper.__init__(self, env)
+        # Gymnasium >=1.0 removed Wrapper.__getattr__ attribute forwarding, so we must
+        # explicitly expose these so sample_factory detects this env as multi-agent
+        # (otherwise it wraps us with NonBatchedMultiAgentWrapper and breaks the data layout).
+        self.is_multiagent = env.unwrapped.is_multiagent
+        self.num_agents = env.unwrapped.num_agents
 
     def reset(self, seed: Optional[int] = None, options: Optional[dict] = None) -> Tuple[ObsType, dict]:
         """Resets the environment.
@@ -43,11 +49,15 @@ class QuadEnvCompatibility(gym.Wrapper):
         # since the termination is tick > ep_len
         obs, reward, done, info = self.env.step(action)
 
-        #convert_to_terminated_truncated_step_api treats done as an iterable if info is a dictionary, fails if it not iterable
-        if isinstance(info, dict) and isinstance(done, bool):
-            done = [done]
-
-        return convert_to_terminated_truncated_step_api((obs, reward, done, info), is_vector_env=True)
+        # sample_factory's non-batched multi-agent sampler expects per-agent
+        # terminated/truncated sequences (one entry per agent).
+        if isinstance(done, (list, np.ndarray)):
+            terminated = [bool(d) for d in done]
+            truncated = [False] * len(terminated)
+        else:
+            terminated = bool(done)
+            truncated = False
+        return obs, reward, terminated, truncated, info
 
     def render(self) -> Any:
         """Renders the environment.
