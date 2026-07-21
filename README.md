@@ -48,6 +48,22 @@ This should pull and install all the necessary dependencies including PyTorch.
 
 ### Train
 
+
+#### Mine
+```bash
+tmux new -s training
+
+cd /scratch/bmugizi/marl_research/quad-swarm-rl
+
+bash train_exp1.sh 2>&1 | tee seed1_train.log && \
+bash train_exp2.sh 2>&1 | tee seed2_train.log && \
+bash train_exp3.sh 2>&1 | tee seed3_train.log
+
+# Then Ctrl+B then D
+```
+
+
+#### repo
 This will run the baseline experiment.
 Change the number of workers appropriately to match the number of logical CPU cores on your machine, but it is advised that
 the total number of simulated environments is close to that in the original command:
