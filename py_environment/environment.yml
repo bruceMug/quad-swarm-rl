@@ -1,0 +1,8 @@
+name: swarm_r311
+channels:
+  - defaults
+dependencies:
+  - python=3.11.15
+  - ffmpeg
+  - typing_extensions
+prefix: /scratch/bmugizi/conda_envs/swarm_r311
