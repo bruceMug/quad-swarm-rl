@@ -91,6 +91,25 @@ Here is a total list of wandb settings:
 To test the trained model, run the following command:
 
 ```
+# to save a video file
+xvfb-run -a python -m swarm_rl.enjoy --algo=APPO --env=quadrotor_multi \
+  --replay_buffer_sample_prob=0 --quads_use_numba=False \
+  --quads_render=True --quads_view_mode topdown \
+  --save_video --max_num_episodes=100 \
+  --train_dir=PATH_TO_TRAIN_DIR --experiment=EXPERIMENT_NAME
+
+# no video file
+python -m swarm_rl.enjoy --algo=APPO --env=quadrotor_multi \
+  --replay_buffer_sample_prob=0 --quads_use_numba=False \
+  --no_render \
+  --max_num_episodes=10 \
+  --train_dir=PATH_TO_TRAIN_DIR --experiment=EXPERIMENT_NAME
+
+```
+
+or
+
+```
 python -m swarm_rl.enjoy --algo=APPO --env=quadrotor_multi --replay_buffer_sample_prob=0 --quads_use_numba=False --quads_render=True --train_dir=PATH_TO_TRAIN_DIR --experiment=EXPERIMENT_NAME --quads_view_mode CAMERA_VIEWS
 ```
 EXPERIMENT_NAME and PATH_TO_TRAIN_DIR can be found in the cfg.json file of your trained model
@@ -102,123 +121,36 @@ CAMERA_VIEWS can be any number of views from the following: `[topdown, global, c
 
 To run unit tests:
 
-```
+```bash
 ./run_tests.sh
 ```
 
-## Citation
+## Video
+To get a video from the trained model after running the test command, run the following command:
 
-If you use this repository in your work or otherwise wish to cite it, please make reference to our following papers.
-
-### QuadSwarm: A Modular Multi-Quadrotor Simulator for Deep Reinforcement Learning with Direct Thrust Control 
-[ICRA Workshop: The Role of Robotics Simulators for Unmanned Aerial Vehicles, 2023](https://imrclab.github.io/workshop-uav-sims-icra2023/)
-
-Drone Simulator for Reinforcement Learning.
-```
-@article{huang2023quadswarm,
-  title={Quadswarm: A modular multi-quadrotor simulator for deep reinforcement learning with direct thrust control},
-  author={Huang, Zhehui and Batra, Sumeet and Chen, Tao and Krupani, Rahul and Kumar, Tushar and Molchanov, Artem and Petrenko, Aleksei and Preiss, James A and Yang, Zhaojing and Sukhatme, Gaurav S},
-  journal={arXiv preprint arXiv:2306.09537},
-  year={2023}
-}
+```bash
+ffmpeg -y -i /tmp/sf2_bmugizi/replay.mp4 -vcodec libx264 train_dir/{EXPERIMENT_NAME}/replay.mp4
 ```
 
-### Sim-to-(Multi)-Real: Transfer of Low-Level Robust Control Policies to Multiple Quadrotors
-IROS 2019
+### Tensorboard (ssh tunnel)
 
-Single drone: a unified control policy adaptable to various types of physical quadrotors.
-```
-@inproceedings{molchanov2019sim,
-  title={Sim-to-(multi)-real: Transfer of low-level robust control policies to multiple quadrotors},
-  author={Molchanov, Artem and Chen, Tao and H{\"o}nig, Wolfgang and Preiss, James A and Ayanian, Nora and Sukhatme, Gaurav S},
-  booktitle={2019 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
-  pages={59--66},
-  year={2019},
-  organization={IEEE}
-}
-```
-### Decentralized Control of Quadrotor Swarms with End-to-end Deep Reinforcement Learning
-CoRL 2021
-
-Multiple drones: a decentralized control policy for multiple drones in obstacle free environments.
-```
-@inproceedings{batra21corl,
-  author    = {Sumeet Batra and
-               Zhehui Huang and
-               Aleksei Petrenko and
-               Tushar Kumar and
-               Artem Molchanov and
-               Gaurav S. Sukhatme},
-  title     = {Decentralized Control of Quadrotor Swarms with End-to-end Deep Reinforcement Learning},
-  booktitle = {5th Conference on Robot Learning, CoRL 2021, 8-11 November 2021, London, England, {UK}},
-  series    = {Proceedings of Machine Learning Research},
-  publisher = {{PMLR}},
-  year      = {2021},
-  url       = {https://arxiv.org/abs/2109.07735}
-}
-```
-### Collision Avoidance and Navigation for a Quadrotor Swarm Using End-to-end Deep Reinforcement Learning
-ICRA 2024
-
-Multiple drones: a decentralized control policy for multiple drones in obstacle dense environments.
-```
-@inproceedings{huang2024collision,
-  title={Collision avoidance and navigation for a quadrotor swarm using end-to-end deep reinforcement learning},
-  author={Huang, Zhehui and Yang, Zhaojing and Krupani, Rahul and {\c{S}}enba{\c{s}}lar, Bask{\i}n and Batra, Sumeet and Sukhatme, Gaurav S},
-  booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)},
-  pages={300--306},
-  year={2024},
-  organization={IEEE}
-}
-```
-### HyperPPO: A scalable method for finding small policies for robotic control
-ICRA 2024
-
-A method to find the smallest control policy for deployment: train once, get tons of models with different size by using HyperNetworks.
-
-We only need four neurons to control a quadrotor! That is super amazing!
-
-Please check following videos for more details:
-- [Square Grid Trajectory](https://www.youtube.com/watch?v=IenGT_TOwGQ&ab_channel=USCRESL)
-- [Bezier Curve Trajectory](https://www.youtube.com/watch?v=B5EpKlD5F68&ab_channel=USCRESL)
-```
-@inproceedings{hegde2024hyperppo,
-  title={Hyperppo: A scalable method for finding small policies for robotic control},
-  author={Hegde, Shashank and Huang, Zhehui and Sukhatme, Gaurav S},
-  booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)},
-  pages={10821--10828},
-  year={2024},
-  organization={IEEE}
-}
+1. On the server (leave this running):
+```bash
+tensorboard --logdir=train_dir/{EXPERIMENT_NAME} --port=6006
 ```
 
-### Tiny End-to-End Navigation for Quadrotor Swarms
-ICRA 2025 Workshop
-
-An end-to-end system for navigating a quadrotor swarm with severely resource-constrained hardware, fully relying on onboard resources for perception, localization, planning, and control.
-
-```
-@article{chiutiny,
-  title={Tiny End-to-End Navigation for Quadrotor Swarms},
-  author={Chiu, Darren and Huang, Zhehui and Ge, Ruohai and Sukhatme, Gaurav S}
-}
+2. On your local machine (new terminal, separate SSH):
+```bash
+ssh -L 6006:localhost:6006 bmugizi@ece019.ece.local.cmu.edu
 ```
 
-### Latent Activation Editing: Inference-Time Refinement of Learned Policies for Safer Multirobot Navigation
-Under Review
-
-A novel framwork for inference-time behavior steering of pre-trained robot policies without retraining or fine-tuning.
-```
-@article{das2025latent,
-  title={Latent Activation Editing: Inference-Time Refinement of Learned Policies for Safer Multirobot Navigation},
-  author={Das, Satyajeet and Chiu, Darren and Huang, Zhehui and Lindemann, Lars and Sukhatme, Gaurav S},
-  journal={arXiv preprint arXiv:2509.20623},
-  year={2025}
-}
+3. On your local browser: open
+```bash
+http://localhost:6006
 ```
 
-
-### The next paper will appear soon. Hopefully, it will be the end of 2025. That would be a big surprise. 
-### After that paper publish, we will spend more time on the community, including maintain a website to cover more details of using this simulator and open source some important trained models. 
-
-Github issues and pull requests are welcome.
+You'll see training curves for reward, FPS, and all the episode_extra_stats metrics like metric/agent_success_rate, metric/agent_col_rate, etc. — one curve per seed if you point logdir at the parent folder:
+```bash
+tensorboard --logdir=train_dir --port=6006
+```
+That will show all three seeds overlaid for comparison.
