@@ -1,0 +1,554 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+[36m[2026-08-01 16:04:15,555][450975] register_encoder_factory: <function make_quadmulti_encoder at 0x7f0ecf0f1c60>[0m
+[33m[2026-08-01 16:04:15,592][450975] Loading existing experiment configuration from train_dir/exp1_baseline_seed3/config.json[0m
+[36m[2026-08-01 16:04:15,592][450975] Overriding arg 'train_dir' with value 'train_dir' passed from command line[0m
+[36m[2026-08-01 16:04:15,592][450975] Overriding arg 'quads_use_numba' with value False passed from command line[0m
+[36m[2026-08-01 16:04:15,593][450975] Overriding arg 'replay_buffer_sample_prob' with value 0.0 passed from command line[0m
+[36m[2026-08-01 16:04:15,593][450975] Overriding arg 'quads_view_mode' with value ['topdown'] passed from command line[0m
+[36m[2026-08-01 16:04:15,593][450975] Overriding arg 'quads_render' with value True passed from command line[0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'fps'=0 that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'eval_env_frameskip'=None that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'no_render'=False that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'save_video'=True that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'video_frames'=1000000000.0 that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'video_name'=None that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'max_num_frames'=1000000000.0 that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'max_num_episodes'=100 that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'push_to_hub'=False that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'hf_repository'=None that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,593][450975] Adding new argument 'policy_index'=0 that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,594][450975] Adding new argument 'eval_deterministic'=False that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,594][450975] Adding new argument 'train_script'=None that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,594][450975] Adding new argument 'enjoy_script'=None that is not in the saved config file![0m
+[36m[2026-08-01 16:04:15,594][450975] Using frameskip 1 and render_action_repeat=1 for evaluation[0m
+/scratch/bmugizi/conda_envs/swarm_r311/lib/python3.11/site-packages/gymnasium/spaces/box.py:130: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  gym.logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+[33m[2026-08-01 16:04:15,982][450975] Loading state from checkpoint train_dir/exp1_baseline_seed3/checkpoint_p0/checkpoint_000976566_1000003584.pth...[0m
+/scratch/bmugizi/conda_envs/swarm_r311/lib/python3.11/site-packages/sample_factory/algo/learning/learner.py:281: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint_dict = torch.load(latest_checkpoint, map_location=device)
+[36m[2026-08-01 16:04:22,895][450975] Num frames 100...[0m
+[36m[2026-08-01 16:04:26,208][450975] Num frames 200...[0m
+[36m[2026-08-01 16:04:29,636][450975] Num frames 300...[0m
+[36m[2026-08-01 16:04:33,022][450975] Num frames 400...[0m
+[36m[2026-08-01 16:04:36,551][450975] Num frames 500...[0m
+[36m[2026-08-01 16:04:40,054][450975] Num frames 600...[0m
+[36m[2026-08-01 16:04:46,426][450975] Num frames 700...[0m
+[36m[2026-08-01 16:04:49,739][450975] Num frames 800...[0m
+[36m[2026-08-01 16:04:53,045][450975] Num frames 900...[0m
+[36m[2026-08-01 16:04:56,372][450975] Num frames 1000...[0m
+[36m[2026-08-01 16:04:59,770][450975] Num frames 1100...[0m
+[36m[2026-08-01 16:05:03,496][450975] Num frames 1200...[0m
+[36m[2026-08-01 16:05:07,039][450975] Num frames 1300...[0m
+[36m[2026-08-01 16:05:10,420][450975] Num frames 1400...[0m
+[36m[2026-08-01 16:05:13,909][450975] Num frames 1500...[0m
+[37m[1m[2026-08-01 16:05:14,652][450975] Avg episode rewards: #0: -1.176, #1: 2.979, #2: -7.511, #3: 3.247, #4: 3.585, #5: 2.804, #6: -5.690, #7: -15.286, true rewards: #0: -1.176, #1: 2.979, #2: -7.511, #3: 3.247, #4: 3.585, #5: 2.804, #6: -5.690, #7: -15.286[0m
+[37m[1m[2026-08-01 16:05:14,653][450975] Avg episode reward: -2.131, avg true_objective: -2.131[0m
+[36m[2026-08-01 16:05:18,848][450975] Num frames 1600...[0m
+[36m[2026-08-01 16:05:22,124][450975] Num frames 1700...[0m
+[36m[2026-08-01 16:05:25,525][450975] Num frames 1800...[0m
+[36m[2026-08-01 16:05:28,911][450975] Num frames 1900...[0m
+[36m[2026-08-01 16:05:32,201][450975] Num frames 2000...[0m
+[36m[2026-08-01 16:05:35,460][450975] Num frames 2100...[0m
+[36m[2026-08-01 16:05:38,716][450975] Num frames 2200...[0m
+[36m[2026-08-01 16:05:42,335][450975] Num frames 2300...[0m
+[36m[2026-08-01 16:05:45,679][450975] Num frames 2400...[0m
+[36m[2026-08-01 16:05:48,947][450975] Num frames 2500...[0m
+[36m[2026-08-01 16:05:52,223][450975] Num frames 2600...[0m
+[36m[2026-08-01 16:05:55,433][450975] Num frames 2700...[0m
+[36m[2026-08-01 16:05:58,674][450975] Num frames 2800...[0m
+[36m[2026-08-01 16:06:01,997][450975] Num frames 2900...[0m
+[36m[2026-08-01 16:06:05,717][450975] Num frames 3000...[0m
+[37m[1m[2026-08-01 16:06:06,463][450975] Avg episode rewards: #0: 1.253, #1: 2.455, #2: -2.888, #3: 3.123, #4: 3.706, #5: 3.384, #6: -1.263, #7: -5.707, true rewards: #0: 1.253, #1: 2.455, #2: -2.888, #3: 3.123, #4: 3.706, #5: 3.384, #6: -1.263, #7: -5.707[0m
+[37m[1m[2026-08-01 16:06:06,463][450975] Avg episode reward: 0.508, avg true_objective: 0.508[0m
+[36m[2026-08-01 16:06:10,442][450975] Num frames 3100...[0m
+[36m[2026-08-01 16:06:13,905][450975] Num frames 3200...[0m
+[36m[2026-08-01 16:06:17,234][450975] Num frames 3300...[0m
+[36m[2026-08-01 16:06:20,495][450975] Num frames 3400...[0m
+[36m[2026-08-01 16:06:23,794][450975] Num frames 3500...[0m
+[36m[2026-08-01 16:06:27,143][450975] Num frames 3600...[0m
+[36m[2026-08-01 16:06:30,450][450975] Num frames 3700...[0m
+[36m[2026-08-01 16:06:33,758][450975] Num frames 3800...[0m
+[36m[2026-08-01 16:06:37,111][450975] Num frames 3900...[0m
+[36m[2026-08-01 16:06:40,527][450975] Num frames 4000...[0m
+[36m[2026-08-01 16:06:43,866][450975] Num frames 4100...[0m
+[36m[2026-08-01 16:06:47,148][450975] Num frames 4200...[0m
+[36m[2026-08-01 16:06:50,491][450975] Num frames 4300...[0m
+[36m[2026-08-01 16:06:53,819][450975] Num frames 4400...[0m
+[36m[2026-08-01 16:06:57,185][450975] Num frames 4500...[0m
+[37m[1m[2026-08-01 16:06:58,130][450975] Avg episode rewards: #0: 2.053, #1: 2.817, #2: -0.449, #3: 3.518, #4: 3.324, #5: 3.370, #6: 0.960, #7: -2.385, true rewards: #0: 2.053, #1: 2.817, #2: -0.449, #3: 3.518, #4: 3.324, #5: 3.370, #6: 0.960, #7: -2.385[0m
+[37m[1m[2026-08-01 16:06:58,131][450975] Avg episode reward: 1.651, avg true_objective: 1.651[0m
+[36m[2026-08-01 16:07:01,980][450975] Num frames 4600...[0m
+[36m[2026-08-01 16:07:05,721][450975] Num frames 4700...[0m
+[36m[2026-08-01 16:07:09,003][450975] Num frames 4800...[0m
+[36m[2026-08-01 16:07:12,338][450975] Num frames 4900...[0m
+[36m[2026-08-01 16:07:15,705][450975] Num frames 5000...[0m
+[36m[2026-08-01 16:07:19,019][450975] Num frames 5100...[0m
+[36m[2026-08-01 16:07:22,263][450975] Num frames 5200...[0m
+[36m[2026-08-01 16:07:25,553][450975] Num frames 5300...[0m
+[36m[2026-08-01 16:07:28,846][450975] Num frames 5400...[0m
+[36m[2026-08-01 16:07:32,167][450975] Num frames 5500...[0m
+[36m[2026-08-01 16:07:35,472][450975] Num frames 5600...[0m
+[36m[2026-08-01 16:07:38,749][450975] Num frames 5700...[0m
+[36m[2026-08-01 16:07:42,012][450975] Num frames 5800...[0m
+[36m[2026-08-01 16:07:45,274][450975] Num frames 5900...[0m
+[36m[2026-08-01 16:07:48,550][450975] Num frames 6000...[0m
+[37m[1m[2026-08-01 16:07:49,506][450975] Avg episode rewards: #0: 2.738, #1: 3.041, #2: 0.313, #3: 3.313, #4: 3.160, #5: 2.778, #6: 1.200, #7: -0.800, true rewards: #0: 2.738, #1: 3.041, #2: 0.313, #3: 3.313, #4: 3.160, #5: 2.778, #6: 1.200, #7: -0.800[0m
+[37m[1m[2026-08-01 16:07:49,506][450975] Avg episode reward: 1.968, avg true_objective: 1.968[0m
+[36m[2026-08-01 16:07:53,122][450975] Num frames 6100...[0m
+[36m[2026-08-01 16:07:56,327][450975] Num frames 6200...[0m
+[36m[2026-08-01 16:07:59,675][450975] Num frames 6300...[0m
+[36m[2026-08-01 16:08:03,373][450975] Num frames 6400...[0m
+[36m[2026-08-01 16:08:06,909][450975] Num frames 6500...[0m
+[36m[2026-08-01 16:08:10,572][450975] Num frames 6600...[0m
+[36m[2026-08-01 16:08:14,186][450975] Num frames 6700...[0m
+[36m[2026-08-01 16:08:17,476][450975] Num frames 6800...[0m
+[36m[2026-08-01 16:08:20,794][450975] Num frames 6900...[0m
+[36m[2026-08-01 16:08:24,255][450975] Num frames 7000...[0m
+[36m[2026-08-01 16:08:27,578][450975] Num frames 7100...[0m
+[36m[2026-08-01 16:08:30,975][450975] Num frames 7200...[0m
+[36m[2026-08-01 16:08:34,397][450975] Num frames 7300...[0m
+[36m[2026-08-01 16:08:37,809][450975] Num frames 7400...[0m
+[36m[2026-08-01 16:08:41,273][450975] Num frames 7500...[0m
+[37m[1m[2026-08-01 16:08:43,228][450975] Avg episode rewards: #0: 2.950, #1: -1.121, #2: 0.434, #3: 2.500, #4: 3.460, #5: 3.078, #6: 1.598, #7: -3.791, true rewards: #0: 2.950, #1: -1.121, #2: 0.434, #3: 2.500, #4: 3.460, #5: 3.078, #6: 1.598, #7: -3.791[0m
+[37m[1m[2026-08-01 16:08:43,229][450975] Avg episode reward: 1.139, avg true_objective: 1.139[0m
+[36m[2026-08-01 16:08:46,255][450975] Num frames 7600...[0m
+[36m[2026-08-01 16:08:49,685][450975] Num frames 7700...[0m
+[36m[2026-08-01 16:08:53,080][450975] Num frames 7800...[0m
+[36m[2026-08-01 16:08:56,359][450975] Num frames 7900...[0m
+[36m[2026-08-01 16:08:59,663][450975] Num frames 8000...[0m
+[36m[2026-08-01 16:09:03,415][450975] Num frames 8100...[0m
+[36m[2026-08-01 16:09:07,024][450975] Num frames 8200...[0m
+[36m[2026-08-01 16:09:10,427][450975] Num frames 8300...[0m
+[36m[2026-08-01 16:09:13,905][450975] Num frames 8400...[0m
+[36m[2026-08-01 16:09:17,254][450975] Num frames 8500...[0m
+[36m[2026-08-01 16:09:20,785][450975] Num frames 8600...[0m
+[36m[2026-08-01 16:09:24,284][450975] Num frames 8700...[0m
+[36m[2026-08-01 16:09:27,616][450975] Num frames 8800...[0m
+[36m[2026-08-01 16:09:30,928][450975] Num frames 8900...[0m
+[36m[2026-08-01 16:09:34,221][450975] Num frames 9000...[0m
+[37m[1m[2026-08-01 16:09:35,181][450975] Avg episode rewards: #0: 1.152, #1: -1.104, #2: 0.115, #3: 1.360, #4: 2.677, #5: 2.475, #6: 1.092, #7: -3.638, true rewards: #0: 1.152, #1: -1.104, #2: 0.115, #3: 1.360, #4: 2.677, #5: 2.475, #6: 1.092, #7: -3.638[0m
+[37m[1m[2026-08-01 16:09:35,182][450975] Avg episode reward: 0.516, avg true_objective: 0.516[0m
+[36m[2026-08-01 16:09:38,817][450975] Num frames 9100...[0m
+[36m[2026-08-01 16:09:42,216][450975] Num frames 9200...[0m
+[36m[2026-08-01 16:09:45,507][450975] Num frames 9300...[0m
+[36m[2026-08-01 16:09:48,898][450975] Num frames 9400...[0m
+[36m[2026-08-01 16:09:52,201][450975] Num frames 9500...[0m
+[36m[2026-08-01 16:09:55,487][450975] Num frames 9600...[0m
+[36m[2026-08-01 16:09:58,720][450975] Num frames 9700...[0m
+[36m[2026-08-01 16:10:01,957][450975] Num frames 9800...[0m
+[36m[2026-08-01 16:10:05,737][450975] Num frames 9900...[0m
+[36m[2026-08-01 16:10:09,041][450975] Num frames 10000...[0m
+[36m[2026-08-01 16:10:12,594][450975] Num frames 10100...[0m
+[36m[2026-08-01 16:10:15,951][450975] Num frames 10200...[0m
+[36m[2026-08-01 16:10:19,485][450975] Num frames 10300...[0m
+[36m[2026-08-01 16:10:23,004][450975] Num frames 10400...[0m
+[36m[2026-08-01 16:10:26,425][450975] Num frames 10500...[0m
+[37m[1m[2026-08-01 16:10:27,495][450975] Avg episode rewards: #0: 0.998, #1: -2.742, #2: -3.287, #3: 1.172, #4: 2.126, #5: 2.228, #6: 1.008, #7: -3.160, true rewards: #0: 0.998, #1: -2.742, #2: -3.287, #3: 1.172, #4: 2.126, #5: 2.228, #6: 1.008, #7: -3.160[0m
+[37m[1m[2026-08-01 16:10:27,496][450975] Avg episode reward: -0.207, avg true_objective: -0.207[0m
+[36m[2026-08-01 16:10:31,126][450975] Num frames 10600...[0m
+[36m[2026-08-01 16:10:34,361][450975] Num frames 10700...[0m
+[36m[2026-08-01 16:10:37,604][450975] Num frames 10800...[0m
+[36m[2026-08-01 16:10:40,882][450975] Num frames 10900...[0m
+[36m[2026-08-01 16:10:44,632][450975] Num frames 11000...[0m
+[36m[2026-08-01 16:10:48,087][450975] Num frames 11100...[0m
+[36m[2026-08-01 16:10:51,430][450975] Num frames 11200...[0m
+[36m[2026-08-01 16:10:54,751][450975] Num frames 11300...[0m
+[36m[2026-08-01 16:10:58,084][450975] Num frames 11400...[0m
+[36m[2026-08-01 16:11:01,511][450975] Num frames 11500...[0m
+[36m[2026-08-01 16:11:05,337][450975] Num frames 11600...[0m
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+IMPORTING OPENGL RENDERING MODULE. THIS SHOULD NOT BE IMPORTED IN HEADLESS MODE!
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames[36m[2026-08-01 16:11:08,702][450975] Num frames 11700...[0m
+[36m[2026-08-01 16:11:12,465][450975] Num frames 11800...[0m
+[36m[2026-08-01 16:11:15,997][450975] Num frames 11900...[0m
+[36m[2026-08-01 16:11:19,555][450975] Num frames 12000...[0m
+[37m[1m[2026-08-01 16:11:20,593][450975] Avg episode rewards: #0: 1.096, #1: -1.702, #2: -2.353, #3: 1.567, #4: 1.381, #5: 2.275, #6: -1.261, #7: -2.328, true rewards: #0: 1.096, #1: -1.702, #2: -2.353, #3: 1.567, #4: 1.381, #5: 2.275, #6: -1.261, #7: -2.328[0m
+[37m[1m[2026-08-01 16:11:20,593][450975] Avg episode reward: -0.166, avg true_objective: -0.166[0m
+[36m[2026-08-01 16:11:24,162][450975] Num frames 12100...[0m
+[36m[2026-08-01 16:11:27,376][450975] Num frames 12200...[0m
+[36m[2026-08-01 16:11:30,679][450975] Num frames 12300...[0m
+[36m[2026-08-01 16:11:34,066][450975] Num frames 12400...[0m
+[36m[2026-08-01 16:11:37,480][450975] Num frames 12500...[0m
+[36m[2026-08-01 16:11:40,969][450975] Num frames 12600...[0m
+[36m[2026-08-01 16:11:44,426][450975] Num frames 12700...[0m
+[36m[2026-08-01 16:11:47,796][450975] Num frames 12800...[0m
+[36m[2026-08-01 16:11:51,139][450975] Num frames 12900...[0m
+[36m[2026-08-01 16:11:54,493][450975] Num frames 13000...[0m
+[36m[2026-08-01 16:11:57,820][450975] Num frames 13100...[0m
+[36m[2026-08-01 16:12:01,446][450975] Num frames 13200...[0m
+[36m[2026-08-01 16:12:05,365][450975] Num frames 13300...[0m
+[36m[2026-08-01 16:12:08,838][450975] Num frames 13400...[0m
+[36m[2026-08-01 16:12:12,274][450975] Num frames 13500...[0m
+[37m[1m[2026-08-01 16:12:13,422][450975] Avg episode rewards: #0: 0.889, #1: -1.153, #2: -2.301, #3: 1.375, #4: 1.283, #5: 2.513, #6: -0.842, #7: -2.903, true rewards: #0: 0.889, #1: -1.153, #2: -2.301, #3: 1.375, #4: 1.283, #5: 2.513, #6: -0.842, #7: -2.903[0m
+[37m[1m[2026-08-01 16:12:13,423][450975] Avg episode reward: -0.142, avg true_objective: -0.142[0m
+[36m[2026-08-01 16:12:16,898][450975] Num frames 13600...[0m
+[36m[2026-08-01 16:12:20,081][450975] Num frames 13700...[0m
+[36m[2026-08-01 16:12:23,315][450975] Num frames 13800...[0m
+[36m[2026-08-01 16:12:26,640][450975] Num frames 13900...[0m
+[36m[2026-08-01 16:12:29,894][450975] Num frames 14000...[0m
+[36m[2026-08-01 16:12:33,231][450975] Num frames 14100...[0m
+[36m[2026-08-01 16:12:36,506][450975] Num frames 14200...[0m
+[36m[2026-08-01 16:12:39,820][450975] Num frames 14300...[0m
+[36m[2026-08-01 16:12:43,332][450975] Num frames 14400...[0m
+[36m[2026-08-01 16:12:46,599][450975] Num frames 14500...[0m
+[36m[2026-08-01 16:12:49,905][450975] Num frames 14600...[0m
+[36m[2026-08-01 16:12:53,263][450975] Num frames 14700...[0m
+[36m[2026-08-01 16:12:56,541][450975] Num frames 14800...[0m
+[36m[2026-08-01 16:12:59,876][450975] Num frames 14900...[0m
+[36m[2026-08-01 16:13:03,726][450975] Num frames 15000...[0m
+[37m[1m[2026-08-01 16:13:05,831][450975] Avg episode rewards: #0: 1.003, #1: -0.438, #2: -1.530, #3: 1.518, #4: 1.439, #5: 2.584, #6: -0.278, #7: -2.412, true rewards: #0: 1.003, #1: -0.438, #2: -1.530, #3: 1.518, #4: 1.439, #5: 2.584, #6: -0.278, #7: -2.412[0m
+[37m[1m[2026-08-01 16:13:05,831][450975] Avg episode reward: 0.235, avg true_objective: 0.235[0m
+[36m[2026-08-01 16:13:08,639][450975] Num frames 15100...[0m
+[36m[2026-08-01 16:13:11,949][450975] Num frames 15200...[0m
+[36m[2026-08-01 16:13:15,306][450975] Num frames 15300...[0m
+[36m[2026-08-01 16:13:18,558][450975] Num frames 15400...[0m
+[36m[2026-08-01 16:13:21,811][450975] Num frames 15500...[0m
+[36m[2026-08-01 16:13:25,198][450975] Num frames 15600...[0m
+[36m[2026-08-01 16:13:28,457][450975] Num frames 15700...[0m
+[36m[2026-08-01 16:13:31,730][450975] Num frames 15800...[0m
+[36m[2026-08-01 16:13:35,036][450975] Num frames 15900...[0m
+[36m[2026-08-01 16:13:38,276][450975] Num frames 16000...[0m
+[36m[2026-08-01 16:13:41,550][450975] Num frames 16100...[0m
+[36m[2026-08-01 16:13:44,805][450975] Num frames 16200...[0m
+[36m[2026-08-01 16:13:48,078][450975] Num frames 16300...[0m
+[36m[2026-08-01 16:13:51,319][450975] Num frames 16400...[0m
+[36m[2026-08-01 16:13:54,785][450975] Num frames 16500...[0m
+[37m[1m[2026-08-01 16:13:55,825][450975] Avg episode rewards: #0: 1.362, #1: -0.104, #2: -0.922, #3: 1.845, #4: 1.783, #5: 1.861, #6: 0.078, #7: -1.674, true rewards: #0: 1.362, #1: -0.104, #2: -0.922, #3: 1.845, #4: 1.783, #5: 1.861, #6: 0.078, #7: -1.674[0m
+[37m[1m[2026-08-01 16:13:55,825][450975] Avg episode reward: 0.529, avg true_objective: 0.529[0m
+[36m[2026-08-01 16:13:59,242][450975] Num frames 16600...[0m
+[36m[2026-08-01 16:14:02,777][450975] Num frames 16700...[0m
+[36m[2026-08-01 16:14:06,436][450975] Num frames 16800...[0m
+[36m[2026-08-01 16:14:09,790][450975] Num frames 16900...[0m
+[36m[2026-08-01 16:14:13,383][450975] Num frames 17000...[0m
+[36m[2026-08-01 16:14:16,912][450975] Num frames 17100...[0m
+[36m[2026-08-01 16:14:20,390][450975] Num frames 17200...[0m
+[36m[2026-08-01 16:14:23,919][450975] Num frames 17300...[0m
+[36m[2026-08-01 16:14:27,421][450975] Num frames 17400...[0m
+[36m[2026-08-01 16:14:30,670][450975] Num frames 17500...[0m
+[36m[2026-08-01 16:14:33,909][450975] Num frames 17600...[0m
+[36m[2026-08-01 16:14:37,204][450975] Num frames 17700...[0m
+[36m[2026-08-01 16:14:40,535][450975] Num frames 17800...[0m
+[36m[2026-08-01 16:14:43,902][450975] Num frames 17900...[0m
+[36m[2026-08-01 16:14:47,154][450975] Num frames 18000...[0m
+[37m[1m[2026-08-01 16:14:48,295][450975] Avg episode rewards: #0: 1.325, #1: 0.048, #2: -0.657, #3: 1.928, #4: 1.985, #5: 1.567, #6: 0.382, #7: -1.278, true rewards: #0: 1.325, #1: 0.048, #2: -0.657, #3: 1.928, #4: 1.985, #5: 1.567, #6: 0.382, #7: -1.278[0m
+[37m[1m[2026-08-01 16:14:48,295][450975] Avg episode reward: 0.662, avg true_objective: 0.662[0m
+[36m[2026-08-01 16:14:52,034][450975] Num frames 18100...[0m
+[36m[2026-08-01 16:14:55,347][450975] Num frames 18200...[0m
+[36m[2026-08-01 16:14:58,600][450975] Num frames 18300...[0m
+[36m[2026-08-01 16:15:02,107][450975] Num frames 18400...[0m
+[36m[2026-08-01 16:15:05,750][450975] Num frames 18500...[0m
+[36m[2026-08-01 16:15:09,131][450975] Num frames 18600...[0m
+[36m[2026-08-01 16:15:12,725][450975] Num frames 18700...[0m
+[36m[2026-08-01 16:15:16,111][450975] Num frames 18800...[0m
+[36m[2026-08-01 16:15:19,688][450975] Num frames 18900...[0m
+[36m[2026-08-01 16:15:23,360][450975] Num frames 19000...[0m
+[36m[2026-08-01 16:15:26,839][450975] Num frames 19100...[0m
+[36m[2026-08-01 16:15:30,286][450975] Num frames 19200...[0m
+[36m[2026-08-01 16:15:33,718][450975] Num frames 19300...[0m
+[36m[2026-08-01 16:15:37,021][450975] Num frames 19400...[0m
+[36m[2026-08-01 16:15:40,593][450975] Num frames 19500...[0m
+[37m[1m[2026-08-01 16:15:42,060][450975] Avg episode rewards: #0: 0.794, #1: -0.526, #2: -0.664, #3: 1.598, #4: 1.802, #5: 1.446, #6: 0.350, #7: -1.141, true rewards: #0: 0.794, #1: -0.526, #2: -0.664, #3: 1.598, #4: 1.802, #5: 1.446, #6: 0.350, #7: -1.141[0m
+[37m[1m[2026-08-01 16:15:42,061][450975] Avg episode reward: 0.457, avg true_objective: 0.457[0m
+ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 14.3.0 (conda-forge gcc 14.3.0-16)
+  configuration: --prefix=/scratch/bmugizi/conda_envs/swarm_r311 --cc=/home/conda/feedstock_root/build_artifacts/ffmpeg_1769712549653/_build_env/bin/x86_64-conda-linux-gnu-cc --cxx=/home/conda/feedstock_root/build_artifacts/ffmpeg_1769712549653/_build_env/bin/x86_64-conda-linux-gnu-c++ --nm=/home/conda/feedstock_root/build_artifacts/ffmpeg_1769712549653/_build_env/bin/x86_64-conda-linux-gnu-nm --ar=/home/conda/feedstock_root/build_artifacts/ffmpeg_1769712549653/_build_env/bin/x86_64-conda-linux-gnu-ar --disable-doc --enable-openssl --enable-demuxer=dash --enable-hardcoded-tables --enable-libfreetype --enable-libharfbuzz --enable-libfontconfig --enable-libopenh264 --enable-libdav1d --disable-gnutls --enable-libvpx --enable-libass --enable-pthreads --enable-alsa --enable-libpulse --enable-libvpl --enable-vaapi --enable-libopenvino --enable-gpl --enable-libx264 --enable-libx265 --enable-libmp3lame --enable-libaom --enable-libsvtav1 --enable-libxml2 --enable-pic --enable-shared --disable-static --enable-version3 --enable-zlib --enable-libvorbis --enable-libopus --enable-librsvg --enable-libjxl --enable-libwebp --enable-ffplay --enable-vulkan --enable-libshaderc --pkg-config=/home/conda/feedstock_root/build_artifacts/ffmpeg_1769712549653/_build_env/bin/pkg-config
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/sf2_bmugizi/replay.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    encoder         : Lavf59.27.100
+  Duration: 00:02:10.23, start: 0.000000, bitrate: 336 kb/s
+  Stream #0:0[0x1](und): Video: mpeg4 (Simple Profile) (mp4v / 0x7634706D), yuv420p, 480x480 [SAR 1:1 DAR 1:1], 335 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 -> #0:0 (mpeg4 (native) -> h264 (libx264))
+Press [q] to stop, [?] for help
+[libx264 @ 0x55d5839bb780] using SAR=1/1
+[libx264 @ 0x55d5839bb780] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[libx264 @ 0x55d5839bb780] profile High, level 3.0, 4:2:0, 8-bit
+[libx264 @ 0x55d5839bb780] 264 - core 164 r3095 baee400 - H.264/MPEG-4 AVC codec - Copyleft 2003-2022 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=15 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to 'train_dir/exp1_baseline_seed3/replay.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    encoder         : Lavf62.3.100
+  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 480x480 [SAR 1:1 DAR 1:1], q=2-31, 30 fps, 15360 tbn (default)
+    Metadata:
+      encoder         : Lavc62.11.100 libx264
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+frame=  595 fps=0.0 q=29.0 size=       0KiB time=00:00:19.76 bitrate=   0.0kbits/s speed=39.5x elapsed=0:00:00.50    frame= 1338 fps=1338 q=29.0 size=     256KiB time=00:00:44.53 bitrate=  47.1kbits/s speed=44.5x elapsed=0:00:01.00    frame= 2065 fps=1376 q=29.0 size=     512KiB time=00:01:08.76 bitrate=  61.0kbits/s speed=45.8x elapsed=0:00:01.50    frame= 2763 fps=1381 q=29.0 size=     512KiB time=00:01:32.03 bitrate=  45.6kbits/s speed=  46x elapsed=0:00:02.00    frame= 3484 fps=1393 q=29.0 size=     768KiB time=00:01:56.06 bitrate=  54.2kbits/s speed=46.4x elapsed=0:00:02.50    [out#0/mp4 @ 0x55d5839b8e40] video:957KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 4.794630%
+frame= 3907 fps=1400 q=-1.0 Lsize=    1003KiB time=00:02:10.16 bitrate=  63.1kbits/s speed=46.6x elapsed=0:00:02.79    
+[libx264 @ 0x55d5839bb780] frame I:18    Avg QP:14.92  size:  1062
+[libx264 @ 0x55d5839bb780] frame P:1105  Avg QP:21.49  size:   399
+[libx264 @ 0x55d5839bb780] frame B:2784  Avg QP:26.41  size:   187
+[libx264 @ 0x55d5839bb780] consecutive B-frames:  2.9%  4.5%  5.4% 87.2%
+[libx264 @ 0x55d5839bb780] mb I  I16..4: 32.6% 65.6%  1.8%
+[libx264 @ 0x55d5839bb780] mb P  I16..4:  0.1%  0.5%  0.3%  P16..4:  1.4%  0.4%  0.2%  0.0%  0.0%    skip:97.1%
+[libx264 @ 0x55d5839bb780] mb B  I16..4:  0.0%  0.2%  0.0%  B16..8:  2.0%  0.2%  0.1%  direct: 0.2%  skip:97.2%  L0:53.8% L1:42.1% BI: 4.1%
+[libx264 @ 0x55d5839bb780] 8x8 transform intra:64.6% inter:8.2%
+[libx264 @ 0x55d5839bb780] coded y,uvDC,uvAC intra: 9.0% 17.0% 15.5% inter: 0.3% 0.6% 0.5%
+[libx264 @ 0x55d5839bb780] i16 v,h,dc,p: 72% 25%  3%  0%
+[libx264 @ 0x55d5839bb780] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 38%  5% 56%  0%  0%  0%  0%  0%  0%
+[libx264 @ 0x55d5839bb780] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 20% 14% 53%  3%  2%  2%  2%  2%  2%
+[libx264 @ 0x55d5839bb780] i8c dc,h,v,p: 84%  8%  8%  0%
+[libx264 @ 0x55d5839bb780] Weighted P-Frames: Y:0.6% UV:0.3%
+[libx264 @ 0x55d5839bb780] ref P L0: 74.9%  3.3% 14.2%  7.6%  0.0%
+[libx264 @ 0x55d5839bb780] ref B L0: 69.7% 25.7%  4.6%
+[libx264 @ 0x55d5839bb780] ref B L1: 93.9%  6.1%
+[libx264 @ 0x55d5839bb780] kb/s:60.17
+[36m[2026-08-01 16:15:49,656][450975] Replay video saved to train_dir/exp1_baseline_seed3/replay.mp4![0m
+(0, 0.4573945004510908)
+
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
+Rendering cannot keep up! Rendering every 5 frames
