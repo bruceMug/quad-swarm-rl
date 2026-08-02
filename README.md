@@ -106,7 +106,7 @@ Here is a total list of wandb settings:
 ### Test
 To test the trained model, run the following command:
 
-```
+```bash
 # to save a video file
 xvfb-run -a python -m swarm_rl.enjoy --algo=APPO --env=quadrotor_multi \
   --replay_buffer_sample_prob=0 --quads_use_numba=False \
@@ -120,7 +120,13 @@ python -m swarm_rl.enjoy --algo=APPO --env=quadrotor_multi \
   --no_render \
   --max_num_episodes=10 \
   --train_dir=PATH_TO_TRAIN_DIR --experiment=EXPERIMENT_NAME
+```
 
+general command
+```bash
+bash test_seed1.sh 2>&1 | tee logs/seed1_test.log && \
+bash test_seed2.sh 2>&1 | tee logs/seed2_test.log && \
+bash test_seed3.sh 2>&1 | tee logs/seed3_test.log
 ```
 
 or
