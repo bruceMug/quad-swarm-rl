@@ -1,0 +1,70 @@
+{
+  "source": "tensorboard last-10% means",
+  "seeds": [
+    "exp1_baseline_seed1",
+    "exp1_baseline_seed2",
+    "exp1_baseline_seed3"
+  ],
+  "aggregated": {
+    "episode_reward": {
+      "seed_means": [
+        -14.589435,
+        -5.772,
+        -6.743356
+      ],
+      "overall_mean": -9.034930333333334,
+      "overall_std": 3.9475962887728975,
+      "n_seeds": 3
+    },
+    "metric/agent_success_rate": {
+      "seed_means": [
+        0.46,
+        0.51,
+        0.42
+      ],
+      "overall_mean": 0.4633333333333333,
+      "overall_std": 0.036817870057290876,
+      "n_seeds": 3
+    },
+    "metric/agent_col_rate": {
+      "seed_means": [
+        0.03,
+        0.48,
+        0.57
+      ],
+      "overall_mean": 0.36000000000000004,
+      "overall_std": 0.23622023622035432,
+      "n_seeds": 3
+    },
+    "metric/agent_neighbor_col_rate": {
+      "seed_means": [
+        0.03,
+        0.48,
+        0.57
+      ],
+      "overall_mean": 0.36000000000000004,
+      "overall_std": 0.23622023622035432,
+      "n_seeds": 3
+    },
+    "metric/agent_deadlock_rate": {
+      "seed_means": [
+        0.51,
+        0.01,
+        0.01
+      ],
+      "overall_mean": 0.17666666666666667,
+      "overall_std": 0.23570226039551584,
+      "n_seeds": 3
+    },
+    "metric/agent_obst_col_rate": {
+      "seed_means": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "overall_mean": 0.0,
+      "overall_std": 0.0,
+      "n_seeds": 3
+    }
+  }
+}
