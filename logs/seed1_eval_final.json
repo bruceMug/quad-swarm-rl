@@ -1,0 +1,1073 @@
+{
+  "experiment": "exp1_baseline_seed1",
+  "train_dir": "train_dir",
+  "num_episodes": 100,
+  "deterministic": true,
+  "generated_at": "2026-08-03T09:04:12.148939",
+  "summary": {
+    "episode_reward": {
+      "mean": 1.484471,
+      "std": 3.453128,
+      "min": -10.702381,
+      "max": 5.518142,
+      "n": 100
+    },
+    "episode_length": {
+      "mean": 1501.0,
+      "std": 0.0,
+      "min": 1501.0,
+      "max": 1501.0,
+      "n": 100
+    },
+    "num_collisions": {
+      "mean": 0.42,
+      "std": 0.695414,
+      "min": 0.0,
+      "max": 3.0,
+      "n": 100
+    },
+    "num_collisions_with_room": {
+      "mean": 1.48,
+      "std": 2.260442,
+      "min": 0.0,
+      "max": 14.0,
+      "n": 100
+    },
+    "num_collisions_with_floor": {
+      "mean": 1.21,
+      "std": 1.739511,
+      "min": 0.0,
+      "max": 12.0,
+      "n": 100
+    },
+    "num_collisions_with_wall": {
+      "mean": 0.5,
+      "std": 1.367479,
+      "min": 0.0,
+      "max": 11.0,
+      "n": 100
+    },
+    "num_collisions_with_ceiling": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "num_collisions_after_settle": {
+      "mean": 0.36,
+      "std": 0.671118,
+      "min": 0.0,
+      "max": 3.0,
+      "n": 100
+    },
+    "ep_rand_bezier/num_collisions": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "num_collisions_final_5_s": {
+      "mean": 0.09,
+      "std": 0.349142,
+      "min": 0.0,
+      "max": 2.0,
+      "n": 100
+    },
+    "ep_rand_bezier/num_collisions_final_5_s": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "distance_to_goal_1s": {
+      "mean": 0.45957,
+      "std": 0.546862,
+      "min": 0.035671,
+      "max": 2.478983,
+      "n": 100
+    },
+    "distance_to_goal_3s": {
+      "mean": 0.453932,
+      "std": 0.402827,
+      "min": 0.057174,
+      "max": 2.388975,
+      "n": 100
+    },
+    "distance_to_goal_5s": {
+      "mean": 0.504091,
+      "std": 0.427382,
+      "min": 0.049305,
+      "max": 2.18928,
+      "n": 100
+    },
+    "ep_rand_bezier/distance_to_goal_1s": {
+      "mean": 1.124854,
+      "std": 0.586751,
+      "min": 0.287043,
+      "max": 1.884306,
+      "n": 8
+    },
+    "ep_rand_bezier/distance_to_goal_3s": {
+      "mean": 0.921551,
+      "std": 0.183451,
+      "min": 0.590886,
+      "max": 1.208149,
+      "n": 8
+    },
+    "ep_rand_bezier/distance_to_goal_5s": {
+      "mean": 1.016792,
+      "std": 0.148267,
+      "min": 0.793016,
+      "max": 1.228981,
+      "n": 8
+    },
+    "metric/agent_success_rate": {
+      "mean": 0.905,
+      "std": 0.165944,
+      "min": 0.25,
+      "max": 1.0,
+      "n": 100
+    },
+    "ep_rand_bezier/agent_success_rate": {
+      "mean": 0.890625,
+      "std": 0.245566,
+      "min": 0.25,
+      "max": 1.0,
+      "n": 8
+    },
+    "metric/agent_deadlock_rate": {
+      "mean": 0.01,
+      "std": 0.076404,
+      "min": 0.0,
+      "max": 0.75,
+      "n": 100
+    },
+    "ep_rand_bezier/agent_deadlock_rate": {
+      "mean": 0.109375,
+      "std": 0.245566,
+      "min": 0.0,
+      "max": 0.75,
+      "n": 8
+    },
+    "metric/agent_col_rate": {
+      "mean": 0.085,
+      "std": 0.152971,
+      "min": 0.0,
+      "max": 0.625,
+      "n": 100
+    },
+    "ep_rand_bezier/agent_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "metric/agent_neighbor_col_rate": {
+      "mean": 0.085,
+      "std": 0.152971,
+      "min": 0.0,
+      "max": 0.625,
+      "n": 100
+    },
+    "ep_rand_bezier/agent_neighbor_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "metric/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "ep_rand_bezier/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "rew_main": {
+      "mean": -5.117344,
+      "std": 4.020229,
+      "min": -24.304802,
+      "max": -0.834964,
+      "n": 100
+    },
+    "rew_pos": {
+      "mean": -5.117344,
+      "std": 4.020229,
+      "min": -24.304802,
+      "max": -0.834964,
+      "n": 100
+    },
+    "rew_action": {
+      "mean": -0.100325,
+      "std": 0.04229,
+      "min": -0.283852,
+      "max": -0.052623,
+      "n": 100
+    },
+    "rew_crash": {
+      "mean": -0.01775,
+      "std": 0.038977,
+      "min": -0.24,
+      "max": 0.0,
+      "n": 100
+    },
+    "rew_orient": {
+      "mean": 7.208697,
+      "std": 0.364901,
+      "min": 5.685035,
+      "max": 7.494362,
+      "n": 100
+    },
+    "rew_spin": {
+      "mean": -0.837895,
+      "std": 0.939003,
+      "min": -5.439673,
+      "max": -0.291955,
+      "n": 100
+    },
+    "rewraw_main": {
+      "mean": -115.117344,
+      "std": 313.676416,
+      "min": -1013.366986,
+      "max": -0.834964,
+      "n": 100
+    },
+    "rewraw_pos": {
+      "mean": -5.117344,
+      "std": 4.020229,
+      "min": -24.304802,
+      "max": -0.834964,
+      "n": 100
+    },
+    "rewraw_action": {
+      "mean": -2.006509,
+      "std": 0.845801,
+      "min": -5.677046,
+      "max": -1.052464,
+      "n": 100
+    },
+    "rewraw_crash": {
+      "mean": -0.01775,
+      "std": 0.038977,
+      "min": -0.24,
+      "max": 0.0,
+      "n": 100
+    },
+    "rewraw_orient": {
+      "mean": 7.208697,
+      "std": 0.364901,
+      "min": 5.685035,
+      "max": 7.494362,
+      "n": 100
+    },
+    "rewraw_spin": {
+      "mean": -8.378947,
+      "std": 9.390031,
+      "min": -54.396728,
+      "max": -2.919548,
+      "n": 100
+    },
+    "rew_quadcol": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "rew_proximity": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "rewraw_quadcol": {
+      "mean": -0.11,
+      "std": 0.31289,
+      "min": -1.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "z_approx_total_training_steps": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "Scenario_static_same_goal/rew_pos": {
+      "mean": -5.992865,
+      "std": 6.349883,
+      "min": -24.304802,
+      "max": -2.398395,
+      "n": 10
+    },
+    "Scenario_static_same_goal/rew_crash": {
+      "mean": -0.0135,
+      "std": 0.022028,
+      "min": -0.065,
+      "max": 0.0,
+      "n": 10
+    },
+    "z_action0_mean": {
+      "mean": 0.087252,
+      "std": 0.021384,
+      "min": 0.064012,
+      "max": 0.169004,
+      "n": 100
+    },
+    "z_action0_std": {
+      "mean": 0.155695,
+      "std": 0.038916,
+      "min": 0.085,
+      "max": 0.238265,
+      "n": 100
+    },
+    "z_action1_mean": {
+      "mean": 0.087686,
+      "std": 0.021524,
+      "min": 0.06385,
+      "max": 0.170248,
+      "n": 100
+    },
+    "z_action1_std": {
+      "mean": 0.153715,
+      "std": 0.038322,
+      "min": 0.083776,
+      "max": 0.238411,
+      "n": 100
+    },
+    "z_action2_mean": {
+      "mean": 0.087581,
+      "std": 0.021301,
+      "min": 0.063952,
+      "max": 0.168797,
+      "n": 100
+    },
+    "z_action2_std": {
+      "mean": 0.164372,
+      "std": 0.037496,
+      "min": 0.0984,
+      "max": 0.247252,
+      "n": 100
+    },
+    "z_action3_mean": {
+      "mean": 0.087468,
+      "std": 0.021419,
+      "min": 0.064157,
+      "max": 0.168761,
+      "n": 100
+    },
+    "z_action3_std": {
+      "mean": 0.159617,
+      "std": 0.037435,
+      "min": 0.091294,
+      "max": 0.245321,
+      "n": 100
+    },
+    "z_anneal_quadcol_bin": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "z_anneal_quadcol_bin_smooth_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "z_anneal_quadcol_bin_obst": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 100
+    },
+    "static_diff_goal/num_collisions": {
+      "mean": 0.2,
+      "std": 0.4,
+      "min": 0.0,
+      "max": 1.0,
+      "n": 15
+    },
+    "static_diff_goal/num_collisions_final_5_s": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 15
+    },
+    "static_diff_goal/distance_to_goal_1s": {
+      "mean": 0.111388,
+      "std": 0.037733,
+      "min": 0.067044,
+      "max": 0.212566,
+      "n": 15
+    },
+    "static_diff_goal/distance_to_goal_3s": {
+      "mean": 0.104961,
+      "std": 0.038281,
+      "min": 0.057174,
+      "max": 0.192775,
+      "n": 15
+    },
+    "static_diff_goal/distance_to_goal_5s": {
+      "mean": 0.105675,
+      "std": 0.038447,
+      "min": 0.049305,
+      "max": 0.201189,
+      "n": 15
+    },
+    "static_diff_goal/agent_success_rate": {
+      "mean": 0.95,
+      "std": 0.1,
+      "min": 0.75,
+      "max": 1.0,
+      "n": 15
+    },
+    "static_diff_goal/agent_deadlock_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 15
+    },
+    "static_diff_goal/agent_col_rate": {
+      "mean": 0.05,
+      "std": 0.1,
+      "min": 0.0,
+      "max": 0.25,
+      "n": 15
+    },
+    "static_diff_goal/agent_neighbor_col_rate": {
+      "mean": 0.05,
+      "std": 0.1,
+      "min": 0.0,
+      "max": 0.25,
+      "n": 15
+    },
+    "static_diff_goal/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 15
+    },
+    "Scenario_dynamic_diff_goal/rew_pos": {
+      "mean": -3.40994,
+      "std": 1.563758,
+      "min": -6.240459,
+      "max": -1.292036,
+      "n": 6
+    },
+    "Scenario_dynamic_diff_goal/rew_crash": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 6
+    },
+    "dynamic_diff_goal/num_collisions": {
+      "mean": 0.454545,
+      "std": 0.655555,
+      "min": 0.0,
+      "max": 2.0,
+      "n": 11
+    },
+    "dynamic_diff_goal/num_collisions_final_5_s": {
+      "mean": 0.090909,
+      "std": 0.28748,
+      "min": 0.0,
+      "max": 1.0,
+      "n": 11
+    },
+    "dynamic_diff_goal/distance_to_goal_1s": {
+      "mean": 0.290862,
+      "std": 0.429074,
+      "min": 0.084215,
+      "max": 1.616572,
+      "n": 11
+    },
+    "dynamic_diff_goal/distance_to_goal_3s": {
+      "mean": 0.505872,
+      "std": 0.302409,
+      "min": 0.09964,
+      "max": 1.078728,
+      "n": 11
+    },
+    "dynamic_diff_goal/distance_to_goal_5s": {
+      "mean": 0.518225,
+      "std": 0.155366,
+      "min": 0.229846,
+      "max": 0.8778,
+      "n": 11
+    },
+    "dynamic_diff_goal/agent_success_rate": {
+      "mean": 0.897727,
+      "std": 0.139176,
+      "min": 0.625,
+      "max": 1.0,
+      "n": 11
+    },
+    "dynamic_diff_goal/agent_deadlock_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 11
+    },
+    "dynamic_diff_goal/agent_col_rate": {
+      "mean": 0.102273,
+      "std": 0.139176,
+      "min": 0.0,
+      "max": 0.375,
+      "n": 11
+    },
+    "dynamic_diff_goal/agent_neighbor_col_rate": {
+      "mean": 0.102273,
+      "std": 0.139176,
+      "min": 0.0,
+      "max": 0.375,
+      "n": 11
+    },
+    "dynamic_diff_goal/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 11
+    },
+    "static_same_goal/num_collisions": {
+      "mean": 0.142857,
+      "std": 0.349927,
+      "min": 0.0,
+      "max": 1.0,
+      "n": 14
+    },
+    "static_same_goal/num_collisions_final_5_s": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 14
+    },
+    "static_same_goal/distance_to_goal_1s": {
+      "mean": 0.280825,
+      "std": 0.052454,
+      "min": 0.170867,
+      "max": 0.358763,
+      "n": 14
+    },
+    "static_same_goal/distance_to_goal_3s": {
+      "mean": 0.279984,
+      "std": 0.03366,
+      "min": 0.20063,
+      "max": 0.328498,
+      "n": 14
+    },
+    "static_same_goal/distance_to_goal_5s": {
+      "mean": 0.277984,
+      "std": 0.028624,
+      "min": 0.211921,
+      "max": 0.326249,
+      "n": 14
+    },
+    "static_same_goal/agent_success_rate": {
+      "mean": 0.964286,
+      "std": 0.087482,
+      "min": 0.75,
+      "max": 1.0,
+      "n": 14
+    },
+    "static_same_goal/agent_deadlock_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 14
+    },
+    "static_same_goal/agent_col_rate": {
+      "mean": 0.035714,
+      "std": 0.087482,
+      "min": 0.0,
+      "max": 0.25,
+      "n": 14
+    },
+    "static_same_goal/agent_neighbor_col_rate": {
+      "mean": 0.035714,
+      "std": 0.087482,
+      "min": 0.0,
+      "max": 0.25,
+      "n": 14
+    },
+    "static_same_goal/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 14
+    },
+    "Scenario_dynamic_same_goal/rew_pos": {
+      "mean": -5.317735,
+      "std": 3.529804,
+      "min": -15.6141,
+      "max": -1.862695,
+      "n": 15
+    },
+    "Scenario_dynamic_same_goal/rew_crash": {
+      "mean": -0.016667,
+      "std": 0.026936,
+      "min": -0.08,
+      "max": 0.0,
+      "n": 15
+    },
+    "dynamic_formations/num_collisions": {
+      "mean": 0.083333,
+      "std": 0.276385,
+      "min": 0.0,
+      "max": 1.0,
+      "n": 12
+    },
+    "dynamic_formations/num_collisions_final_5_s": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 12
+    },
+    "dynamic_formations/distance_to_goal_1s": {
+      "mean": 0.245599,
+      "std": 0.150777,
+      "min": 0.064921,
+      "max": 0.53809,
+      "n": 12
+    },
+    "dynamic_formations/distance_to_goal_3s": {
+      "mean": 0.247076,
+      "std": 0.105514,
+      "min": 0.079525,
+      "max": 0.447082,
+      "n": 12
+    },
+    "dynamic_formations/distance_to_goal_5s": {
+      "mean": 0.246139,
+      "std": 0.068912,
+      "min": 0.112711,
+      "max": 0.382023,
+      "n": 12
+    },
+    "dynamic_formations/agent_success_rate": {
+      "mean": 0.979167,
+      "std": 0.069096,
+      "min": 0.75,
+      "max": 1.0,
+      "n": 12
+    },
+    "dynamic_formations/agent_deadlock_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 12
+    },
+    "dynamic_formations/agent_col_rate": {
+      "mean": 0.020833,
+      "std": 0.069096,
+      "min": 0.0,
+      "max": 0.25,
+      "n": 12
+    },
+    "dynamic_formations/agent_neighbor_col_rate": {
+      "mean": 0.020833,
+      "std": 0.069096,
+      "min": 0.0,
+      "max": 0.25,
+      "n": 12
+    },
+    "dynamic_formations/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 12
+    },
+    "swap_goals/num_collisions": {
+      "mean": 0.625,
+      "std": 0.484123,
+      "min": 0.0,
+      "max": 1.0,
+      "n": 8
+    },
+    "swap_goals/num_collisions_final_5_s": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "swap_goals/distance_to_goal_1s": {
+      "mean": 0.224659,
+      "std": 0.175362,
+      "min": 0.076761,
+      "max": 0.618339,
+      "n": 8
+    },
+    "swap_goals/distance_to_goal_3s": {
+      "mean": 0.334326,
+      "std": 0.108988,
+      "min": 0.123113,
+      "max": 0.47429,
+      "n": 8
+    },
+    "swap_goals/distance_to_goal_5s": {
+      "mean": 0.333416,
+      "std": 0.080045,
+      "min": 0.244348,
+      "max": 0.519276,
+      "n": 8
+    },
+    "swap_goals/agent_success_rate": {
+      "mean": 0.84375,
+      "std": 0.121031,
+      "min": 0.75,
+      "max": 1.0,
+      "n": 8
+    },
+    "swap_goals/agent_deadlock_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "swap_goals/agent_col_rate": {
+      "mean": 0.15625,
+      "std": 0.121031,
+      "min": 0.0,
+      "max": 0.25,
+      "n": 8
+    },
+    "swap_goals/agent_neighbor_col_rate": {
+      "mean": 0.15625,
+      "std": 0.121031,
+      "min": 0.0,
+      "max": 0.25,
+      "n": 8
+    },
+    "swap_goals/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "Scenario_dynamic_formations/rew_pos": {
+      "mean": -6.263405,
+      "std": 4.601551,
+      "min": -19.411672,
+      "max": -0.834964,
+      "n": 17
+    },
+    "Scenario_dynamic_formations/rew_crash": {
+      "mean": -0.027353,
+      "std": 0.055865,
+      "min": -0.215,
+      "max": 0.0,
+      "n": 17
+    },
+    "ep_lissajous3D/num_collisions": {
+      "mean": 0.25,
+      "std": 0.661438,
+      "min": 0.0,
+      "max": 2.0,
+      "n": 8
+    },
+    "ep_lissajous3D/num_collisions_final_5_s": {
+      "mean": 0.125,
+      "std": 0.330719,
+      "min": 0.0,
+      "max": 1.0,
+      "n": 8
+    },
+    "ep_lissajous3D/distance_to_goal_1s": {
+      "mean": 1.700176,
+      "std": 0.370781,
+      "min": 1.260284,
+      "max": 2.478983,
+      "n": 8
+    },
+    "ep_lissajous3D/distance_to_goal_3s": {
+      "mean": 1.402749,
+      "std": 0.419753,
+      "min": 1.060252,
+      "max": 2.388975,
+      "n": 8
+    },
+    "ep_lissajous3D/distance_to_goal_5s": {
+      "mean": 1.573988,
+      "std": 0.352124,
+      "min": 1.315026,
+      "max": 2.18928,
+      "n": 8
+    },
+    "ep_lissajous3D/agent_success_rate": {
+      "mean": 0.921875,
+      "std": 0.16462,
+      "min": 0.5,
+      "max": 1.0,
+      "n": 8
+    },
+    "ep_lissajous3D/agent_deadlock_rate": {
+      "mean": 0.015625,
+      "std": 0.04134,
+      "min": 0.0,
+      "max": 0.125,
+      "n": 8
+    },
+    "ep_lissajous3D/agent_col_rate": {
+      "mean": 0.0625,
+      "std": 0.165359,
+      "min": 0.0,
+      "max": 0.5,
+      "n": 8
+    },
+    "ep_lissajous3D/agent_neighbor_col_rate": {
+      "mean": 0.0625,
+      "std": 0.165359,
+      "min": 0.0,
+      "max": 0.5,
+      "n": 8
+    },
+    "ep_lissajous3D/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 8
+    },
+    "Scenario_ep_lissajous3D/rew_pos": {
+      "mean": -5.665353,
+      "std": 4.815459,
+      "min": -17.955026,
+      "max": -1.761008,
+      "n": 14
+    },
+    "Scenario_ep_lissajous3D/rew_crash": {
+      "mean": -0.033929,
+      "std": 0.065032,
+      "min": -0.24,
+      "max": 0.0,
+      "n": 14
+    },
+    "Scenario_swap_goals/rew_pos": {
+      "mean": -4.58422,
+      "std": 3.376443,
+      "min": -11.288244,
+      "max": -2.189229,
+      "n": 5
+    },
+    "Scenario_swap_goals/rew_crash": {
+      "mean": -0.008,
+      "std": 0.016,
+      "min": -0.04,
+      "max": 0.0,
+      "n": 5
+    },
+    "Scenario_static_diff_goal/rew_pos": {
+      "mean": -3.961009,
+      "std": 2.807366,
+      "min": -11.317059,
+      "max": -1.592071,
+      "n": 9
+    },
+    "Scenario_static_diff_goal/rew_crash": {
+      "mean": -0.011667,
+      "std": 0.023333,
+      "min": -0.07,
+      "max": 0.0,
+      "n": 9
+    },
+    "swarm_vs_swarm/num_collisions": {
+      "mean": 1.076923,
+      "std": 1.071414,
+      "min": 0.0,
+      "max": 3.0,
+      "n": 13
+    },
+    "swarm_vs_swarm/num_collisions_final_5_s": {
+      "mean": 0.538462,
+      "std": 0.745797,
+      "min": 0.0,
+      "max": 2.0,
+      "n": 13
+    },
+    "swarm_vs_swarm/distance_to_goal_1s": {
+      "mean": 0.404482,
+      "std": 0.497343,
+      "min": 0.035671,
+      "max": 1.839734,
+      "n": 13
+    },
+    "swarm_vs_swarm/distance_to_goal_3s": {
+      "mean": 0.355216,
+      "std": 0.195637,
+      "min": 0.076065,
+      "max": 0.919922,
+      "n": 13
+    },
+    "swarm_vs_swarm/distance_to_goal_5s": {
+      "mean": 0.458774,
+      "std": 0.218383,
+      "min": 0.237092,
+      "max": 1.080552,
+      "n": 13
+    },
+    "swarm_vs_swarm/agent_success_rate": {
+      "mean": 0.75,
+      "std": 0.235135,
+      "min": 0.375,
+      "max": 1.0,
+      "n": 13
+    },
+    "swarm_vs_swarm/agent_deadlock_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 13
+    },
+    "swarm_vs_swarm/agent_col_rate": {
+      "mean": 0.25,
+      "std": 0.235135,
+      "min": 0.0,
+      "max": 0.625,
+      "n": 13
+    },
+    "swarm_vs_swarm/agent_neighbor_col_rate": {
+      "mean": 0.25,
+      "std": 0.235135,
+      "min": 0.0,
+      "max": 0.625,
+      "n": 13
+    },
+    "swarm_vs_swarm/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 13
+    },
+    "Scenario_swarm_vs_swarm/rew_pos": {
+      "mean": -4.12256,
+      "std": 2.051587,
+      "min": -9.42289,
+      "max": -1.449105,
+      "n": 12
+    },
+    "Scenario_swarm_vs_swarm/rew_crash": {
+      "mean": -0.005,
+      "std": 0.01118,
+      "min": -0.03,
+      "max": 0.0,
+      "n": 12
+    },
+    "Scenario_ep_rand_bezier/rew_pos": {
+      "mean": -4.812199,
+      "std": 2.409423,
+      "min": -11.035487,
+      "max": -2.400343,
+      "n": 12
+    },
+    "Scenario_ep_rand_bezier/rew_crash": {
+      "mean": -0.020417,
+      "std": 0.022496,
+      "min": -0.07,
+      "max": 0.0,
+      "n": 12
+    },
+    "dynamic_same_goal/num_collisions": {
+      "mean": 0.363636,
+      "std": 0.642824,
+      "min": 0.0,
+      "max": 2.0,
+      "n": 11
+    },
+    "dynamic_same_goal/num_collisions_final_5_s": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 11
+    },
+    "dynamic_same_goal/distance_to_goal_1s": {
+      "mean": 0.413833,
+      "std": 0.260523,
+      "min": 0.152393,
+      "max": 1.081438,
+      "n": 11
+    },
+    "dynamic_same_goal/distance_to_goal_3s": {
+      "mean": 0.49843,
+      "std": 0.264653,
+      "min": 0.200014,
+      "max": 1.197764,
+      "n": 11
+    },
+    "dynamic_same_goal/distance_to_goal_5s": {
+      "mean": 0.62913,
+      "std": 0.20908,
+      "min": 0.3202,
+      "max": 0.915119,
+      "n": 11
+    },
+    "dynamic_same_goal/agent_success_rate": {
+      "mean": 0.920455,
+      "std": 0.133493,
+      "min": 0.625,
+      "max": 1.0,
+      "n": 11
+    },
+    "dynamic_same_goal/agent_deadlock_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 11
+    },
+    "dynamic_same_goal/agent_col_rate": {
+      "mean": 0.079545,
+      "std": 0.133493,
+      "min": 0.0,
+      "max": 0.375,
+      "n": 11
+    },
+    "dynamic_same_goal/agent_neighbor_col_rate": {
+      "mean": 0.079545,
+      "std": 0.133493,
+      "min": 0.0,
+      "max": 0.375,
+      "n": 11
+    },
+    "dynamic_same_goal/agent_obst_col_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "n": 11
+    }
+  }
+}
