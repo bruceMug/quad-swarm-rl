@@ -1,5 +1,5 @@
 {
-  "source": "tensorboard last-10% means",
+  "source": "held-out evaluation (100 episodes each)",
   "seeds": [
     "exp1_baseline_seed1",
     "exp1_baseline_seed2",
@@ -8,52 +8,52 @@
   "aggregated": {
     "episode_reward": {
       "seed_means": [
-        -14.589435,
-        -5.772,
-        -6.743356
+        1.484471,
+        0.300187,
+        0.248219
       ],
-      "overall_mean": -9.034930333333334,
-      "overall_std": 3.9475962887728975,
+      "overall_mean": 0.6776256666666667,
+      "overall_std": 0.5709201416411542,
       "n_seeds": 3
     },
     "metric/agent_success_rate": {
       "seed_means": [
-        0.46,
-        0.51,
-        0.42
+        0.905,
+        0.895,
+        0.93875
       ],
-      "overall_mean": 0.4633333333333333,
-      "overall_std": 0.036817870057290876,
+      "overall_mean": 0.9129166666666667,
+      "overall_std": 0.018717564537680146,
       "n_seeds": 3
     },
     "metric/agent_col_rate": {
       "seed_means": [
-        0.03,
-        0.48,
-        0.57
+        0.085,
+        0.09125,
+        0.05
       ],
-      "overall_mean": 0.36000000000000004,
-      "overall_std": 0.23622023622035432,
+      "overall_mean": 0.07541666666666667,
+      "overall_std": 0.018152517425659973,
       "n_seeds": 3
     },
     "metric/agent_neighbor_col_rate": {
       "seed_means": [
-        0.03,
-        0.48,
-        0.57
+        0.085,
+        0.09125,
+        0.05
       ],
-      "overall_mean": 0.36000000000000004,
-      "overall_std": 0.23622023622035432,
+      "overall_mean": 0.07541666666666667,
+      "overall_std": 0.018152517425659973,
       "n_seeds": 3
     },
     "metric/agent_deadlock_rate": {
       "seed_means": [
-        0.51,
         0.01,
-        0.01
+        0.01375,
+        0.01125
       ],
-      "overall_mean": 0.17666666666666667,
-      "overall_std": 0.23570226039551584,
+      "overall_mean": 0.011666666666666667,
+      "overall_std": 0.0015590239111558089,
       "n_seeds": 3
     },
     "metric/agent_obst_col_rate": {
