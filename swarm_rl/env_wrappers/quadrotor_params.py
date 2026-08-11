@@ -119,3 +119,16 @@ def add_quadrotors_env_args(env, parser):
 
     # Sim2Real
     p.add_argument('--quads_sim2real', default=False, type=str2bool, help='Whether to use sim2real or not')
+
+    # Byzantine agents (byzantine_experiments/). Consumed by ByzantineEnvWrapper, which is
+    # applied by byzantine_experiments.rollout.env_factory rather than by quad_utils.py.
+    p.add_argument('--byzantine_enabled', default=False, type=str2bool,
+                   help='Inject Byzantine agents into the swarm at rollout time')
+    p.add_argument('--byzantine_tier', default='', type=str,
+                   help='Key into BYZANTINE_REGISTRY, e.g. tier0_noop / tier1_stochastic')
+    p.add_argument('--byzantine_indices', default='', type=str,
+                   help='Comma-separated indices of the compromised drones, e.g. "0,3"')
+    p.add_argument('--byzantine_config', default='{}', type=str,
+                   help='JSON blob of kwargs forwarded to the Byzantine agent constructor')
+    p.add_argument('--byzantine_seed', default=0, type=int,
+                   help='Base seed for Byzantine agent RNGs and random index assignment')
