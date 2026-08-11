@@ -1,0 +1,243 @@
+{
+  "checkpoint": "train_dir/exp1_baseline_seed1",
+  "checkpoint_file": "train_dir/exp1_baseline_seed1/checkpoint_p0/checkpoint_000976566_1000003584.pth",
+  "experiment": "exp1_baseline_seed1",
+  "train_dir": "train_dir",
+  "tier": "tier0_noop",
+  "tier_config": {},
+  "compromised_indices": [
+    0
+  ],
+  "f_fraction": 0.125,
+  "assignment_mode": "fixed",
+  "byzantine_wrapper_config": {
+    "tier": "tier0_noop",
+    "tier_config": {},
+    "compromised_indices": [
+      0
+    ],
+    "n_compromised": 1,
+    "num_agents": 8,
+    "f_fraction": 0.125,
+    "assignment_mode": "fixed",
+    "seed": 1,
+    "action_dim": 4,
+    "action_low": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0
+    ],
+    "action_high": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "action_dtype": "float32",
+    "registered_tiers": [
+      "tier0_noop"
+    ]
+  },
+  "n_episodes": 100,
+  "seed": 1,
+  "deterministic": true,
+  "num_agents": 8,
+  "quads_mode": "mix",
+  "episode_duration": 15.0,
+  "domain_randomization": {
+    "quads_domain_random": false,
+    "quads_obst_density_random": false,
+    "quads_obst_size_random": false,
+    "replay_buffer_sample_prob": 0.75,
+    "thrust_noise_ratio": 0.05,
+    "sense_noise": "default",
+    "dynamics_randomize_every": null
+  },
+  "arrays": {
+    "obs": {
+      "shape": [
+        100,
+        1501,
+        8,
+        54
+      ],
+      "dtype": "float32"
+    },
+    "actions_honest": {
+      "shape": [
+        100,
+        1501,
+        8,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "actions_executed": {
+      "shape": [
+        100,
+        1501,
+        8,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "rewards": {
+      "shape": [
+        100,
+        1501,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "positions": {
+      "shape": [
+        100,
+        1501,
+        8,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "velocities": {
+      "shape": [
+        100,
+        1501,
+        8,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "collisions": {
+      "shape": [
+        100,
+        1501
+      ],
+      "dtype": "float32"
+    },
+    "episode_lengths": {
+      "shape": [
+        100
+      ],
+      "dtype": "int32"
+    },
+    "byzantine_mask": {
+      "shape": [
+        8
+      ],
+      "dtype": "bool"
+    }
+  },
+  "git_sha": "41b4f27b4c5ec740d87d31bd09fda222a18549c7-dirty",
+  "command": "/scratch/bmugizi/marl_research/quad-swarm-r1/byzantine_experiments/rollout/collect.py --checkpoint train_dir/exp1_baseline_seed1 --tier tier0_noop --compromised-indices 0 --n-episodes 100 --seed 1 --device cpu --out byzantine_experiments/results/t0_noop_seed1_f0125.npz",
+  "generated_at": "2026-08-11T07:03:12.345278",
+  "summary": {
+    "checkpoint_file": "train_dir/exp1_baseline_seed1/checkpoint_p0/checkpoint_000976566_1000003584.pth",
+    "episode_reward_mean": -0.07168767772614956,
+    "episode_reward_std": 5.090817308569853,
+    "episode_reward_min": -23.168563842773438,
+    "episode_reward_max": 5.164718151092529
+  },
+  "episode_rewards": [
+    -1.397404,
+    4.089952,
+    -1.649328,
+    4.194977,
+    3.616159,
+    -4.9453,
+    -7.299507,
+    3.912178,
+    3.549923,
+    2.01704,
+    4.063844,
+    0.609627,
+    1.944207,
+    2.341385,
+    -7.784777,
+    4.668955,
+    3.972327,
+    1.166266,
+    4.041598,
+    -3.267758,
+    -4.517023,
+    3.189255,
+    4.360517,
+    -1.291051,
+    3.341482,
+    -2.302562,
+    -5.621321,
+    -9.788277,
+    1.964369,
+    -11.445381,
+    3.240614,
+    0.033601,
+    -6.187103,
+    1.572899,
+    -2.414274,
+    3.867089,
+    -10.330709,
+    -4.676755,
+    4.702991,
+    3.181401,
+    4.577289,
+    2.824971,
+    2.289494,
+    -0.001487,
+    3.942348,
+    -23.168564,
+    4.100818,
+    3.637466,
+    -6.785989,
+    0.092784,
+    4.024878,
+    -5.852345,
+    -10.408927,
+    -6.491183,
+    2.216217,
+    0.318898,
+    2.264884,
+    -0.161465,
+    -1.311664,
+    -0.785162,
+    2.63846,
+    2.139459,
+    3.517795,
+    4.153649,
+    3.952295,
+    3.529945,
+    -1.360178,
+    3.041272,
+    -5.087749,
+    2.053173,
+    -2.975752,
+    3.291747,
+    -8.063631,
+    1.983238,
+    -8.462511,
+    0.770247,
+    -2.888046,
+    -2.188945,
+    1.780799,
+    -0.21079,
+    3.224895,
+    -14.342279,
+    4.02364,
+    2.496464,
+    3.672098,
+    5.164718,
+    -6.208774,
+    2.180027,
+    4.677892,
+    4.951772,
+    2.972658,
+    3.851936,
+    4.709713,
+    -5.94282,
+    3.449194,
+    4.839598,
+    3.385249,
+    -5.979891,
+    3.635492,
+    2.407791
+  ]
+}

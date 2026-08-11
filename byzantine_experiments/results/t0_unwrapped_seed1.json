@@ -1,0 +1,215 @@
+{
+  "checkpoint": "train_dir/exp1_baseline_seed1",
+  "checkpoint_file": "train_dir/exp1_baseline_seed1/checkpoint_p0/checkpoint_000976566_1000003584.pth",
+  "experiment": "exp1_baseline_seed1",
+  "train_dir": "train_dir",
+  "tier": null,
+  "tier_config": {},
+  "compromised_indices": [
+    0
+  ],
+  "f_fraction": 0.0,
+  "assignment_mode": "fixed",
+  "byzantine_wrapper_config": null,
+  "n_episodes": 100,
+  "seed": 1,
+  "deterministic": true,
+  "num_agents": 8,
+  "quads_mode": "mix",
+  "episode_duration": 15.0,
+  "domain_randomization": {
+    "quads_domain_random": false,
+    "quads_obst_density_random": false,
+    "quads_obst_size_random": false,
+    "replay_buffer_sample_prob": 0.75,
+    "thrust_noise_ratio": 0.05,
+    "sense_noise": "default",
+    "dynamics_randomize_every": null
+  },
+  "arrays": {
+    "obs": {
+      "shape": [
+        100,
+        1501,
+        8,
+        54
+      ],
+      "dtype": "float32"
+    },
+    "actions_honest": {
+      "shape": [
+        100,
+        1501,
+        8,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "actions_executed": {
+      "shape": [
+        100,
+        1501,
+        8,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "rewards": {
+      "shape": [
+        100,
+        1501,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "positions": {
+      "shape": [
+        100,
+        1501,
+        8,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "velocities": {
+      "shape": [
+        100,
+        1501,
+        8,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "collisions": {
+      "shape": [
+        100,
+        1501
+      ],
+      "dtype": "float32"
+    },
+    "episode_lengths": {
+      "shape": [
+        100
+      ],
+      "dtype": "int32"
+    },
+    "byzantine_mask": {
+      "shape": [
+        8
+      ],
+      "dtype": "bool"
+    }
+  },
+  "git_sha": "41b4f27b4c5ec740d87d31bd09fda222a18549c7-dirty",
+  "command": "/scratch/bmugizi/marl_research/quad-swarm-r1/byzantine_experiments/rollout/collect.py --checkpoint train_dir/exp1_baseline_seed1 --no-byzantine --n-episodes 100 --seed 1 --device cpu --out byzantine_experiments/results/t0_unwrapped_seed1.npz",
+  "generated_at": "2026-08-11T07:05:18.112982",
+  "summary": {
+    "checkpoint_file": "train_dir/exp1_baseline_seed1/checkpoint_p0/checkpoint_000976566_1000003584.pth",
+    "episode_reward_mean": 0.5985181280970573,
+    "episode_reward_std": 3.4985860470715293,
+    "episode_reward_min": -8.763680458068848,
+    "episode_reward_max": 4.842893600463867
+  },
+  "episode_rewards": [
+    1.272025,
+    4.304458,
+    0.884207,
+    0.023656,
+    1.889136,
+    3.004742,
+    -2.488165,
+    -0.590926,
+    3.347675,
+    3.719811,
+    2.243386,
+    4.218046,
+    1.413323,
+    3.950923,
+    4.386769,
+    4.686342,
+    0.153814,
+    1.72589,
+    3.635839,
+    -0.8138,
+    -7.87479,
+    1.668748,
+    4.344854,
+    2.486043,
+    -0.183245,
+    3.370525,
+    2.319628,
+    2.303512,
+    -1.370782,
+    4.457209,
+    -5.476286,
+    4.36537,
+    4.285195,
+    -5.780526,
+    3.883145,
+    4.001526,
+    3.394815,
+    -7.454332,
+    -4.117628,
+    -0.536159,
+    0.865796,
+    2.300566,
+    2.213008,
+    2.726128,
+    2.411193,
+    -1.204525,
+    1.609213,
+    0.426126,
+    -8.631196,
+    3.865586,
+    -6.907059,
+    4.226786,
+    -5.269902,
+    0.367573,
+    -1.524056,
+    0.297183,
+    -2.795,
+    -6.912759,
+    -3.547886,
+    -8.76368,
+    4.152946,
+    -3.399784,
+    -2.037564,
+    3.809219,
+    2.969996,
+    -7.627387,
+    -1.808674,
+    0.994476,
+    2.690376,
+    4.697617,
+    1.830085,
+    2.610207,
+    -1.193346,
+    -4.493912,
+    -2.695736,
+    3.382046,
+    0.022742,
+    0.861672,
+    -1.319969,
+    2.379375,
+    -0.489657,
+    -0.262416,
+    -3.021023,
+    1.379596,
+    -5.466188,
+    3.034731,
+    1.654558,
+    3.98981,
+    1.029052,
+    2.978888,
+    -0.82055,
+    2.586962,
+    -1.457056,
+    1.051236,
+    3.164084,
+    4.185597,
+    3.49578,
+    2.931503,
+    4.842894,
+    4.41256
+  ]
+}
