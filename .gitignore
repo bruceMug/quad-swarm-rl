@@ -12,8 +12,13 @@ _results
 *.wpr
 *.cprof
 *.egg-info/
+.c*
 train_dir/
 wandb/
+research*.md
 # Byzantine rollout trajectories: ~250 MB per 100-episode run. The .json sidecars next to
 # them are small and carry the run provenance, so those stay tracked.
 byzantine_experiments/results/*.npz
+logs/tier1
+byzantine_experiments/results/*.json
+byzantine_experiments/results/tier1
