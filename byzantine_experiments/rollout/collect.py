@@ -40,6 +40,12 @@ from swarm_rl.train import parse_swarm_cfg, register_swarm_components
 
 import byzantine_experiments.agents  # noqa: F401  (populates BYZANTINE_REGISTRY)
 from byzantine_experiments.agents.base import BYZANTINE_REGISTRY
+from byzantine_experiments.analysis.metrics import compute_metrics
+from byzantine_experiments.analysis.wandb_logging import (
+    DEFAULT_ENTITY,
+    DEFAULT_PROJECT,
+    log_rollout,
+)
 from byzantine_experiments.rollout.env_factory import make_byzantine_env
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -57,20 +63,31 @@ def git_sha():
         return 'unknown'
 
 
-def quad_state(unwrapped):
+def quad_state(env):
     """Current per-drone position and velocity, straight from the dynamics objects.
 
     Read from `envs[i].dynamics` rather than the env's cached `pos`/`vel` arrays because
     `vel` is only refreshed inside step(), so it is stale on the first step of an episode.
+
+    Takes the OUTER env and resolves `.unwrapped` on every call. Do not hoist that lookup
+    out of the loop: ExperienceReplayWrapper replaces its `self.env` with a deepcopy of a
+    buffered snapshot whenever it replays an episode (quad_experience_replay.py:167-190),
+    which happens on ~75% of resets at the trained config's replay_buffer_sample_prob=0.75.
+    A cached `unwrapped` therefore ends up pointing at an env that is no longer being
+    stepped, and silently records frozen positions.
     """
+    unwrapped = env.unwrapped
     pos = np.array([e.dynamics.pos for e in unwrapped.envs], dtype=np.float32)
     vel = np.array([e.dynamics.vel for e in unwrapped.envs], dtype=np.float32)
     return pos, vel
 
 
-def step_collisions(unwrapped):
-    """Drone-drone collisions registered on the step just taken (a pair counts once)."""
-    last = getattr(unwrapped, 'last_step_unique_collisions', None)
+def step_collisions(env):
+    """Drone-drone collisions registered on the step just taken (a pair counts once).
+
+    Resolves `.unwrapped` per call for the same reason as quad_state().
+    """
+    last = getattr(env.unwrapped, 'last_step_unique_collisions', None)
     if last is None:
         return 0
     return int(np.asarray(last).size // 2)
@@ -123,7 +140,6 @@ def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True):
 
     env, byz = make_byzantine_env(cfg, byzantine_kwargs)
     env_info = extract_env_info(env, cfg)
-    unwrapped = env.unwrapped
 
     device = torch.device('cpu' if cfg.device == 'cpu' else 'cuda')
     actor_critic, checkpoint_path = load_policy(cfg, env, device)
@@ -162,7 +178,7 @@ def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True):
             rnn_states = policy_outputs['new_rnn_states']
 
             # State the action was taken in -- aligned with `obs`, hence read pre-step.
-            pos, vel = quad_state(unwrapped)
+            pos, vel = quad_state(env)
             obs_now = obs['obs'].cpu().numpy() if isinstance(obs, dict) else np.asarray(obs)
 
             obs_next, rew, terminated, truncated, infos = env.step(actions)
@@ -177,7 +193,7 @@ def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True):
             cur['rewards'].append(rew.float().cpu().numpy().astype(np.float32))
             cur['positions'].append(pos)
             cur['velocities'].append(vel)
-            cur['collisions'].append(step_collisions(unwrapped))
+            cur['collisions'].append(step_collisions(env))
 
             if episode_reward is None:
                 episode_reward = rew.float().clone()
@@ -261,6 +277,19 @@ def main():
     p.add_argument('--no-byzantine', action='store_true',
                    help='Skip the wrapper entirely -- a pure unwrapped baseline rollout')
     p.add_argument('--device', default=None, choices=['cpu', 'gpu'], help='Override cfg.device')
+
+    w = p.add_argument_group('wandb')
+    w.add_argument('--wandb', action='store_true', help='Log this run to Weights & Biases')
+    w.add_argument('--wandb-project', default=None, help=f'default: {DEFAULT_PROJECT}')
+    w.add_argument('--wandb-entity', default=None, help=f'default: {DEFAULT_ENTITY}')
+    w.add_argument('--wandb-group', default=None,
+                   help='Experimental condition; defaults to the tier name. Set per condition, '
+                        'NOT per seed -- group is what aggregates seeds into one band.')
+    w.add_argument('--wandb-job-type', default='rollout')
+    w.add_argument('--wandb-name', default=None, help='Display name; defaults to the out file stem')
+    w.add_argument('--wandb-tags', nargs='*', default=[])
+    w.add_argument('--no-npz', action='store_true',
+                   help='Compute metrics and log, but do not write the ~250 MB trajectory file')
     known, extra_argv = p.parse_known_args()
 
     cfg = build_cfg(known.checkpoint, extra_argv)
@@ -289,9 +318,14 @@ def main():
     data = pad_and_stack(episodes)
     data['byzantine_mask'] = byz_mask.astype(bool)
 
+    low = byz_config['action_low'][0] if byz_config else -1.0
+    high = byz_config['action_high'][0] if byz_config else 1.0
+    metrics = compute_metrics(data, action_low=low, action_high=high)
+
     out_path = known.out
     os.makedirs(os.path.dirname(os.path.abspath(out_path)), exist_ok=True)
-    np.savez_compressed(out_path, **data)
+    if not known.no_npz:
+        np.savez_compressed(out_path, **data)
 
     sidecar = dict(
         checkpoint=known.checkpoint,
@@ -326,17 +360,69 @@ def main():
         generated_at=datetime.now().isoformat(),
         summary={k: v for k, v in summary.items() if k != 'episode_rewards'},
         episode_rewards=summary['episode_rewards'],
+        # Characterisation metrics live in the sidecar so the aggregator never has to open
+        # the 250 MB .npz files.
+        metrics={k: v for k, v in metrics.items() if k != 'per_episode'},
     )
     json_path = os.path.splitext(out_path)[0] + '.json'
     with open(json_path, 'w') as f:
         json.dump(sidecar, f, indent=2)
 
-    print(f'\nWrote {out_path}')
-    for k, v in data.items():
-        print(f'  {k:20s} {str(v.shape):28s} {v.dtype}')
+    if not known.no_npz:
+        print(f'\nWrote {out_path}')
+        for k, v in data.items():
+            print(f'  {k:20s} {str(v.shape):28s} {v.dtype}')
     print(f'Wrote {json_path}')
-    print(f"\nmean episode reward: {summary['episode_reward_mean']:.6f} "
+    print(f"\nmean episode reward   : {summary['episode_reward_mean']:.6f} "
           f"± {summary['episode_reward_std']:.6f}  (n={known.n_episodes})")
+    for k in ('goal_rmse_mean', 'goal_rmse_honest_mean', 'collisions_mean',
+              'action_deviation_byzantine_mean', 'saturation_rate_byzantine',
+              'min_separation_mean'):
+        print(f'{k:22s}: {metrics[k]:.6f}')
+
+    if known.wandb:
+        name = known.wandb_name or os.path.splitext(os.path.basename(out_path))[0]
+        group = known.wandb_group or (known.tier if not known.no_byzantine else 'clean')
+        tags = list(known.wandb_tags) or default_tags(known, cfg, tier_config)
+        try:
+            url = log_rollout(
+                sidecar, metrics, run_name=name, group=group,
+                job_type=known.wandb_job_type, tags=tags,
+                project=known.wandb_project, entity=known.wandb_entity,
+                notes=f'Byzantine rollout: {group} on {cfg.experiment}',
+            )
+            if url:
+                print(f'wandb: {url}')
+        except Exception as exc:
+            # Never fail a completed rollout because of a logging problem -- the .npz and
+            # .json are already on disk at this point. Transient wandb auth failures do
+            # happen when many workers read ~/.netrc off AFS at once. Backfill later with
+            # `python -m byzantine_experiments.analysis.backfill_wandb`.
+            print(f'[wandb] logging FAILED ({type(exc).__name__}: {exc}). '
+                  f'Data is saved; re-log with backfill_wandb.')
+
+
+def default_tags(known, cfg, tier_config):
+    """Tags that make the runs table filterable without opening any run."""
+    tags = [
+        f'seed{known.seed}',
+        f'{cfg.quads_num_agents}agents',
+        cfg.quads_mode,
+        cfg.experiment,
+        f'n_ep{known.n_episodes}',
+    ]
+    if known.no_byzantine:
+        tags += ['clean', 'f0']
+    else:
+        n = len(known.compromised_indices.split(',')) if known.compromised_indices.strip() else 0
+        tags += [
+            known.tier,
+            known.tier.split('_')[0],                      # tier0 / tier1 / ...
+            'f' + f'{n / cfg.quads_num_agents:.4f}'.replace('.', ''),
+            f'nbyz{n}',
+        ]
+        tags += [f'{k}{v}' for k, v in sorted(tier_config.items())]
+    return tags
 
 
 if __name__ == '__main__':
