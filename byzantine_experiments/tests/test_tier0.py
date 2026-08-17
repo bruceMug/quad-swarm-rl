@@ -457,3 +457,46 @@ def test_noop_matches_unwrapped_on_the_real_policy_stack():
 
     for name, a, b in zip(('obs', 'rewards', 'actions'), plain, wrapped):
         assert np.array_equal(a, b), f'no-op wrapper changed the {name} trace on the real stack'
+
+
+@pytest.mark.skipif(not os.path.isdir(CHECKPOINT),
+                    reason=f'{CHECKPOINT} not present')
+def test_recorded_positions_track_the_live_env_across_replayed_episodes():
+    """
+    Regression: `positions`/`velocities`/`collisions` must come from the env being stepped.
+
+    ExperienceReplayWrapper swaps its `self.env` for a deepcopy of a buffered snapshot when
+    it replays an episode (quad_experience_replay.py:167-190), which at the trained config's
+    replay_buffer_sample_prob=0.75 happens on most resets. Resolving `env.unwrapped` once
+    and reusing it therefore records a frozen env: `obs` (which comes back from step) keeps
+    moving while `positions` stays perfectly still. That bug produced 42/50 completely
+    static episodes before it was caught.
+
+    The invariant: whenever the goal-relative position in `obs` moves, the recorded absolute
+    position must move too.
+    """
+    import torch
+    from swarm_rl.train import register_swarm_components
+    from byzantine_experiments.rollout.collect import build_cfg, run_rollouts
+
+    register_swarm_components()
+    cfg = build_cfg(CHECKPOINT, [])
+    cfg.device = 'cpu'
+    assert cfg.replay_buffer_sample_prob > 0, 'this test is only meaningful with the replay buffer on'
+
+    episodes, _, _, _ = run_rollouts(
+        cfg, {'tier': 'tier0_noop', 'compromised_indices': [0], 'seed': 1},
+        n_episodes=6, seed=1, deterministic=True,
+    )
+
+    static = 0
+    for ep in episodes:
+        pos_motion = np.abs(np.diff(ep['positions'][:, 0, :], axis=0)).sum()
+        obs_motion = np.abs(np.diff(ep['obs'][:, 0, 0:3], axis=0)).sum()
+        assert obs_motion > 1.0, 'sanity: the drone should be moving in obs space'
+        if pos_motion < 1e-6:
+            static += 1
+
+    assert static == 0, (
+        f'{static}/{len(episodes)} episodes recorded a completely frozen position while obs '
+        f'kept moving -- the collector is reading a stale env.unwrapped')
