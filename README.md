@@ -93,6 +93,76 @@ If you want to monitor training with WandB, follow the steps below:
 - setup WandB locally by running `wandb login` in the terminal (https://docs.wandb.ai/quickstart#1.-set-up-wandb).
 * add `--with_wandb=True` in the command.
 
+#### Mine
+
+Use the `swarm_r311_recovered` conda env — `swarm_r311` has a corrupt protobuf install and
+`import wandb` fails there with `No module named 'google.protobuf.wrappers_pb2'`.
+
+One-time setup:
+```bash
+conda activate swarm_r311_recovered
+wandb login   # key from https://wandb.ai/authorize
+```
+
+Run exp1 with wandb (`exp1_wandb.sh` takes the seed as its first arg, default 1):
+```bash
+tmux new -s training
+conda activate swarm_r311_recovered
+cd /scratch/bmugizi/marl_research/quad-swarm-r1
+
+bash exp1_wandb.sh 1 2>&1 | tee logs/exp1_wandb_seed1_train.log && \
+bash exp1_wandb.sh 2 2>&1 | tee logs/exp1_wandb_seed2_train.log && \
+bash exp1_wandb.sh 3 2>&1 | tee logs/exp1_wandb_seed3_train.log
+# Ctrl+B then D
+```
+
+Flag mapping. The entity goes in `--wandb_user`; there is **no** `--wandb_entity` flag and
+sample_factory hard-errors on unknown args (`error: unrecognized arguments`):
+```
+--wandb_project=byzantine_exp
+--wandb_user=bmugizi-carnegie-mellon-university
+--wandb_group=baseline             # otherwise defaults to the env name, quadrotor_multi
+```
+
+#### Project / run organization
+
+Everything goes in the single `byzantine_exp` project — wandb can only compare runs within
+one project, and baseline-vs-byzantine is the comparison that matters. Structure inside it:
+
+| level | meaning | examples |
+| --- | --- | --- |
+| `--wandb_group` | experimental condition | `baseline`, `byz_1_attacker`, `byz_2_attackers` |
+| `--wandb_job_type` | train vs eval | `train`, `eval` |
+| `--wandb_tags` | cross-cutting filters | `seed1`, `8agents`, `mix` |
+
+Group is what makes wandb aggregate the seeds of one condition into a single mean±band
+curve, so always set it per condition (not per seed).
+
+#### Backfilling the finished baseline runs (no retraining)
+
+`wandb sync` can set `--project`/`--entity`/`--id` but **not** group, tags, or config, and
+the tfevents path sets no display name either — so sync with an explicit `--id`, then
+backfill group/tags/name plus the full hyperparameter config (read from each run's
+`train_dir/*/config.json`) with the helper script:
+
+```bash
+conda activate swarm_r311_recovered
+cd /scratch/bmugizi/marl_research/quad-swarm-r1
+
+for s in 1 2 3; do
+  wandb sync --sync-tensorboard \
+    --entity bmugizi-carnegie-mellon-university --project byzantine_exp \
+    --id exp1_baseline_seed${s} \
+    train_dir/exp1_baseline_seed${s}
+done
+
+python scripts/wandb_tag_synced_runs.py --dry-run   # check first
+python scripts/wandb_tag_synced_runs.py
+```
+
+Training runs launched with `--with_wandb=True` already carry their group, tags, and config,
+and do not need the fixup script.
+
 Here is a total list of wandb settings: 
 ```
 --with_wandb: Enables Weights and Biases integration (default: False)
