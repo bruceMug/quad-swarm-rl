@@ -1,0 +1,886 @@
+{
+  "clean": {
+    "jitter": 0.02392727881669998,
+    "action_jitter": 0.02232605405151844,
+    "action_std": 0.17044110596179962,
+    "goal_error": 0.7955597639083862,
+    "excursion_max": 9.903305053710938,
+    "persistence": 0.685225784778595,
+    "speed": 1.1373060941696167,
+    "z_mean": 2.464341878890991,
+    "z_min": 0.04596194252371788,
+    "floor_frac": 0.006612258494337109
+  },
+  "configs": {
+    "t1_dropout_s1_p0.05_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.026472901925444603,
+          "action_jitter": 0.021880248561501503,
+          "action_std": 0.1839367151260376,
+          "goal_error": 0.7930156588554382,
+          "excursion_max": 7.178548336029053,
+          "persistence": 0.6819489002227783,
+          "speed": 1.141867756843567,
+          "z_mean": 2.0541484355926514,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.01323117921385743
+        },
+        "honest": {
+          "jitter": 0.02528391219675541,
+          "action_jitter": 0.022420937195420265,
+          "action_std": 0.17054586112499237,
+          "goal_error": 0.7796013355255127,
+          "excursion_max": 10.428297996520996,
+          "persistence": 0.690459132194519,
+          "speed": 1.110872507095337,
+          "z_mean": 2.0957653522491455,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.011514228609498429
+        }
+      },
+      "description": "The degraded drone is behaviourally indistinguishable from a clean drone at this severity. Meanwhile its honest neighbours hold formation (0.98x clean goal error)."
+    },
+    "t1_dropout_s1_p0.15_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.026025740429759026,
+          "action_jitter": 0.02130572311580181,
+          "action_std": 0.1806674301624298,
+          "goal_error": 0.8210309147834778,
+          "excursion_max": 10.206368446350098,
+          "persistence": 0.6708640456199646,
+          "speed": 1.1633940935134888,
+          "z_mean": 2.324859142303467,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.01217854763491006
+        },
+        "honest": {
+          "jitter": 0.025164665654301643,
+          "action_jitter": 0.022408034652471542,
+          "action_std": 0.17794683575630188,
+          "goal_error": 0.7968917489051819,
+          "excursion_max": 9.378174781799316,
+          "persistence": 0.6775988340377808,
+          "speed": 1.1626077890396118,
+          "z_mean": 2.372429370880127,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.009810602455505853
+        }
+      },
+      "description": "The degraded drone is behaviourally indistinguishable from a clean drone at this severity. Meanwhile its honest neighbours hold formation (1.00x clean goal error)."
+    },
+    "t1_dropout_s1_p0.15_zero_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.02493887208402157,
+          "action_jitter": 0.09879719465970993,
+          "action_std": 0.18037645518779755,
+          "goal_error": 0.7480865120887756,
+          "excursion_max": 6.856321334838867,
+          "persistence": 0.6798374056816101,
+          "speed": 1.0222315788269043,
+          "z_mean": 1.900864601135254,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.017574950033311127
+        },
+        "honest": {
+          "jitter": 0.022531870752573013,
+          "action_jitter": 0.022477395832538605,
+          "action_std": 0.16461823880672455,
+          "goal_error": 0.6886308193206787,
+          "excursion_max": 9.001389503479004,
+          "persistence": 0.6826727390289307,
+          "speed": 0.9986163973808289,
+          "z_mean": 1.9776420593261719,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.008251641762634434
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal. Meanwhile its honest neighbours hold formation (0.87x clean goal error)."
+    },
+    "t1_dropout_s1_p0.3_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.023685837164521217,
+          "action_jitter": 0.020990971475839615,
+          "action_std": 0.17702829837799072,
+          "goal_error": 0.7028611898422241,
+          "excursion_max": 7.123354434967041,
+          "persistence": 0.688479483127594,
+          "speed": 0.9401054382324219,
+          "z_mean": 2.1800200939178467,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.01011325782811459
+        },
+        "honest": {
+          "jitter": 0.020685950294137,
+          "action_jitter": 0.022570805624127388,
+          "action_std": 0.16623738408088684,
+          "goal_error": 0.6293484568595886,
+          "excursion_max": 8.862613677978516,
+          "persistence": 0.6697286367416382,
+          "speed": 0.8711371421813965,
+          "z_mean": 2.280052423477173,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.005845626725040449
+        }
+      },
+      "description": "The degraded drone is behaviourally indistinguishable from a clean drone at this severity. Meanwhile its honest neighbours hold formation (0.79x clean goal error)."
+    },
+    "t1_dropout_s1_p0.5_zero_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.04747679829597473,
+          "action_jitter": 0.3353874385356903,
+          "action_std": 0.23877665400505066,
+          "goal_error": 1.577789068222046,
+          "excursion_max": 9.246122360229492,
+          "persistence": 0.7465883493423462,
+          "speed": 1.4746179580688477,
+          "z_mean": 1.493391752243042,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.0997601598934044
+        },
+        "honest": {
+          "jitter": 0.024480335414409637,
+          "action_jitter": 0.02248850278556347,
+          "action_std": 0.16857491433620453,
+          "goal_error": 0.7564761638641357,
+          "excursion_max": 9.409886360168457,
+          "persistence": 0.6853567957878113,
+          "speed": 1.094419240951538,
+          "z_mean": 2.130321979522705,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.011552298467688208
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (2.0x the clean per-step velocity change); drifts persistently away from its goal (2.0x clean goal error, direction autocorrelation 0.75 at 0.5 s); spends 10.0% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.95x clean goal error)."
+    },
+    "t1_dropout_s1_p0.6_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.026956185698509216,
+          "action_jitter": 0.02275259606540203,
+          "action_std": 0.19710193574428558,
+          "goal_error": 0.7605676054954529,
+          "excursion_max": 5.757770538330078,
+          "persistence": 0.6700401902198792,
+          "speed": 1.0891287326812744,
+          "z_mean": 2.141467809677124,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.013617588274483677
+        },
+        "honest": {
+          "jitter": 0.023490870371460915,
+          "action_jitter": 0.022856006398797035,
+          "action_std": 0.16590851545333862,
+          "goal_error": 0.700197160243988,
+          "excursion_max": 8.680984497070312,
+          "persistence": 0.6542997360229492,
+          "speed": 0.9937419295310974,
+          "z_mean": 2.121940851211548,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.00971162082421243
+        }
+      },
+      "description": "The degraded drone is behaviourally indistinguishable from a clean drone at this severity. Meanwhile its honest neighbours hold formation (0.88x clean goal error)."
+    },
+    "t1_dropout_s1_p0.85_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.0906195342540741,
+          "action_jitter": 0.027578242123126984,
+          "action_std": 0.321308970451355,
+          "goal_error": 1.8421220779418945,
+          "excursion_max": 9.092243194580078,
+          "persistence": 0.7149279713630676,
+          "speed": 2.1772708892822266,
+          "z_mean": 1.3515628576278687,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.11538974017321786
+        },
+        "honest": {
+          "jitter": 0.024391094222664833,
+          "action_jitter": 0.02255065180361271,
+          "action_std": 0.17040972411632538,
+          "goal_error": 0.7453147768974304,
+          "excursion_max": 7.986763954162598,
+          "persistence": 0.6740202903747559,
+          "speed": 1.0432499647140503,
+          "z_mean": 2.088258981704712,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.01126867802417436
+        }
+      },
+      "description": "The degraded drone wobbles (3.8x the clean per-step velocity change); drifts persistently away from its goal (2.3x clean goal error, direction autocorrelation 0.71 at 0.5 s); spends 11.5% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.94x clean goal error)."
+    },
+    "t1_dropout_s1_p0.85_zero_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.05075690895318985,
+          "action_jitter": 0.2971093952655792,
+          "action_std": 0.20992736518383026,
+          "goal_error": 3.3455772399902344,
+          "excursion_max": 10.728385925292969,
+          "persistence": 0.955159604549408,
+          "speed": 0.762962281703949,
+          "z_mean": 0.2016238421201706,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.8383344437041972
+        },
+        "honest": {
+          "jitter": 0.025439994409680367,
+          "action_jitter": 0.022270938381552696,
+          "action_std": 0.17649704217910767,
+          "goal_error": 0.8373427987098694,
+          "excursion_max": 10.610529899597168,
+          "persistence": 0.6917033195495605,
+          "speed": 1.1450048685073853,
+          "z_mean": 2.3111343383789062,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.01127058151708385
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (2.1x the clean per-step velocity change); drifts persistently away from its goal (4.2x clean goal error, direction autocorrelation 0.96 at 0.5 s); spends 83.8% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (1.05x clean goal error)."
+    },
+    "t1_dropout_s1_p0.98_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.15147702395915985,
+          "action_jitter": 0.008479672484099865,
+          "action_std": 0.23867106437683105,
+          "goal_error": 3.5276315212249756,
+          "excursion_max": 9.528539657592773,
+          "persistence": 0.9323663711547852,
+          "speed": 1.8267792463302612,
+          "z_mean": 0.38472527265548706,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.5796402398401066
+        },
+        "honest": {
+          "jitter": 0.022674541920423508,
+          "action_jitter": 0.022608797997236252,
+          "action_std": 0.16676950454711914,
+          "goal_error": 0.6638051867485046,
+          "excursion_max": 8.753396987915039,
+          "persistence": 0.6655733585357666,
+          "speed": 0.9342979192733765,
+          "z_mean": 2.084615468978882,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.00862662986580375
+        }
+      },
+      "description": "The degraded drone emits an unusually smooth/stale control signal (frozen output); wobbles (6.3x the clean per-step velocity change); drifts persistently away from its goal (4.4x clean goal error, direction autocorrelation 0.93 at 0.5 s); spends 58.0% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.83x clean goal error)."
+    },
+    "t1_gaussian_s1_sigma0.1_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.02703193761408329,
+          "action_jitter": 0.2720643877983093,
+          "action_std": 0.21038351953029633,
+          "goal_error": 0.7636691927909851,
+          "excursion_max": 6.456963539123535,
+          "persistence": 0.646431028842926,
+          "speed": 1.1281976699829102,
+          "z_mean": 2.099501132965088,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.009020652898067954
+        },
+        "honest": {
+          "jitter": 0.023887617513537407,
+          "action_jitter": 0.022465063259005547,
+          "action_std": 0.17021194100379944,
+          "goal_error": 0.7571611404418945,
+          "excursion_max": 8.07630729675293,
+          "persistence": 0.6507041454315186,
+          "speed": 1.0834202766418457,
+          "z_mean": 2.132070302963257,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.008567621585609593
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal. Meanwhile its honest neighbours hold formation (0.95x clean goal error)."
+    },
+    "t1_gaussian_s1_sigma0.25_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.060282085090875626,
+          "action_jitter": 0.6658247113227844,
+          "action_std": 0.36862289905548096,
+          "goal_error": 1.3901829719543457,
+          "excursion_max": 8.662297248840332,
+          "persistence": 0.6642342209815979,
+          "speed": 1.6312243938446045,
+          "z_mean": 1.8308604955673218,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.06209193870752831
+        },
+        "honest": {
+          "jitter": 0.024098189547657967,
+          "action_jitter": 0.022380288690328598,
+          "action_std": 0.17191572487354279,
+          "goal_error": 0.7556849718093872,
+          "excursion_max": 10.287863731384277,
+          "persistence": 0.6702533960342407,
+          "speed": 1.0970193147659302,
+          "z_mean": 2.237410068511963,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.010105643856476635
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (2.5x the clean per-step velocity change); strays around its goal without a consistent direction (1.7x clean goal error, direction autocorrelation 0.66); spends 6.2% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.95x clean goal error)."
+    },
+    "t1_gaussian_s1_sigma0.30_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.093434639275074,
+          "action_jitter": 0.7760604023933411,
+          "action_std": 0.4032094180583954,
+          "goal_error": 2.0752482414245605,
+          "excursion_max": 9.006535530090332,
+          "persistence": 0.7510310411453247,
+          "speed": 2.0385918617248535,
+          "z_mean": 1.35124933719635,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.1304197201865423
+        },
+        "honest": {
+          "jitter": 0.02540416084229946,
+          "action_jitter": 0.02257866971194744,
+          "action_std": 0.17701826989650726,
+          "goal_error": 0.7841063141822815,
+          "excursion_max": 10.802421569824219,
+          "persistence": 0.6708132028579712,
+          "speed": 1.0708231925964355,
+          "z_mean": 2.346798896789551,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.012176644142000571
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (3.9x the clean per-step velocity change); drifts persistently away from its goal (2.6x clean goal error, direction autocorrelation 0.75 at 0.5 s); spends 13.0% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.99x clean goal error)."
+    },
+    "t1_gaussian_s1_sigma0.35_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.11896523088216782,
+          "action_jitter": 0.8742892742156982,
+          "action_std": 0.4142165184020996,
+          "goal_error": 3.0155112743377686,
+          "excursion_max": 10.780929565429688,
+          "persistence": 0.8174479603767395,
+          "speed": 2.311020612716675,
+          "z_mean": 0.9574205875396729,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.24730179880079947
+        },
+        "honest": {
+          "jitter": 0.026040686294436455,
+          "action_jitter": 0.022127807140350342,
+          "action_std": 0.17730146646499634,
+          "goal_error": 0.8666474223136902,
+          "excursion_max": 11.275994300842285,
+          "persistence": 0.6948338150978088,
+          "speed": 1.2296401262283325,
+          "z_mean": 2.4071269035339355,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.012235652422194727
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (5.0x the clean per-step velocity change); drifts persistently away from its goal (3.8x clean goal error, direction autocorrelation 0.82 at 0.5 s); spends 24.7% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (1.09x clean goal error)."
+    },
+    "t1_gaussian_s1_sigma0.40_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.1253705471754074,
+          "action_jitter": 0.9705162644386292,
+          "action_std": 0.4258653521537781,
+          "goal_error": 2.8258135318756104,
+          "excursion_max": 10.912220001220703,
+          "persistence": 0.8553522229194641,
+          "speed": 2.217010021209717,
+          "z_mean": 0.7052659392356873,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.30294470353097935
+        },
+        "honest": {
+          "jitter": 0.02173543907701969,
+          "action_jitter": 0.022829793393611908,
+          "action_std": 0.16334526240825653,
+          "goal_error": 0.6367849707603455,
+          "excursion_max": 9.135580062866211,
+          "persistence": 0.6645573377609253,
+          "speed": 0.8896896839141846,
+          "z_mean": 2.036677122116089,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.0082402208051775
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (5.2x the clean per-step velocity change); drifts persistently away from its goal (3.6x clean goal error, direction autocorrelation 0.86 at 0.5 s); spends 30.3% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.80x clean goal error)."
+    },
+    "t1_gaussian_s1_sigma0.5_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.14084848761558533,
+          "action_jitter": 1.1322224140167236,
+          "action_std": 0.4567599296569824,
+          "goal_error": 3.594848394393921,
+          "excursion_max": 11.557558059692383,
+          "persistence": 0.9127224683761597,
+          "speed": 1.9139732122421265,
+          "z_mean": 0.4033397138118744,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.4995336442371752
+        },
+        "honest": {
+          "jitter": 0.023843733593821526,
+          "action_jitter": 0.022255416959524155,
+          "action_std": 0.17360304296016693,
+          "goal_error": 0.7533852458000183,
+          "excursion_max": 9.85782241821289,
+          "persistence": 0.6777759194374084,
+          "speed": 1.0590511560440063,
+          "z_mean": 2.345930337905884,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.009264299990482535
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (5.9x the clean per-step velocity change); drifts persistently away from its goal (4.5x clean goal error, direction autocorrelation 0.91 at 0.5 s); spends 50.0% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.95x clean goal error)."
+    },
+    "t1_ou_s1_sigmaou0.04_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.05241207778453827,
+          "action_jitter": 0.08960843086242676,
+          "action_std": 0.26554784178733826,
+          "goal_error": 1.1791589260101318,
+          "excursion_max": 11.149028778076172,
+          "persistence": 0.6154050827026367,
+          "speed": 1.465547800064087,
+          "z_mean": 1.7244372367858887,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.04103930712858095
+        },
+        "honest": {
+          "jitter": 0.022517699748277664,
+          "action_jitter": 0.022888604551553726,
+          "action_std": 0.16864600777626038,
+          "goal_error": 0.6509419083595276,
+          "excursion_max": 8.836624145507812,
+          "persistence": 0.6391296982765198,
+          "speed": 0.9316316843032837,
+          "z_mean": 2.0495762825012207,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.008053678500047587
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (2.2x the clean per-step velocity change); strays around its goal without a consistent direction (1.5x clean goal error, direction autocorrelation 0.62); spends 4.1% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.82x clean goal error)."
+    },
+    "t1_ou_s1_sigmaou0.06_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.1181701049208641,
+          "action_jitter": 0.12424206733703613,
+          "action_std": 0.28643497824668884,
+          "goal_error": 2.666614294052124,
+          "excursion_max": 10.614099502563477,
+          "persistence": 0.8027490377426147,
+          "speed": 2.286369800567627,
+          "z_mean": 0.9191612005233765,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.22878081279147236
+        },
+        "honest": {
+          "jitter": 0.026800602674484253,
+          "action_jitter": 0.0228346586227417,
+          "action_std": 0.17819049954414368,
+          "goal_error": 0.8227771520614624,
+          "excursion_max": 8.19572639465332,
+          "persistence": 0.6639720797538757,
+          "speed": 1.1777616739273071,
+          "z_mean": 2.1111860275268555,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.012871419053964024
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (4.9x the clean per-step velocity change); drifts persistently away from its goal (3.4x clean goal error, direction autocorrelation 0.80 at 0.5 s); spends 22.9% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (1.03x clean goal error)."
+    },
+    "t1_ou_s1_sigmaou0.08_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.15144488215446472,
+          "action_jitter": 0.16133062541484833,
+          "action_std": 0.2473112791776657,
+          "goal_error": 3.5253493785858154,
+          "excursion_max": 11.707612991333008,
+          "persistence": 0.907934308052063,
+          "speed": 2.112313985824585,
+          "z_mean": 0.45091721415519714,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.4419720186542305
+        },
+        "honest": {
+          "jitter": 0.02431218884885311,
+          "action_jitter": 0.02292141132056713,
+          "action_std": 0.1742466539144516,
+          "goal_error": 0.7233946919441223,
+          "excursion_max": 8.0127534866333,
+          "persistence": 0.6453835964202881,
+          "speed": 1.03116774559021,
+          "z_mean": 2.295236110687256,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.009405158465784715
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (6.3x the clean per-step velocity change); drifts persistently away from its goal (4.4x clean goal error, direction autocorrelation 0.91 at 0.5 s); spends 44.2% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.91x clean goal error)."
+    },
+    "t1_ou_s1_sigmaou0.1_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.15479078888893127,
+          "action_jitter": 0.19931213557720184,
+          "action_std": 0.25811854004859924,
+          "goal_error": 3.5153443813323975,
+          "excursion_max": 9.601156234741211,
+          "persistence": 0.9199196696281433,
+          "speed": 1.8621866703033447,
+          "z_mean": 0.35816308856010437,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.546875416389074
+        },
+        "honest": {
+          "jitter": 0.02260829322040081,
+          "action_jitter": 0.02261125110089779,
+          "action_std": 0.1629779189825058,
+          "goal_error": 0.6927148699760437,
+          "excursion_max": 8.34837818145752,
+          "persistence": 0.6500088572502136,
+          "speed": 0.9918721914291382,
+          "z_mean": 2.067499876022339,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.007971828304939563
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (6.5x the clean per-step velocity change); drifts persistently away from its goal (4.4x clean goal error, direction autocorrelation 0.92 at 0.5 s); spends 54.7% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.87x clean goal error)."
+    },
+    "t1_ou_s1_sigmaou0.2_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.14499258995056152,
+          "action_jitter": 0.36758434772491455,
+          "action_std": 0.3666762709617615,
+          "goal_error": 3.54834246635437,
+          "excursion_max": 9.728504180908203,
+          "persistence": 0.9732080101966858,
+          "speed": 1.0130103826522827,
+          "z_mean": 0.15118999779224396,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.8219453697534976
+        },
+        "honest": {
+          "jitter": 0.025024451315402985,
+          "action_jitter": 0.022602852433919907,
+          "action_std": 0.1754995733499527,
+          "goal_error": 0.7612987756729126,
+          "excursion_max": 10.763707160949707,
+          "persistence": 0.6745200157165527,
+          "speed": 1.0472092628479004,
+          "z_mean": 2.2678592205047607,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.01071095460169411
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (6.1x the clean per-step velocity change); drifts persistently away from its goal (4.5x clean goal error, direction autocorrelation 0.97 at 0.5 s); spends 82.2% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.96x clean goal error)."
+    },
+    "t1_ou_s1_sigmaou0.4_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.10675329715013504,
+          "action_jitter": 0.6286469101905823,
+          "action_std": 0.5882510542869568,
+          "goal_error": 3.1495773792266846,
+          "excursion_max": 9.037647247314453,
+          "persistence": 0.9684978127479553,
+          "speed": 0.5890982747077942,
+          "z_mean": 0.151292622089386,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.9161625582944704
+        },
+        "honest": {
+          "jitter": 0.021227868273854256,
+          "action_jitter": 0.022481856867671013,
+          "action_std": 0.1590862274169922,
+          "goal_error": 0.6428841948509216,
+          "excursion_max": 7.577247142791748,
+          "persistence": 0.6720549464225769,
+          "speed": 0.9185739755630493,
+          "z_mean": 2.166867256164551,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.006165413533834587
+        }
+      },
+      "description": "The degraded drone emits a visibly twitchy control signal; wobbles (4.5x the clean per-step velocity change); drifts persistently away from its goal (4.0x clean goal error, direction autocorrelation 0.97 at 0.5 s); spends 91.6% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.81x clean goal error)."
+    },
+    "t1_stall_s1_d0.10_ms0.1_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.03214404359459877,
+          "action_jitter": 0.02326270006597042,
+          "action_std": 0.2035154551267624,
+          "goal_error": 0.8346685767173767,
+          "excursion_max": 9.891522407531738,
+          "persistence": 0.6779733896255493,
+          "speed": 1.1557689905166626,
+          "z_mean": 2.147199869155884,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.022251832111925385
+        },
+        "honest": {
+          "jitter": 0.025268474593758583,
+          "action_jitter": 0.022466054186224937,
+          "action_std": 0.17856542766094208,
+          "goal_error": 0.7807804942131042,
+          "excursion_max": 9.783854484558105,
+          "persistence": 0.6704473495483398,
+          "speed": 1.0561954975128174,
+          "z_mean": 2.150251865386963,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.012566860188445798
+        }
+      },
+      "description": "The degraded drone is behaviourally indistinguishable from a clean drone at this severity. Meanwhile its honest neighbours hold formation (0.98x clean goal error)."
+    },
+    "t1_stall_s1_d0.10_ms0.3_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.049316901713609695,
+          "action_jitter": 0.021166373044252396,
+          "action_std": 0.24595136940479279,
+          "goal_error": 1.219858169555664,
+          "excursion_max": 7.457840919494629,
+          "persistence": 0.6803547739982605,
+          "speed": 1.609965443611145,
+          "z_mean": 1.7859309911727905,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.0499400399733511
+        },
+        "honest": {
+          "jitter": 0.026192164048552513,
+          "action_jitter": 0.02284305915236473,
+          "action_std": 0.1727265864610672,
+          "goal_error": 0.7965348362922668,
+          "excursion_max": 8.527719497680664,
+          "persistence": 0.6586183905601501,
+          "speed": 1.149124026298523,
+          "z_mean": 2.0690555572509766,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.012250880365470639
+        }
+      },
+      "description": "The degraded drone wobbles (2.1x the clean per-step velocity change); strays around its goal without a consistent direction (1.5x clean goal error, direction autocorrelation 0.68); spends 5.0% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (1.00x clean goal error)."
+    },
+    "t1_stall_s1_d0.10_ms1.0_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.04014860838651657,
+          "action_jitter": 0.020860591903328896,
+          "action_std": 0.2135801613330841,
+          "goal_error": 1.0470553636550903,
+          "excursion_max": 8.553170204162598,
+          "persistence": 0.6762029528617859,
+          "speed": 1.3100804090499878,
+          "z_mean": 1.735300064086914,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.05616255829447035
+        },
+        "honest": {
+          "jitter": 0.023569297045469284,
+          "action_jitter": 0.022739937528967857,
+          "action_std": 0.16351403295993805,
+          "goal_error": 0.6957730650901794,
+          "excursion_max": 7.268528461456299,
+          "persistence": 0.6450169086456299,
+          "speed": 0.9849139451980591,
+          "z_mean": 1.9025331735610962,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.00818692300371181
+        }
+      },
+      "description": "The degraded drone wobbles (1.7x the clean per-step velocity change); strays around its goal without a consistent direction (1.3x clean goal error, direction autocorrelation 0.68); spends 5.6% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.87x clean goal error)."
+    },
+    "t1_stall_s1_d0.25_ms0.1_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.04640396311879158,
+          "action_jitter": 0.023279661312699318,
+          "action_std": 0.24241937696933746,
+          "goal_error": 1.0799895524978638,
+          "excursion_max": 10.04443645477295,
+          "persistence": 0.6646605134010315,
+          "speed": 1.3905869722366333,
+          "z_mean": 2.049071788787842,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.04018654230512991
+        },
+        "honest": {
+          "jitter": 0.021344998851418495,
+          "action_jitter": 0.022961800917983055,
+          "action_std": 0.15846598148345947,
+          "goal_error": 0.6334710121154785,
+          "excursion_max": 7.327036380767822,
+          "persistence": 0.6642671227455139,
+          "speed": 0.91475909948349,
+          "z_mean": 2.2456820011138916,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.008672313695631484
+        }
+      },
+      "description": "The degraded drone wobbles (1.9x the clean per-step velocity change); strays around its goal without a consistent direction (1.4x clean goal error, direction autocorrelation 0.66); spends 4.0% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.80x clean goal error)."
+    },
+    "t1_stall_s1_d0.25_ms0.3_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.07887499034404755,
+          "action_jitter": 0.01973889023065567,
+          "action_std": 0.2954801619052887,
+          "goal_error": 1.858108401298523,
+          "excursion_max": 9.799959182739258,
+          "persistence": 0.71617591381073,
+          "speed": 2.102163791656494,
+          "z_mean": 1.7559406757354736,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.10703530979347102
+        },
+        "honest": {
+          "jitter": 0.02634165808558464,
+          "action_jitter": 0.0224600899964571,
+          "action_std": 0.18358100950717926,
+          "goal_error": 0.8593161702156067,
+          "excursion_max": 10.511283874511719,
+          "persistence": 0.660557210445404,
+          "speed": 1.1987990140914917,
+          "z_mean": 2.3678085803985596,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.010926049300466355
+        }
+      },
+      "description": "The degraded drone wobbles (3.3x the clean per-step velocity change); drifts persistently away from its goal (2.3x clean goal error, direction autocorrelation 0.72 at 0.5 s); spends 10.7% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (1.08x clean goal error)."
+    },
+    "t1_stall_s1_d0.25_ms1.0_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.06274458020925522,
+          "action_jitter": 0.017847243696451187,
+          "action_std": 0.25372907519340515,
+          "goal_error": 1.5193995237350464,
+          "excursion_max": 9.535662651062012,
+          "persistence": 0.6923310160636902,
+          "speed": 1.6132361888885498,
+          "z_mean": 1.493017554283142,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.14041305796135908
+        },
+        "honest": {
+          "jitter": 0.023042401298880577,
+          "action_jitter": 0.022899311035871506,
+          "action_std": 0.1635034680366516,
+          "goal_error": 0.6605939865112305,
+          "excursion_max": 9.165314674377441,
+          "persistence": 0.6389603614807129,
+          "speed": 0.9042885303497314,
+          "z_mean": 1.9805117845535278,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.0108670410202722
+        }
+      },
+      "description": "The degraded drone wobbles (2.6x the clean per-step velocity change); strays around its goal without a consistent direction (1.9x clean goal error, direction autocorrelation 0.69); spends 14.0% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.83x clean goal error)."
+    },
+    "t1_stall_s1_d0.50_ms0.1_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.07811763882637024,
+          "action_jitter": 0.02451120689511299,
+          "action_std": 0.3008890450000763,
+          "goal_error": 1.5707910060882568,
+          "excursion_max": 8.712868690490723,
+          "persistence": 0.6902787685394287,
+          "speed": 2.0288937091827393,
+          "z_mean": 1.563349962234497,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.09127248500999334
+        },
+        "honest": {
+          "jitter": 0.025076450780034065,
+          "action_jitter": 0.022673774510622025,
+          "action_std": 0.17355765402317047,
+          "goal_error": 0.7580439448356628,
+          "excursion_max": 9.432470321655273,
+          "persistence": 0.6710397005081177,
+          "speed": 1.0529502630233765,
+          "z_mean": 2.093709707260132,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.012218520986009326
+        }
+      },
+      "description": "The degraded drone wobbles (3.3x the clean per-step velocity change); strays around its goal without a consistent direction (2.0x clean goal error, direction autocorrelation 0.69); spends 9.1% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.95x clean goal error)."
+    },
+    "t1_stall_s1_d0.50_ms0.3_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.115959033370018,
+          "action_jitter": 0.016683679074048996,
+          "action_std": 0.30045121908187866,
+          "goal_error": 2.3473572731018066,
+          "excursion_max": 9.805028915405273,
+          "persistence": 0.7696480751037598,
+          "speed": 2.4341180324554443,
+          "z_mean": 1.1098692417144775,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.2000666222518321
+        },
+        "honest": {
+          "jitter": 0.02299848571419716,
+          "action_jitter": 0.022643929347395897,
+          "action_std": 0.16649176180362701,
+          "goal_error": 0.7128663063049316,
+          "excursion_max": 10.167125701904297,
+          "persistence": 0.6799871325492859,
+          "speed": 0.9909374713897705,
+          "z_mean": 2.1376829147338867,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.008881697915675264
+        }
+      },
+      "description": "The degraded drone wobbles (4.8x the clean per-step velocity change); drifts persistently away from its goal (3.0x clean goal error, direction autocorrelation 0.77 at 0.5 s); spends 20.0% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (0.90x clean goal error)."
+    },
+    "t1_stall_s1_d0.50_ms1.0_hold_f0125": {
+      "descriptors": {
+        "byzantine": {
+          "jitter": 0.10833956301212311,
+          "action_jitter": 0.013324650935828686,
+          "action_std": 0.29233407974243164,
+          "goal_error": 2.6008198261260986,
+          "excursion_max": 11.580772399902344,
+          "persistence": 0.7953771948814392,
+          "speed": 2.311115264892578,
+          "z_mean": 1.0887534618377686,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.25540306462358425
+        },
+        "honest": {
+          "jitter": 0.0281462874263525,
+          "action_jitter": 0.022494332864880562,
+          "action_std": 0.1871747374534607,
+          "goal_error": 0.881591796875,
+          "excursion_max": 10.367311477661133,
+          "persistence": 0.6606834530830383,
+          "speed": 1.2246195077896118,
+          "z_mean": 2.1905386447906494,
+          "z_min": 0.04596194252371788,
+          "floor_frac": 0.01525839916246312
+        }
+      },
+      "description": "The degraded drone wobbles (4.5x the clean per-step velocity change); drifts persistently away from its goal (3.3x clean goal error, direction autocorrelation 0.80 at 0.5 s); spends 25.5% of the time near the floor (vs 0.7% clean). Meanwhile its honest neighbours hold formation (1.11x clean goal error)."
+    }
+  }
+}
