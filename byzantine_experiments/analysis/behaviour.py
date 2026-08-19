@@ -35,6 +35,7 @@ import numpy as np
 RESULTS_DIR = 'byzantine_experiments/results/tier1'
 FIG_DIR = 'byzantine_experiments/results/figures'
 OUT_JSON = 'byzantine_experiments/results/tier1_behaviour.json'
+OUT_JSON_BY_PREFIX = {'t1': OUT_JSON, 't2': 'byzantine_experiments/results/tier2_behaviour.json'}
 
 PERSISTENCE_LAG = 50   # steps = 0.5 s at the env's 100 Hz control rate
 FLOOR_Z = 0.15
@@ -170,7 +171,7 @@ def plain_language(byz, honest, clean):
     return 'The degraded drone ' + '; '.join(words) + '. ' + team
 
 
-def make_plots(configs, results_dir, fig_dir):
+def make_plots(configs, results_dir, fig_dir, tier_label='Tier 1'):
     """Trajectory / goal-error / action figures for one representative run per variant."""
     import matplotlib
     matplotlib.use('Agg')
@@ -195,7 +196,7 @@ def make_plots(configs, results_dir, fig_dir):
         n_show = min(5, len(lengths))
 
         fig, axes = plt.subplots(2, 2, figsize=(13, 9))
-        fig.suptitle(f'Tier 1 behaviour — {label}\n'
+        fig.suptitle(f'{tier_label} behaviour — {label}\n'
                      f'(drone {b} compromised, drone {h} shown as honest control)',
                      fontsize=12)
 
@@ -254,21 +255,32 @@ def make_plots(configs, results_dir, fig_dir):
 def main():
     p = argparse.ArgumentParser(description=__doc__.split('\n')[1])
     p.add_argument('--results-dir', default=RESULTS_DIR)
+    p.add_argument('--clean-dir', default=None,
+                   help='Where the clean reference lives (default: --results-dir). Tier 2 '
+                        'reuses the Tier 1 clean rollouts, so point this at results/tier1.')
+    p.add_argument('--prefix', default='t1', help="Run-name prefix: 't1' or 't2'")
+    p.add_argument('--pattern', default=None,
+                   help='Glob for the runs to characterise (default: <prefix>_*_s<seed>_*f0125)')
     p.add_argument('--fig-dir', default=FIG_DIR)
     p.add_argument('--plots', action='store_true')
     p.add_argument('--wandb', action='store_true')
     p.add_argument('--seed', type=int, default=1, help='Which baseline seed to characterise')
     args = p.parse_args()
 
-    clean_path = os.path.join(args.results_dir, f't1_clean_s{args.seed}.npz')
+    clean_dir = args.clean_dir or args.results_dir
+    clean_path = os.path.join(clean_dir, f't1_clean_s{args.seed}.npz')
     if not os.path.exists(clean_path):
         raise SystemExit(f'Missing clean reference {clean_path}')
     clean = describe_run(clean_path)['honest']
 
-    runs = sorted(glob.glob(os.path.join(args.results_dir, f't1_*_s{args.seed}_*f0125.npz')))
+    pattern = args.pattern or f'{args.prefix}_*_s{args.seed}_*f0125*'
+    runs = sorted(glob.glob(os.path.join(args.results_dir, pattern + '.npz'))
+                  if not pattern.endswith('.npz') else
+                  glob.glob(os.path.join(args.results_dir, pattern)))
+    runs = [r for r in runs if '_clean_' not in os.path.basename(r)]
     print(f'Characterising {len(runs)} runs against {clean_path}\n')
 
-    report = {'clean': clean, 'configs': {}}
+    report = {'clean': clean, 'clean_path': clean_path, 'configs': {}}
     for path in runs:
         label = os.path.splitext(os.path.basename(path))[0]
         d = describe_run(path)
@@ -276,23 +288,27 @@ def main():
         report['configs'][label] = dict(descriptors=d, description=text)
         print(f'{label}\n    {text}\n')
 
-    os.makedirs(os.path.dirname(os.path.abspath(OUT_JSON)), exist_ok=True)
-    with open(OUT_JSON, 'w') as f:
+    out_json = OUT_JSON_BY_PREFIX.get(args.prefix, OUT_JSON)
+    os.makedirs(os.path.dirname(os.path.abspath(out_json)), exist_ok=True)
+    with open(out_json, 'w') as f:
         json.dump(report, f, indent=2, default=float)
-    print(f'Wrote {OUT_JSON}')
+    print(f'Wrote {out_json}')
 
     fig_paths = []
     if args.plots:
         reps = [(os.path.splitext(os.path.basename(p))[0], p) for p in runs]
-        fig_paths = make_plots(reps, args.results_dir, args.fig_dir)
+        tier_label = {'t1': 'Tier 1', 't2': 'Tier 2'}.get(args.prefix, args.prefix)
+        fig_paths = make_plots(reps, args.results_dir, args.fig_dir, tier_label=tier_label)
 
     if args.wandb:
         try:
             import wandb
             from byzantine_experiments.analysis.wandb_logging import DEFAULT_ENTITY, DEFAULT_PROJECT
             run = wandb.init(project=DEFAULT_PROJECT, entity=DEFAULT_ENTITY,
-                             name=f'tier1_behaviour_s{args.seed}', group='tier1_analysis',
-                             job_type='analysis', tags=['tier1', 'behaviour', 'analysis'])
+                             name=f'{args.prefix}_behaviour_s{args.seed}',
+                             group=f'tier{args.prefix[-1]}_analysis',
+                             job_type='analysis',
+                             tags=[f'tier{args.prefix[-1]}', 'behaviour', 'analysis'])
             table = wandb.Table(columns=['config', 'description'] +
                                         [f'byz_{k}' for k in clean] +
                                         [f'honest_{k}' for k in clean])
