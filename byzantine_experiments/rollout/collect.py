@@ -227,6 +227,8 @@ def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True):
     )
     byz_mask = byz.byzantine_mask if byz else np.zeros(num_agents, dtype=bool)
     byz_config = byz.config_summary() if byz else None
+    if byz is not None:
+        summary['agent_diagnostics'] = byz.agent_diagnostics()
 
     env.close()
     return episodes, byz_mask, byz_config, summary
@@ -358,11 +360,13 @@ def main():
         git_sha=git_sha(),
         command=' '.join(sys.argv),
         generated_at=datetime.now().isoformat(),
-        summary={k: v for k, v in summary.items() if k != 'episode_rewards'},
+        summary={k: v for k, v in summary.items()
+                 if k not in ('episode_rewards', 'agent_diagnostics')},
         episode_rewards=summary['episode_rewards'],
         # Characterisation metrics live in the sidecar so the aggregator never has to open
         # the 250 MB .npz files.
         metrics={k: v for k, v in metrics.items() if k != 'per_episode'},
+        agent_diagnostics=summary.get('agent_diagnostics'),
     )
     json_path = os.path.splitext(out_path)[0] + '.json'
     with open(json_path, 'w') as f:
