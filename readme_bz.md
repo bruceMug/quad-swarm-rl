@@ -23,7 +23,12 @@ For *why* things are built this way, see
 | Behaviour analysis + 30 figures | done | `results/tier1_behaviour.json`, `results/figures/` |
 | Plain-language guide to every output | done | `byzantine_experiments/why/TIER1_explanation.md` |
 | wandb | 123 runs uploaded, duplicates removed | project `byzantine_exp` |
-| **Validation gate** | ✅ **met for all three usable variants** | see below |
+| **Tier 1 validation gate** | ✅ **met for all three usable variants** | see below |
+| Tier 2 agents (4 variants: signflip, waypoint_pull, liar, collusion) | done, 31 tests pass | `agents/tier2_structured.py` |
+| Tier 2 matrix — 57 runs | **done**, 0 failures | `results/tier2/*.{npz,json}` |
+| Tier 2 calibration + behaviour + 19 figures | done | `results/tier2_calibration.{md,csv}`, `results/tier2_behaviour.json` |
+| Plain-language guide to Tier 2 outputs | done | `byzantine_experiments/why/TIER2_explanation.md` |
+| **Tier 2 validation gate** | ⚠️ **met for 2A only** — 1 of 19 configs in the 20–40 % band | `design/tier2_design.md` §5 |
 
 Canonical Tier 1 settings, for Tier 3 to be matched against:
 
@@ -41,7 +46,10 @@ and a log. Logs are merged into **one file per variant**
 (`logs/tier1/{clean,gaussian,ou,dropout,stall}.log`) plus the sweep-level
 `logs/tier1_matrix.log`, so a 123-run sweep leaves 5 log files, not 123.
 
-**Next:** Tier 2. Spec at `byzantine_experiments/specs/TIER2_SIGNFLIP.md`.
+**Next:** Tier 3 — but read `design/tier2_design.md` §10 first. The spec's ≥30 % team-reward
+gate is *trivially* passed (a Tier 1 noise fault scores 214 %), because the all-8 reward mean is
+dominated by the compromised drone's own collapse; and the matched-damage check it specifies is
+statistically vacuous at n = 50. Both are fixable with small edits to the spec.
 
 ---
 
@@ -59,15 +67,81 @@ Verify the environment is intact — takes ~30 s, needs no GPU:
 
 ```bash
 pytest byzantine_experiments/tests/test_tier1.py -q      # 41 tests, ~17 s
+pytest byzantine_experiments/tests/test_tier2.py -q      # 31 tests, ~6 s
 pytest byzantine_experiments/tests/test_tier0.py -q      # 15 tests, ~2 min (2 use the checkpoints)
 ```
 
-Expect: `41 passed` and `15 passed`. If wandb auth fails, check your AFS token with
+Expect: `41 passed`, `31 passed, 3 skipped`, and `15 passed`. If wandb auth fails, check your AFS token with
 `tokens` and renew with `klog` — `~/.netrc` lives on AFS.
 
 ---
 
-## 2. How the Tier 1 sweeps were produced (all complete — for reference)
+## 2A. Tier 2 — how the matrix was produced (complete — for reference)
+
+Spec: [`specs/TIER2_SIGNFLIP.md`](byzantine_experiments/specs/TIER2_SIGNFLIP.md).
+All 57 runs are complete. Results in `design/tier2_design.md` and `why/TIER2_explanation.md`.
+
+```bash
+# 57 runs x 50 episodes  (~75 min at PARALLEL=12, ~7 GB)
+PARALLEL=12 bash scripts/byz_rollout_tier2.sh
+
+# then the analysis (seconds / ~1 min)
+python -m byzantine_experiments.analysis.aggregate_tier2
+python -m byzantine_experiments.analysis.behaviour \
+    --results-dir byzantine_experiments/results/tier2 \
+    --clean-dir  byzantine_experiments/results/tier1 \
+    --prefix t2 --plots --wandb
+```
+
+Optional first (~6 s): `pytest byzantine_experiments/tests/test_tier2.py -q` → `31 passed, 3 skipped`.
+The 3 skips are the efficacy test, which needs real rollouts; to run it too:
+`BYZ_SLOW_TESTS=1 pytest byzantine_experiments/tests/test_tier2.py -q -k efficacy` (~4 min).
+
+**The matrix:**
+
+| variant | configs | f | runs |
+| --- | --- | --- | --- |
+| 2A `signflip` | `partial` (body roll/pitch flip, thrust honest) + `full` (all motors) | 0.125, 0.25 | 12 |
+| 2B `waypoint_pull` | α ∈ {0.3, 0.6, 1.0} | 0.125, 0.25 | 18 |
+| 2C `liar` | lie_mode ∈ {offset, stale, mirror} | 0.125, 0.25 | 18 |
+| 2D `collusion` | mode ∈ {same_waypoint, pincer, mirror_pair} | 0.25 only | 9 |
+
+**Clean references are not re-run.** Tier 1 already collected 3 clean rollouts from the same
+checkpoints with the same collector and the same 50 episodes; the Tier 2 aggregator reads them
+from `results/tier1/`. That saves 45 minutes of identical numbers.
+
+**Knobs** (same style as Tier 1): `DRY_RUN=1`, `WANDB=0`, `FORCE=1`, `ONLY=2a|2b|2c|2d` to run
+one variant's block, `KEEP_RUN_LOGS=1`. Resumable — finished configs are skipped.
+
+**What the matrix found** (details in `why/TIER2_explanation.md`):
+
+| variant | goal-RMSE degradation | in the 20–40 % band? |
+| --- | --- | --- |
+| 2A signflip | 28.9 – 67.6 % | ✅ `full` at f=0.125 → 28.9 % (the only one) |
+| 2B waypoint | 77.8 – 168.1 % | ❌ too strong even at α=0.3 |
+| 2C liar | 5.6 – 11.8 % | ❌ too weak by construction |
+| 2D collusion | 73.7 – 181.2 % | ❌ too strong |
+
+And the finding that spans both tiers: **honest-drone formation error stays within −6.8 % to
++9.5 % of clean in every Tier 2 config** — the same ±10 % band as Tier 1. Attacking 1–2 of 8
+drones does not measurably damage the other six, intent or no intent.
+
+### If a metric is added after a sweep has run
+
+Do **not** re-simulate. The trajectories are on disk; replay the metric computation:
+
+```bash
+python -m byzantine_experiments.analysis.refresh_metrics \
+    --results-dir byzantine_experiments/results/tier2          # ~84 s for 57 runs
+```
+
+This was needed twice already — Tier 2 added `attacker_survived`, `attacker_below_guard_frac`
+and the cumulative-reward curve, none of which existed when Tier 1's clean references were
+collected (without the curve, every Tier 2 time-to-impact reads `n/a`).
+
+---
+
+## 2B. How the Tier 1 sweeps were produced (all complete — for reference)
 
 **Why.** Variant 1C (`tier1_dropout`) turned out to be a near-null fault: at the env's 100 Hz
 control rate, an i.i.d. per-step dropout lasts ~1 control tick, and reusing a 10 ms-old
@@ -197,7 +271,8 @@ python -m byzantine_experiments.rollout.collect \
 
 Unrecognised flags pass through to sample_factory, e.g. `--replay_buffer_sample_prob=0.0`.
 
-**Registered tiers:** `tier0_noop`, `tier1_gaussian`, `tier1_ou`, `tier1_dropout`, `tier1_stall`
+**Registered tiers:** `tier0_noop`, `tier1_gaussian`, `tier1_ou`, `tier1_dropout`,
+`tier1_stall`, `tier2_signflip`, `tier2_waypoint_pull`, `tier2_liar`, `tier2_collusion`
 
 ```bash
 python -c "from byzantine_experiments.agents import BYZANTINE_REGISTRY as R; print(sorted(R))"
