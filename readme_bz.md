@@ -25,10 +25,10 @@ For *why* things are built this way, see
 | wandb | 123 runs uploaded, duplicates removed | project `byzantine_exp` |
 | **Tier 1 validation gate** | ✅ **met for all three usable variants** | see below |
 | Tier 2 agents (4 variants: signflip, waypoint_pull, liar, collusion) | done, 31 tests pass | `agents/tier2_structured.py` |
-| Tier 2 matrix — 57 runs | **done**, 0 failures | `results/tier2/*.{npz,json}` |
+| Tier 2 matrix — 57 runs + 12-run 2B α-refinement = **69 runs** | **done**, 0 failures | `results/tier2/*.{npz,json}` |
 | Tier 2 calibration + behaviour + 19 figures | done | `results/tier2_calibration.{md,csv}`, `results/tier2_behaviour.json` |
 | Plain-language guide to Tier 2 outputs | done | `byzantine_experiments/why/TIER2_explanation.md` |
-| **Tier 2 validation gate** | ⚠️ **met for 2A only** — 1 of 19 configs in the 20–40 % band | `design/tier2_design.md` §5 |
+| **Tier 2 validation gate** | ✅ **met for 2A and 2B** — `waypoint α=0.20` lands at 23.2 % | `design/tier2_design.md` §5 |
 
 Canonical Tier 1 settings, for Tier 3 to be matched against:
 
@@ -111,7 +111,12 @@ checkpoints with the same collector and the same 50 episodes; the Tier 2 aggrega
 from `results/tier1/`. That saves 45 minutes of identical numbers.
 
 **Knobs** (same style as Tier 1): `DRY_RUN=1`, `WANDB=0`, `FORCE=1`, `ONLY=2a|2b|2c|2d` to run
-one variant's block, `KEEP_RUN_LOGS=1`. Resumable — finished configs are skipped.
+one variant's block, `ALPHA_REFINE=1` for the 2B α grid, `KEEP_RUN_LOGS=1`. Resumable —
+finished configs are skipped.
+
+```bash
+ALPHA_REFINE=1 PARALLEL=12 bash scripts/byz_rollout_tier2.sh   # 12 runs, ~20 min (done)
+```
 
 **What the matrix found** (details in `why/TIER2_explanation.md`):
 
