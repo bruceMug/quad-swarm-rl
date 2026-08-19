@@ -232,9 +232,21 @@ def test_registry_entries_are_valid():
         assert out.shape == honest.shape, f'{name} changed the action shape'
         assert np.array_equal(honest, original), f'{name} mutated its input in place'
         assert np.all(out >= -1.0) and np.all(out <= 1.0), f'{name} escaped the action range'
-        # the broadcast hook must exist and default to honest
+        # The broadcast hook must exist and behave according to the agent's declared
+        # capability. Tier 2C sets `lies_about_state = True` and is *supposed* to report a
+        # false state -- demanding identity of every agent would forbid the whole variant.
+        # What every agent must do is return a well-formed, finite 6-vector
+        # [x, y, z, vx, vy, vz], and only lie if it said it would.
         state = np.arange(6, dtype=np.float32)
-        assert np.array_equal(np.asarray(agent.perturb_broadcast_state(state, 0)), state)
+        reported = np.asarray(agent.perturb_broadcast_state(state.copy(), 0))
+        assert reported.shape == (6,), f'{name} broadcast a malformed state {reported.shape}'
+        assert np.all(np.isfinite(reported)), f'{name} broadcast a non-finite state'
+        if getattr(cls, 'lies_about_state', False):
+            assert not np.array_equal(reported, state), (
+                f'{name} declares lies_about_state but reported the truth')
+        else:
+            assert np.array_equal(reported, state), (
+                f'{name} corrupted its broadcast state without declaring lies_about_state')
 
 
 def test_perturbation_log_integrity(actions):
