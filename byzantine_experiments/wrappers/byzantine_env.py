@@ -20,7 +20,12 @@ import inspect
 import numpy as np
 import gymnasium as gym
 
-from byzantine_experiments.agents.base import BYZANTINE_REGISTRY, ByzantineAgent, get_byzantine_class
+from byzantine_experiments.agents.base import (
+    BYZANTINE_REGISTRY,
+    ByzantineAgent,
+    EgoState,
+    get_byzantine_class,
+)
 
 
 class ByzantineEnvWrapper(gym.Wrapper):
@@ -60,6 +65,14 @@ class ByzantineEnvWrapper(gym.Wrapper):
         self.action_high = np.asarray(act_space.high, dtype=np.float64).reshape(-1)
         self.action_dtype = act_space.dtype
 
+        # Size of the ego block that precedes the neighbour blocks in each observation.
+        # Derived, not hardcoded: obs layouts differ between obs_repr settings
+        # (xyz_vxyz_R_omega = 18, _floor = 19, _wall = 24).
+        obs_dim = int(np.prod(env.observation_space.shape))
+        n_neighbors = int(getattr(env.unwrapped, 'num_use_neighbor_obs', 0))
+        self.n_neighbors = n_neighbors
+        self.ego_dim = obs_dim - 6 * n_neighbors
+
         self.tier = tier
         self.tier_name = tier if isinstance(tier, str) else tier.__name__
         self.tier_config = dict(tier_config or {})
@@ -82,6 +95,14 @@ class ByzantineEnvWrapper(gym.Wrapper):
 
         # RNG for episode-to-episode index resampling only; agents own their own streams.
         self._assign_rng = np.random.default_rng(self.seed_value + 999983)
+
+        # Shared mutable channel for colluding agents (Tier 2D). Only Byzantine agents can
+        # see it; it carries nothing the env computes. Must exist before _build_agents(),
+        # which hands it to any agent declaring needs_coordination.
+        self._coordination = {}
+        self._jacobian_inv = {}
+        self.ego_updates = 0
+        self.broadcast_rewrites = 0
 
         self.compromised_indices = list(self._requested_indices)
         self.byz_agents = {}
@@ -118,7 +139,14 @@ class ByzantineEnvWrapper(gym.Wrapper):
             # Authoritative: whatever the constructor did, the legal range is the env's.
             agent.action_low = self.action_low
             agent.action_high = self.action_high
+            if getattr(agent, 'needs_coordination', False):
+                agent.coordination = self._coordination
             self.byz_agents[i] = agent
+
+        self.any_needs_ego = any(getattr(a, 'needs_ego_state', False)
+                                 for a in self.byz_agents.values())
+        self.any_lies = any(getattr(a, 'lies_about_state', False)
+                            for a in self.byz_agents.values())
 
     def _begin_episode(self):
         """Episode boundary bookkeeping: resample indices (random mode), reset agents."""
@@ -141,6 +169,104 @@ class ByzantineEnvWrapper(gym.Wrapper):
         self._t = 0
         self._perturbation_log = []
         self._pending_new_episode = False
+
+    # ---------------------------------------------------------- tier 2 capabilities
+
+    def _drone_states(self):
+        """True (pos, vel) for every drone, read from the live env. See collect.py on why
+        `.unwrapped` is resolved per call rather than cached."""
+        envs = self.env.unwrapped.envs
+        pos = np.array([e.dynamics.pos for e in envs], dtype=np.float64)
+        vel = np.array([e.dynamics.vel for e in envs], dtype=np.float64)
+        return pos, vel
+
+    def _push_ego_state(self):
+        """Give each goal-directed agent its OWN true state before it decides."""
+        if not self.any_needs_ego:
+            return
+        envs = self.env.unwrapped.envs
+        for i, agent in self.byz_agents.items():
+            if not getattr(agent, 'needs_ego_state', False):
+                continue
+            dyn = envs[i].dynamics
+            if i not in self._jacobian_inv:
+                from byzantine_experiments.agents.control_utils import jacobians_for
+                self._jacobian_inv[i] = jacobians_for(dyn)
+            agent.ego = EgoState(
+                pos=np.array(dyn.pos, dtype=np.float64),
+                vel=np.array(dyn.vel, dtype=np.float64),
+                rot=np.array(dyn.rot, dtype=np.float64),
+                omega=np.array(dyn.omega, dtype=np.float64),
+                jacobian=self._jacobian_inv[i][0],
+                jacobian_inv=self._jacobian_inv[i][1],
+                room_box=np.array(envs[i].room_box, dtype=np.float64),
+            )
+            self.ego_updates += 1
+
+    def _apply_broadcast_lies(self, obs):
+        """
+        Rewrite what every OTHER drone sees of a lying agent (Tier 2C).
+
+        The env publishes each drone's true position/velocity into its neighbours'
+        observation vectors. Layout, verified empirically against
+        `QuadrotorEnvMulti.extend_obs_space`:
+
+            obs[i, 0:18]                              ego block (carries sensor noise)
+            obs[i, 18 + 6*slot     : 18 + 6*slot + 3] pos[j] - pos[i]   for the `slot`-th
+            obs[i, 18 + 6*slot + 3 : 18 + 6*slot + 6] vel[j] - vel[i]   closest neighbour j
+
+        `slot` is a *proximity rank*, not an agent id: `neighborhood_indices()` re-sorts the
+        neighbours of each drone every step (by distance plus closing speed), and when
+        `num_use_neighbor_obs < num_agents - 1` it keeps only the closest few. So the index
+        of the liar inside a given observer's vector changes step to step, and on some steps
+        the liar is not present in a given observer's block at all. This is exactly the
+        "get this wrong and the attack silently does nothing" trap: the ordering is taken
+        from the env's own `neighborhood_indices()` rather than reimplemented.
+
+        The lie corrupts the *values* an observer sees, not *which* neighbours it attends
+        to -- selection still runs on true positions. See design/tier2_design.md.
+        """
+        if not self.any_lies:
+            return obs
+
+        liars = {i: a for i, a in self.byz_agents.items()
+                 if getattr(a, 'lies_about_state', False)}
+        if not liars:
+            return obs
+
+        unwrapped = self.env.unwrapped
+        obs = np.array(obs, dtype=np.asarray(obs).dtype, copy=True)
+        pos, vel = self._drone_states()
+        indices = unwrapped.neighborhood_indices()
+        lo = unwrapped.clip_neighbor_space_min_box
+        hi = unwrapped.clip_neighbor_space_max_box
+
+        reported = {}
+        for i, agent in liars.items():
+            true_state = np.concatenate([pos[i], vel[i]])
+            out = np.asarray(agent.perturb_broadcast_state(true_state.copy(), self._t),
+                             dtype=np.float64)
+            if out.shape != (6,):
+                raise ValueError(
+                    f'{self.tier_name} agent {i} returned a broadcast state of shape '
+                    f'{out.shape}, expected (6,) = [x, y, z, vx, vy, vz]')
+            reported[i] = out
+
+        for observer in range(self.num_agents):
+            if observer in liars:
+                continue      # a liar's own observation is untouched
+            for slot, j in enumerate(indices[observer]):
+                j = int(j)
+                if j not in reported:
+                    continue
+                base = self.ego_dim + 6 * slot
+                rel_pos = reported[j][:3] - pos[observer]
+                rel_vel = reported[j][3:] - vel[observer]
+                obs[observer, base:base + 3] = np.clip(rel_pos, lo[:3], hi[:3])
+                obs[observer, base + 3:base + 6] = np.clip(rel_vel, lo[3:6], hi[3:6])
+                self.broadcast_rewrites += 1
+
+        return obs
 
     # ---------------------------------------------------------------- action plumbing
 
@@ -209,6 +335,8 @@ class ByzantineEnvWrapper(gym.Wrapper):
         self._begin_episode()
 
         obs = out[0] if isinstance(out, tuple) else out
+        obs = self._apply_broadcast_lies(obs)
+        out = (obs,) + tuple(out[1:]) if isinstance(out, tuple) else obs
         self._last_obs = np.asarray(obs)
         self._last_honest_actions = None
         self._last_executed_actions = None
@@ -220,6 +348,7 @@ class ByzantineEnvWrapper(gym.Wrapper):
             # does this for the multi-agent env), so start the new episode now.
             self._begin_episode()
 
+        self._push_ego_state()
         honest, was_sequence = self._normalise_actions(actions)
         executed = self._apply_byzantine(honest)
 
@@ -229,6 +358,7 @@ class ByzantineEnvWrapper(gym.Wrapper):
         to_env = list(executed) if was_sequence else executed
         obs, rewards, terminated, truncated, infos = self.env.step(to_env)
 
+        obs = self._apply_broadcast_lies(obs)
         self._last_obs = np.asarray(obs)
         self._t += 1
 
@@ -247,6 +377,20 @@ class ByzantineEnvWrapper(gym.Wrapper):
         return _any(terminated) or _any(truncated)
 
     # ---------------------------------------------------------------- introspection
+
+    def agent_diagnostics(self):
+        """Per-agent internal counters (guard trigger rate, lies told, ...).
+
+        Tier 2 needs these in the run sidecar: a survival guard that fires on most steps
+        means the 'attack' is mostly honest flight, and the calibration has to say so.
+        """
+        out = {}
+        for i, agent in self.byz_agents.items():
+            if hasattr(agent, 'diagnostics'):
+                out[str(i)] = {k: (float(v) if isinstance(v, (int, float, np.integer, np.floating))
+                                   else v)
+                               for k, v in agent.diagnostics().items()}
+        return out
 
     def get_perturbation_log(self):
         """
@@ -291,5 +435,10 @@ class ByzantineEnvWrapper(gym.Wrapper):
             action_low=self.action_low.tolist(),
             action_high=self.action_high.tolist(),
             action_dtype=str(self.action_dtype),
+            ego_dim=self.ego_dim,
+            n_neighbors=self.n_neighbors,
+            uses_ego_state=self.any_needs_ego,
+            lies_about_state=self.any_lies,
+            broadcast_rewrites=self.broadcast_rewrites,
             registered_tiers=sorted(BYZANTINE_REGISTRY),
         )
