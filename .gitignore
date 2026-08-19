@@ -20,5 +20,10 @@ research*.md
 # them are small and carry the run provenance, so those stay tracked.
 byzantine_experiments/results/*.npz
 logs/tier1
+logs/tier2
+logs/tier3
 byzantine_experiments/results/*.json
+!byzantine_experiments/results/*_behaviour.json
 byzantine_experiments/results/tier1
+byzantine_experiments/results/tier2
+byzantine_experiments/results/tier3
