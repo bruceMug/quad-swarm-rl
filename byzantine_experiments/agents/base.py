@@ -41,6 +41,29 @@ def clip_to_action_space(action, low=-1.0, high=1.0):
     return np.clip(action, low, high)
 
 
+class EgoState:
+    """
+    One drone's own true state, handed to agents that declare `needs_ego_state`.
+
+    Tier 1 agents never see this -- a stochastic fault has no use for it, and withholding it
+    makes "no team state access" trivially true. Tier 2+ agents may be goal-directed, so they
+    get their OWN pos/vel/rot/omega (and the inverse control Jacobian of their own airframe,
+    for the position controller). It deliberately carries nothing about any other drone.
+    """
+
+    __slots__ = ('pos', 'vel', 'rot', 'omega', 'jacobian', 'jacobian_inv', 'room_box')
+
+    def __init__(self, pos, vel, rot, omega, jacobian=None, jacobian_inv=None,
+                 room_box=None):
+        self.pos = pos
+        self.vel = vel
+        self.rot = rot
+        self.omega = omega
+        self.jacobian = jacobian
+        self.jacobian_inv = jacobian_inv
+        self.room_box = room_box
+
+
 class ByzantineAgent(ABC):
     """
     Transforms an honest policy's output into Byzantine behaviour.
@@ -50,7 +73,20 @@ class ByzantineAgent(ABC):
       - it MUST return an action in the same dtype/shape/range as the input
       - it MUST NOT mutate its input array in place
       - it MAY maintain internal state across steps (reset via reset())
+
+    Capability flags (all default off, so Tier 0/1 behaviour is unchanged):
+      - needs_ego_state: the wrapper sets `self.ego` (an EgoState) before each
+        perturb_action call. Own state only -- never a neighbour's.
+      - lies_about_state: the wrapper routes this agent's reported position/velocity
+        through perturb_broadcast_state() and rewrites the neighbour block of every OTHER
+        drone's observation accordingly.
+      - needs_coordination: the wrapper hands every such agent the same mutable dict, so
+        colluding attackers can share a plan. Only other Byzantine agents can write to it.
     """
+
+    needs_ego_state = False
+    lies_about_state = False
+    needs_coordination = False
 
     def __init__(self, agent_idx: int, action_dim: int, seed: int = 0,
                  action_low=-1.0, action_high=1.0, **kwargs):
@@ -61,6 +97,9 @@ class ByzantineAgent(ABC):
         # Populated by the wrapper from env.action_space so tiers never hardcode the range.
         self.action_low = action_low
         self.action_high = action_high
+        # Populated by the wrapper when the corresponding capability flag is set.
+        self.ego = None
+        self.coordination = None
 
     @abstractmethod
     def perturb_action(self, honest_action: np.ndarray, obs: np.ndarray,
@@ -70,7 +109,14 @@ class ByzantineAgent(ABC):
     def perturb_broadcast_state(self, true_state: np.ndarray, t: int) -> np.ndarray:
         """
         Optional: corrupt what THIS agent reports to neighbours.
-        Default is honest (identity). Override in tiers that lie about state.
+
+        `true_state` is a 6-vector `[x, y, z, vx, vy, vz]` in world coordinates -- this
+        drone's true position and velocity, which is exactly what the env publishes into
+        every other drone's neighbour observation block. Return a 6-vector in the same
+        layout; the wrapper converts it to the relative form each observer expects.
+
+        Default is honest (identity). Overriding it is only effective if the subclass also
+        sets `lies_about_state = True`, which is what tells the wrapper to intercept.
         """
         return true_state
 
