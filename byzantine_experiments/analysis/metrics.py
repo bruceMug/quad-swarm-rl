@@ -22,6 +22,9 @@ import numpy as np
 
 EGO_GOAL_SLICE = slice(0, 3)  # obs dims 0:3 = pos - goal
 SATURATION_EPS = 1e-4
+FLOOR_Z = 0.15          # below this a drone counts as grounded
+GUARD_Z = 0.60          # Tier 2 survival guard engages below this altitude
+CURVE_STRIDE = 10       # downsampling of the cumulative-reward curve (100 Hz -> 10 Hz)
 
 
 def _step_mask(data):
@@ -115,6 +118,34 @@ def compute_metrics(data, action_low=-1.0, action_high=1.0):
     low_altitude = (positions[..., 2] < 0.15).astype(float)          # (E, T, N)
     ep_low_alt = _per_episode_mean(low_altitude, step_mask)
 
+    # ---- Tier 2: attacker survival ----------------------------------------------------
+    # "Survived" = airborne at the last real step of the episode. An attack that grounds its
+    # own attacker removes it from the episode and yields no behavioural signal to detect.
+    last_idx = np.maximum(lengths - 1, 0)
+    final_z = positions[np.arange(n_episodes), last_idx][:, :, 2]    # (E, N)
+    if byz_mask.any():
+        ep_survived = (final_z[:, byz_mask] > FLOOR_Z).all(axis=1).astype(float)
+        ep_byz_airborne = 1.0 - _per_episode_mean(low_altitude[..., byz_mask], step_mask)
+        # Fraction of steps the attacker was inside the survival guard's ramp. The guard
+        # fires exactly when z < guard_altitude, so this reconstructs the guard trigger rate
+        # from the trajectory alone -- no need to trust (or re-run) the agent's counters.
+        below_guard = (positions[..., byz_mask, 2] < GUARD_Z).astype(float)
+        ep_below_guard = _per_episode_mean(below_guard, step_mask)
+    else:
+        ep_survived = np.full(n_episodes, np.nan)
+        ep_byz_airborne = np.full(n_episodes, np.nan)
+        ep_below_guard = np.full(n_episodes, np.nan)
+
+    # ---- Tier 2: team-reward curve, for time-to-impact --------------------------------
+    # Cumulative team reward (mean over drones) as a function of t, downsampled. The
+    # aggregator diffs this against the clean run's curve to find the first step at which
+    # the attack becomes visible; keeping it here means the .npz never has to be reopened.
+    team_step_reward = np.where(step_mask[..., None], rewards, 0.0).mean(axis=2)   # (E, T)
+    cum = np.cumsum(team_step_reward, axis=1)
+    curve = cum[:, ::CURVE_STRIDE]
+    curve_mean = curve.mean(axis=0)
+    curve_std = curve.std(axis=0)
+
     per_episode = dict(
         episode_reward=ep_reward,
         episode_reward_honest=ep_reward_honest,
@@ -127,6 +158,9 @@ def compute_metrics(data, action_low=-1.0, action_high=1.0):
         saturation_byzantine=ep_sat_byz,
         min_separation=ep_min_sep,
         low_altitude_frac=ep_low_alt,
+        attacker_survived=ep_survived,
+        attacker_airborne_frac=ep_byz_airborne,
+        attacker_below_guard_frac=ep_below_guard,
         episode_length=lengths.astype(float),
     )
 
@@ -143,6 +177,9 @@ def compute_metrics(data, action_low=-1.0, action_high=1.0):
         perturbed_step_fraction=perturbed_frac,
         saturation_rate_byzantine=sat_byz,
         saturation_rate_honest=sat_honest,
+        curve_stride=CURVE_STRIDE,
+        team_reward_curve=curve_mean.tolist(),
+        team_reward_curve_std=curve_std.tolist(),
     )
     for key, vals in per_episode.items():
         vals = np.asarray(vals, dtype=np.float64)
@@ -204,15 +241,50 @@ def degradation_vs_clean(byz, clean):
     out['reward_degradation_pct_sem'] = 100.0 * drop_sem / denom
     out['reward_drop_sigma'] = drop / drop_sem if drop_sem > 0 else float('nan')
 
+    # ---- Tier 2: time-to-impact -------------------------------------------------------
+    # First timestep at which the cumulative team reward of the attacked run departs from
+    # the clean run's by more than 2 clean standard deviations. NaN means the attack never
+    # separated from clean noise within the episode -- which is itself a result.
+    out['time_to_impact_steps'] = float('nan')
+    out['time_to_impact_s'] = float('nan')
+    b_curve = np.asarray(byz.get('team_reward_curve', []), dtype=np.float64)
+    c_curve = np.asarray(clean.get('team_reward_curve', []), dtype=np.float64)
+    c_std = np.asarray(clean.get('team_reward_curve_std', []), dtype=np.float64)
+    stride = int(byz.get('curve_stride', 10))
+    if b_curve.size and b_curve.size == c_curve.size:
+        diverged = np.abs(b_curve - c_curve) > 2.0 * np.maximum(c_std, 1e-9)
+        # require the divergence to persist, so a single noisy sample does not count
+        run = np.convolve(diverged.astype(int), np.ones(3, dtype=int), mode='same') >= 3
+        hits = np.flatnonzero(run)
+        if hits.size:
+            step = int(hits[0]) * stride
+            out['time_to_impact_steps'] = float(step)
+            out['time_to_impact_s'] = step / 100.0     # env control rate
+
+    # ---- Tier 2: victim spillover -----------------------------------------------------
+    # Damage that propagated to drones that were never compromised. This is the quantity the
+    # spec calls "victim spillover", named explicitly rather than left implicit in the
+    # honest-agent columns.
+    c_h, b_h = clean.get('episode_reward_honest_mean'), byz.get('episode_reward_honest_mean')
+    if c_h is not None and b_h is not None:
+        out['victim_spillover_reward_drop'] = c_h - b_h
+        out['victim_spillover_pct'] = (100.0 * (c_h - b_h) / abs(c_h)
+                                       if abs(c_h) > 1e-9 else float('nan'))
+    c_g, b_g = clean.get('goal_rmse_honest_mean'), byz.get('goal_rmse_honest_mean')
+    if c_g is not None and b_g is not None and abs(c_g) > 1e-9:
+        out['victim_spillover_goal_rmse_pct'] = 100.0 * (b_g - c_g) / abs(c_g)
+
     for key in ('episode_reward_honest', 'goal_rmse', 'goal_rmse_honest',
-                'collisions', 'min_separation', 'low_altitude_frac'):
+                'collisions', 'min_separation', 'low_altitude_frac',
+                'attacker_survived', 'attacker_airborne_frac'):
         c, b = clean.get(f'{key}_mean'), byz.get(f'{key}_mean')
         if c is None or b is None:
             continue
         out[f'clean_{key}'] = c
         out[f'{key}_delta'] = b - c
         # For error-like metrics, "degradation" means the value going UP.
-        sign = -1.0 if key in ('episode_reward_honest', 'min_separation') else 1.0
+        sign = -1.0 if key in ('episode_reward_honest', 'min_separation',
+                               'attacker_survived', 'attacker_airborne_frac') else 1.0
         out[f'{key}_degradation_pct'] = (100.0 * sign * (b - c) / abs(c)
                                          if abs(c) > 1e-9 else float('nan'))
     return out
