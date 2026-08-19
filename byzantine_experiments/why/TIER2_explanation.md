@@ -15,15 +15,17 @@ what it is and why it exists, without reading code. Companion to
 
 Same 8-drone swarm, same trained policy, same 3 seeds. But where Tier 1 made drones fly
 *badly*, **Tier 2 makes drones fly badly on purpose**. Four attack styles, run at two
-compromised fractions on three baseline policies = **57 runs**, 50 episodes each. Tier 1 was
+compromised fractions on three baseline policies = 57 runs, plus a 12-run follow-up sweep to
+find a usable severity for the `waypoint` attack = **69 runs**, 50 episodes each. Tier 1 was
 the "broken" reference; Tier 2 is the "malicious but obvious" reference. Together they set up
 the paper's question: when Tier 3 arrives with a *trained* adversary, can the detector tell
 malicious from merely broken — and is it doing that, or just measuring how much damage
 happened?
 
-**The single most important thing to know:** three of the four attacks turned out to be far
-*stronger* than the 20–40 % damage band we need for a fair comparison, and one (`liar`) is far
-weaker. Only one config landed in the band. See §6.
+**The single most important thing to know:** the attacks' severity knobs were badly calibrated
+out of the box — three of four variants were far *stronger* than the 20–40 % damage band we
+need for a fair comparison, and one (`liar`) far weaker. A follow-up sweep on `waypoint` found
+the band at α = 0.20, giving the comparison a second and much better-behaved anchor. See §6.
 
 ---
 
@@ -47,7 +49,7 @@ behaviour_t2_waypoint_s1_a0.6_f025.png
 | `t2` | Tier 2 (`t0` infrastructure, `t1` faults) | — |
 | `signflip` / `waypoint` / `liar` / `collusion` | which of the four attacks (§3) | — |
 | `partial` / `full` | 2A only: which sign flip. `partial` = invert roll/pitch, keep thrust honest. `full` = invert all four motors. | — |
-| `a0.6` | 2B/2D: **alpha**, how committed the attacker is. 0 = honest, 1 = ignores the policy entirely. | 0.3, 0.6, 1.0 |
+| `a0.6` | 2B/2D: **alpha**, how committed the attacker is. 0 = honest, 1 = ignores the policy entirely. | **0.05, 0.10, 0.15, 0.20**, 0.3, 0.6, 1.0 |
 | `offset` / `stale` / `mirror` | 2C: which kind of lie | — |
 | `same_waypoint` / `pincer` / `mirror_pair` | 2D: how the two attackers coordinate | — |
 | `s1 s2 s3`, `f0125`, `f025` | as Tier 1 — seed, and 1-or-2-of-8 compromised | — |
@@ -127,13 +129,13 @@ continuously caught" than as "a drone flying adversarially".
 
 ```
 byzantine_experiments/results/
-├── tier2/                          57 runs × 2 files (7.7 GB of .npz, gitignored)
+├── tier2/                          69 runs × 2 files (9.3 GB of .npz, gitignored)
 │   ├── t2_waypoint_s1_a0.6_f025.npz    ← raw trajectories
-│   └── t2_waypoint_s1_a0.6_f025.json   ← config + all metrics (committed)
-├── tier2_calibration.csv           one row per (config × seed) — 57 rows
+│   └── t2_waypoint_s1_a0.6_f025.json   ← config + all metrics
+├── tier2_calibration.csv           one row per (config × seed) — 69 rows
 ├── tier2_calibration.md            averaged over seeds — the paper table
 ├── tier2_behaviour.json            behavioural descriptors + plain-English sentences
-└── figures/behaviour_t2_*.png      19 figures (all seed-1 configs)
+└── figures/behaviour_t2_*.png      23 figures (all seed-1 configs)
 ```
 
 Same `.npz` schema as Tier 1 (see [`TIER1_explanation.md`](TIER1_explanation.md) §4A). The
@@ -186,20 +188,31 @@ command, a single line.
 
 ## 6. Reading the results
 
-### The severity problem
+### The severity problem, and how it was fixed
 
 The whole point of the calibration is to find attacks in the **20–40 % damage band**, so Tier 3
-can be compared at matched damage. Only **one of 19 configs** landed there:
+can be compared at matched damage. On the spec's original grid only **one of 19 configs**
+landed there. A 12-run follow-up sweep on `waypoint`'s α found a second:
 
 | variant | goal-RMSE degradation range | verdict |
 | --- | --- | --- |
-| `signflip` | 28.9 – 67.6 % | ✅ `full` at f=0.125 → **28.9 %** — the only in-band config |
-| `waypoint` | 77.8 – 168.1 % | ❌ far too strong, even at α = 0.3 |
+| `signflip` | 28.9 – 67.6 % | ✅ `full` at f=0.125 → 28.9 % |
+| `waypoint` | 6.6 – 168.1 % | ✅ **α = 0.20 at f=0.125 → 23.2 %** — the better anchor |
 | `liar` | 5.6 – 11.8 % | ❌ far too weak (by construction, §5) |
 | `collusion` | 73.7 – 181.2 % | ❌ far too strong |
 
-Same pattern as Tier 1: the spec's severity grids bracket the band instead of landing in it.
-2B would need α ≈ 0.1–0.15, below the spec's lowest value.
+**Why α had to be searched so finely.** Damage is wildly non-linear in α, even though the
+*perturbation* is linear:
+
+| α | 0.05 | 0.10 | 0.15 | **0.20** | 0.30 | 1.00 |
+| --- | --- | --- | --- | --- | --- | --- |
+| action deviation | 0.065 | 0.135 | 0.206 | **0.259** | 0.294 | 0.515 |
+| damage | 6.6 % | 8.6 % | 11.2 % | **23.2 %** | 77.8 % | 116.9 % |
+
+There is a **control-authority cliff** between α = 0.15 and α = 0.30: below it the honest
+controller still wins the tug-of-war and drags the drone back; above it the attacker escapes.
+A 26 % increase in perturbation doubles the damage; another 14 % triples it. The spec's grid
+started at α = 0.3 — one notch above the cliff — which is why nothing landed in the band.
 
 ### The finding that carries across both tiers
 
@@ -224,6 +237,7 @@ ranges from −25 % to +29 % with a mean of +3 %. Use goal RMSE.
 
 | figure | what it looks like |
 | --- | --- |
+| `behaviour_t2_waypoint_a0.20_f0125` | **the matched-damage anchor** — a mild purposeful lean; wobbles 3.4× clean, persistence 0.73, 10 % floor time, 96 % survival |
 | `behaviour_t2_signflip_*` | violent tumbling — wobbles at 4.7–6.0× clean, on the floor 26–30 % of the time |
 | `behaviour_t2_waypoint_a1.0_f0125` | **the cleanest attack** — smooth purposeful drift to the wrong place, no wobble, 5.9 % floor time, 100 % survival |
 | `behaviour_t2_liar_*` | indistinguishable from clean (§5) |
@@ -244,7 +258,13 @@ ranges from −25 % to +29 % with a mean of +3 %. Use goal RMSE.
    mostly being rescued by its own safety net.
 3. **The liar's signal is in victim collisions.** If the detector is going to catch 2C at all,
    that is where to look, and it gives the set-structured formulation a concrete job.
-4. **One in-band config is thin.** All three Tier 1 canonical settings currently pair to the
-   same single Tier 2 config (`signflip_full_f0125`, 28.9 %). A short α-refinement sweep for
-   2B would give a second, mechanistically different in-band pair and make the headline
-   comparison much stronger.
+4. **The matched triple now has a good primary pair.** `tier1_gaussian σ=0.25` (23.6 %) against
+   `tier2_waypoint α=0.20` (23.2 %) — a **0.4 pp** gap, pairing a stochastic fault against a
+   goal-directed attack at essentially identical damage. Use `waypoint α=0.20` rather than
+   `signflip_full` as the Tier 2 anchor: 96 % attacker survival vs 69 %, and 15 % guard
+   exposure vs 83 %.
+5. **The cliff predicts where a trained adversary will sit.** A Tier 3 policy optimising damage
+   per unit of action deviation has a strong gradient toward exactly that threshold — maximum
+   damage for minimum detectable perturbation. If the stealth-constrained adversary converges
+   to something resembling "sit just above the control-authority cliff", that is not a
+   coincidence; it is a concrete prediction to check.
