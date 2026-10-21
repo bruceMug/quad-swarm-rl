@@ -1,0 +1,531 @@
+========================================
+Starting C-series Byzantine experiments
+Started: Fri Oct  9 03:03:41 EDT 2026
+Adversaries: adv_seed1_stealth0_lieonlyplaus adv_seed2_stealth0_lieonlyplaus adv_seed2_stealth0_lieonly
+Log: logs/run_C_20261009_030341.log
+========================================
+Tier 3 HORIZON SWEEP: 21 rollouts, 12 at a time
+  adversaries : adv_seed1_stealth0_lieonlyplaus adv_seed2_stealth0_lieonlyplaus adv_seed2_stealth0_lieonly
+  results     -> byzantine_experiments/results_v2/tier3      logs -> logs_v2/tier3
+
+START t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m006M  (adv=adv_seed1_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonlyplaus","milestone":6000000} baseline=s1)
+START t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m025M  (adv=adv_seed1_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonlyplaus","milestone":25000000} baseline=s1)
+START t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m050M  (adv=adv_seed1_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonlyplaus","milestone":50000000} baseline=s1)
+START t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m150M  (adv=adv_seed1_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonlyplaus","milestone":150000000} baseline=s1)
+START t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m075M  (adv=adv_seed1_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonlyplaus","milestone":75000000} baseline=s1)
+START t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m100M  (adv=adv_seed1_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonlyplaus","milestone":100000000} baseline=s1)
+START t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m194M  (adv=adv_seed1_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonlyplaus","milestone":194000000} baseline=s1)
+START t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m050M  (adv=adv_seed2_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonlyplaus","milestone":50000000} baseline=s2)
+START t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m025M  (adv=adv_seed2_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonlyplaus","milestone":25000000} baseline=s2)
+START t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m100M  (adv=adv_seed2_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonlyplaus","milestone":100000000} baseline=s2)
+START t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m075M  (adv=adv_seed2_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonlyplaus","milestone":75000000} baseline=s2)
+START t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m006M  (adv=adv_seed2_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonlyplaus","milestone":6000000} baseline=s2)
+DONE  t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m194M  (1340s)  goal_rmse_mean        : 1.184676
+START t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m150M  (adv=adv_seed2_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonlyplaus","milestone":150000000} baseline=s2)
+DONE  t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m100M  (1345s)  goal_rmse_mean        : 1.213210
+START t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m194M  (adv=adv_seed2_stealth0_lieonlyplaus cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonlyplaus","milestone":194000000} baseline=s2)
+DONE  t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m050M  (1356s)  goal_rmse_mean        : 1.137995
+START t3_adv_seed2_stealth0_lieonly_on_s2_m006M  (adv=adv_seed2_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonly","milestone":6000000} baseline=s2)
+DONE  t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m006M  (1357s)  goal_rmse_mean        : 1.142955
+START t3_adv_seed2_stealth0_lieonly_on_s2_m025M  (adv=adv_seed2_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonly","milestone":25000000} baseline=s2)
+DONE  t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m075M  (1358s)  goal_rmse_mean        : 1.162546
+START t3_adv_seed2_stealth0_lieonly_on_s2_m050M  (adv=adv_seed2_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonly","milestone":50000000} baseline=s2)
+DONE  t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m075M  (1361s)  goal_rmse_mean        : 1.214673
+START t3_adv_seed2_stealth0_lieonly_on_s2_m075M  (adv=adv_seed2_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonly","milestone":75000000} baseline=s2)
+DONE  t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m100M  (1362s)  goal_rmse_mean        : 1.126378
+START t3_adv_seed2_stealth0_lieonly_on_s2_m100M  (adv=adv_seed2_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonly","milestone":100000000} baseline=s2)
+DONE  t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m150M  (1367s)  goal_rmse_mean        : 1.122683
+START t3_adv_seed2_stealth0_lieonly_on_s2_m150M  (adv=adv_seed2_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonly","milestone":150000000} baseline=s2)
+DONE  t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m025M  (1379s)  goal_rmse_mean        : 1.149573
+START t3_adv_seed2_stealth0_lieonly_on_s2_m194M  (adv=adv_seed2_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed2_stealth0_lieonly","milestone":194000000} baseline=s2)
+DONE  t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m006M  (1381s)  goal_rmse_mean        : 1.165761
+DONE  t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m050M  (1386s)  goal_rmse_mean        : 1.091183
+DONE  t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m025M  (1397s)  goal_rmse_mean        : 1.155000
+DONE  t3_adv_seed2_stealth0_lieonly_on_s2_m025M  (1293s)  goal_rmse_mean        : 1.116424
+DONE  t3_adv_seed2_stealth0_lieonly_on_s2_m006M  (1301s)  goal_rmse_mean        : 1.148048
+DONE  t3_adv_seed2_stealth0_lieonly_on_s2_m100M  (1295s)  goal_rmse_mean        : 1.223648
+DONE  t3_adv_seed2_stealth0_lieonly_on_s2_m194M  (1285s)  goal_rmse_mean        : 1.122667
+DONE  t3_adv_seed2_stealth0_lieonly_on_s2_m075M  (1306s)  goal_rmse_mean        : 1.129472
+DONE  t3_adv_seed2_stealth0_lieonly_on_s2_m050M  (1313s)  goal_rmse_mean        : 1.207067
+DONE  t3_adv_seed2_stealth0_lieonly_on_s2_m150M  (1305s)  goal_rmse_mean        : 1.142484
+DONE  t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m150M  (1335s)  goal_rmse_mean        : 1.099168
+DONE  t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m194M  (1339s)  goal_rmse_mean        : 1.149732
+
+Finished in 44 min
+Sidecars present: 70
+
+Next: python -m byzantine_experiments.analysis.gate_tier3 --horizon
+Loaded 70 Tier 3 rollouts and 3 clean references
+Wrote byzantine_experiments/results_v2/tier3_gate.csv  (70 rows)
+Wrote byzantine_experiments/results_v2/tier3_gate.md
+
+run                                             honest%           95% CI      p    own%  surv   sat  gate
+t3_adv_seed1_stealth0_on_s1_m006M                   2.3     [-5.6, 10.2]  0.559   179.4     0    97  fail
+t3_adv_seed1_stealth0_on_s1_m025M                  -0.8      [-8.0, 6.5]  0.834   183.1     0    97  fail
+t3_adv_seed1_stealth0_on_s1_m050M                   1.7      [-5.4, 8.7]  0.628   186.2     0    99  fail
+t3_adv_seed1_stealth0_on_s1_m075M                  -2.4     [-10.5, 5.6]  0.555   181.9     0   100  fail
+t3_adv_seed1_stealth0_on_s1_m100M                  -6.6     [-15.7, 2.5]  0.180   177.5     0   100  fail
+t3_adv_seed1_stealth0_on_s1_m150M                  -0.2      [-7.2, 6.9]  0.960   180.5     0   100  fail
+t3_adv_seed1_stealth0_on_s1_m194M                  -1.5      [-8.5, 5.5]  0.672   183.1     0   100  fail
+t3_adv_seed1_stealth0_f250_on_s1_m006M             -1.8     [-10.4, 6.9]  0.689   188.2     0    93  fail
+t3_adv_seed1_stealth0_f250_on_s1_m025M             -6.4     [-16.4, 3.6]  0.227   187.4     0    97  fail
+t3_adv_seed1_stealth0_f250_on_s1_m050M             -3.5     [-12.4, 5.5]  0.451   187.7     0    97  fail
+t3_adv_seed1_stealth0_f250_on_s1_m075M             -9.4    [-18.0, -0.9]  0.051   183.2     0    90  fail
+t3_adv_seed1_stealth0_f250_on_s1_m100M             -6.9     [-15.9, 2.2]  0.159   182.7     0    94  fail
+t3_adv_seed1_stealth0_f250_on_s1_m150M             -6.4     [-15.0, 2.2]  0.167   185.5     0    97  fail
+t3_adv_seed1_stealth0_f250_on_s1_m194M             -6.9     [-14.9, 1.1]  0.113   184.1     0    96  fail
+t3_adv_seed1_stealth0_lie_on_s1_m006M              -4.2     [-13.2, 4.9]  0.380   197.9     0    76  fail
+t3_adv_seed1_stealth0_lie_on_s1_m025M              -1.9      [-9.6, 5.7]  0.619   185.0     0    94  fail
+t3_adv_seed1_stealth0_lie_on_s1_m050M              -3.5     [-10.4, 3.4]  0.327   183.5     0   100  fail
+t3_adv_seed1_stealth0_lie_on_s1_m075M              -2.6      [-9.9, 4.7]  0.484   183.0     0   100  fail
+t3_adv_seed1_stealth0_lie_on_s1_m100M              -0.5      [-7.9, 6.9]  0.894   182.5     0   100  fail
+t3_adv_seed1_stealth0_lie_on_s1_m150M              -5.4     [-13.2, 2.4]  0.195   182.6     0   100  fail
+t3_adv_seed1_stealth0_lie_on_s1_m194M              -4.4     [-13.5, 4.8]  0.362   184.3     0   100  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m006M          -3.7     [-11.0, 3.6]  0.333   -10.0    98     0  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m025M           6.4     [-2.2, 15.0]  0.125    -4.7   100     0  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m050M          -3.7     [-13.2, 5.9]  0.460    -2.4    98     0  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m075M           4.3     [-3.6, 12.3]  0.257    -1.3    98     0  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m100M           2.8     [-5.3, 10.9]  0.487    -2.3   100     0  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m150M           1.9      [-3.4, 7.2]  0.459   -10.3   100     0  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m194M           2.4      [-5.1, 9.8]  0.522    -7.1   100     0  fail
+t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m006M     -0.0      [-7.7, 7.7]  0.995    -4.9    98     0  fail
+t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m025M     -1.4     [-10.9, 8.0]  0.769    -4.7   100     0  fail
+t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m050M     -2.4     [-10.5, 5.7]  0.568    -5.3    98     0  fail
+t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m075M      2.9     [-6.5, 12.4]  0.525     4.2    98     0  fail
+t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m100M     -3.2     [-10.7, 4.3]  0.415    -9.3   100     0  fail
+t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m150M     -4.2     [-13.8, 5.5]  0.409    -5.7    98     0  fail
+t3_adv_seed1_stealth0_lieonlyplaus_on_s1_m194M      2.6     [-7.0, 12.2]  0.581    -9.1   100     0  fail
+t3_adv_seed2_stealth0_lieonly_on_s2_m006M           3.6     [-4.8, 12.0]  0.377    13.4    98     0  fail
+t3_adv_seed2_stealth0_lieonly_on_s2_m025M           2.0     [-6.0, 10.0]  0.613     1.5    98     0  fail
+t3_adv_seed2_stealth0_lieonly_on_s2_m050M           9.2      [0.2, 18.1]  0.037    12.8   100     0  fail
+t3_adv_seed2_stealth0_lieonly_on_s2_m075M           1.9      [-3.5, 7.2]  0.475     8.8    96     0  fail
+t3_adv_seed2_stealth0_lieonly_on_s2_m100M           7.8     [-1.4, 17.1]  0.080    26.4    98     0  fail
+t3_adv_seed2_stealth0_lieonly_on_s2_m150M           2.3      [-5.2, 9.7]  0.534    13.6   100     0  fail
+t3_adv_seed2_stealth0_lieonly_on_s2_m194M           2.0      [-5.3, 9.3]  0.569     4.8    98     0  fail
+t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m006M      1.2      [-6.3, 8.8]  0.743    18.3   100     0  fail
+t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m025M      4.5     [-4.2, 13.3]  0.285    11.0    96     0  fail
+t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m050M     -1.3      [-8.4, 5.8]  0.713     4.3    98     0  fail
+t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m075M      3.4     [-4.8, 11.7]  0.399    16.1   100     0  fail
+t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m100M      9.3     [-1.9, 20.6]  0.086    16.3    98     0  fail
+t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m150M      0.5      [-6.5, 7.6]  0.879     0.7   100     0  fail
+t3_adv_seed2_stealth0_lieonlyplaus_on_s2_m194M      3.7     [-4.3, 11.8]  0.338     7.4    98     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m006M          11.5      [3.1, 20.0]  0.007    15.3    98     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonly_on_s3_m025M           4.8     [-1.2, 10.8]  0.115     7.6   100     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m050M           7.6      [0.8, 14.3]  0.027    -0.3    98     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m075M          11.3      [0.4, 22.2]  0.043    21.5   100     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonly_on_s3_m100M          14.2      [2.4, 25.9]  0.019    10.7    98     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonly_on_s3_m150M           9.4     [-0.5, 19.2]  0.061    21.8    98     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m194M          13.0      [3.0, 22.9]  0.011     1.4    98     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m006M        9.2      [0.7, 17.7]  0.033    19.4    98     0  fail
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m025M        8.6     [-0.7, 17.9]  0.070    12.2   100     0  fail
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m050M        5.2     [-3.6, 13.9]  0.233    10.0    98     0  fail
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m075M        2.4      [-3.8, 8.7]  0.435    12.8    96     0  fail
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m100M        4.4     [-4.6, 13.3]  0.329    11.8    98     0  fail
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m150M       12.6      [1.8, 23.4]  0.022    13.0    96     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m194M        5.5     [-1.8, 12.9]  0.134    14.6   100     0  fail
+t3_adv_seed3_stealth0_lieonlyplaus_on_s3_m006M      6.5     [-1.7, 14.7]  0.119    18.1    94     0  fail
+t3_adv_seed3_stealth0_lieonlyplaus_on_s3_m025M      6.1     [-1.2, 13.3]  0.104     6.3   100     0  fail
+t3_adv_seed3_stealth0_lieonlyplaus_on_s3_m050M      8.3     [-2.1, 18.8]  0.120    10.2   100     0  fail
+t3_adv_seed3_stealth0_lieonlyplaus_on_s3_m075M      3.1     [-4.6, 10.9]  0.418     0.2    98     0  fail
+t3_adv_seed3_stealth0_lieonlyplaus_on_s3_m100M      6.5     [-0.1, 13.1]  0.053    19.0    98     0  fail
+t3_adv_seed3_stealth0_lieonlyplaus_on_s3_m150M     13.4      [3.2, 23.5]  0.012    11.9    94     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonlyplaus_on_s3_m194M      6.7     [-1.1, 14.5]  0.079     9.0   100     0  fail
+Tier 3 cross-seed transfer: 12 cells (incl. clean references), n=200
+  adversaries: adv_seed1_stealth0_lieonlyplaus adv_seed2_stealth0_lieonlyplaus adv_seed2_stealth0_lieonly
+SKIP  confirm_clean_s1_n200
+SKIP  confirm_clean_s2_n200
+SKIP  confirm_clean_s3_n200
+START confirm_adv_seed1_stealth0_lieonlyplaus_m194_n200
+START confirm_adv_seed1_stealth0_lieonlyplaus_m194_on_s2_n200
+START confirm_adv_seed1_stealth0_lieonlyplaus_m194_on_s3_n200
+START confirm_adv_seed2_stealth0_lieonlyplaus_m194_on_s1_n200
+START confirm_adv_seed2_stealth0_lieonlyplaus_m194_n200
+START confirm_adv_seed2_stealth0_lieonly_m194_on_s1_n200
+START confirm_adv_seed2_stealth0_lieonlyplaus_m194_on_s3_n200
+START confirm_adv_seed2_stealth0_lieonly_m194_n200
+START confirm_adv_seed2_stealth0_lieonly_m194_on_s3_n200
+DONE  confirm_adv_seed2_stealth0_lieonly_m194_on_s3_n200
+DONE  confirm_adv_seed1_stealth0_lieonlyplaus_m194_n200
+DONE  confirm_adv_seed1_stealth0_lieonlyplaus_m194_on_s2_n200
+DONE  confirm_adv_seed2_stealth0_lieonly_m194_on_s1_n200
+DONE  confirm_adv_seed2_stealth0_lieonlyplaus_m194_on_s1_n200
+DONE  confirm_adv_seed2_stealth0_lieonly_m194_n200
+DONE  confirm_adv_seed2_stealth0_lieonlyplaus_m194_n200
+DONE  confirm_adv_seed1_stealth0_lieonlyplaus_m194_on_s3_n200
+DONE  confirm_adv_seed2_stealth0_lieonlyplaus_m194_on_s3_n200
+
+Cross-seed transfer, final checkpoints, n = 200 per cell, paired
+
+  adversary                                       baseline s1              baseline s2              baseline s3
+  seed1_stealth0_lieonlyplaus         +2.8 [ -1.4, +7.0] *  +1.1 [ -2.4, +4.5]    +4.3 [ -0.3, +8.8]  
+  seed2_stealth0_lieonlyplaus         +1.9 [ -1.6, +5.5]    +2.6 [ -1.0, +6.2] *  +6.5 [ +2.0,+11.0] T
+  seed2_stealth0_lieonly              +3.5 [ -0.9, +7.9]    +3.1 [ -0.7, +7.0] *  +3.9 [ -0.1, +7.9]  
+
+  * own seed (the confirmatory run).  T = transfers: significant damage on a seed the adversary was not trained against.
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20261009_050900-a9o0pvxe
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier3_stealth_adv_seed1_stealth0_lieonlyplaus
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/a9o0pvxe
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-a9o0pvxe-calibration_table; uploading summary
+wandb: uploading artifact run-a9o0pvxe-calibration_table
+wandb: uploading byzantine_experiments/results_v2/tier3_report/stealth_adv_seed1_stealth0_lieonlyplaus.png; uploading output.log; uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json (+ 3 more)
+wandb: uploading byzantine_experiments/results_v2/tier3_report/stealth_adv_seed1_stealth0_lieonlyplaus.png; uploading config.yaml; uploading wandb-metadata.json; uploading requirements.txt; uploading media/table/calibration_table_0_11e26e483ad961c17bb0.table.json (+ 1 more)
+wandb: 🚀 View run tier3_stealth_adv_seed1_stealth0_lieonlyplaus at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/a9o0pvxe
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 2 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20261009_050900-a9o0pvxe/logs
+# Stealth analysis -- `adv_seed1_stealth0_lieonlyplaus` (spec item 6)
+
+Own-seed confirmatory run, n = 200 episodes, paired clean run at seed 1. Broadcasts **recorded**. Thresholds set on the clean run only.
+
+## Action level
+
+| statistic | value |
+|---|---|
+| action-norm ratio adversary / honest | 1.048 |
+| AUC, episode-mean action norm, adversary vs honest | 0.532 |
+| control: same slot in the CLEAN run -- ratio / AUC | 0.968 / 0.474 |
+| naive action detector (> clean p99 = 0.610): adversary episodes flagged | 1.0 % |
+| same detector, honest drones flagged | 0.8 % |
+
+## Broadcast physics (naive plausibility checks)
+
+Thresholds (max over every honest drone-step of the clean run): speed 15.19 m/s, acceleration 1605.2 m/s², kinematic residual 0.1194 m; bounds = the 10 x 10 x 10 m room.
+
+| check | adversary steps failing | adversary episodes flagged | honest episodes flagged |
+|---|---|---|---|
+| bounds | 0.0 % | 0.0 % | 0.0 % |
+| speed | 0.0 % | 0.0 % | 0.1 % |
+| consistency | 0.0 % | 0.0 % | 0.3 % |
+| accel | 0.0 % | 0.0 % | 0.0 % |
+| **any check** | | **0.0 %** | 0.4 % |
+
+Broadcast below the floor: 0.0 % of steps. Broadcast speed mean 1.46 m/s (true 1.07). Offset |claim − truth| mean 1.65 m, p99 2.00 m.
+
+**Reading.** An action-level detector sees this adversary iff the AUC is well away from 0.5 *and* from the same-slot clean control. A broadcast check catches it iff "any check" flags its episodes at a rate well above the honest false-alarm rate. The spec asks to say so plainly if a naive detector catches the stealthy adversary.
+
+![](stealth_adv_seed1_stealth0_lieonlyplaus.png)
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/a9o0pvxe
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run 86dgcq0o
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20261009_050923-86dgcq0o
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier3_behaviour_adv_seed1_stealth0_lieonlyplaus
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/86dgcq0o
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-86dgcq0o-calibration_table; uploading summary
+wandb: uploading artifact run-86dgcq0o-calibration_table
+wandb: uploading wandb-metadata.json; uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed1_stealth0_lieonlyplaus_episodes.png; uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed1_stealth0_lieonlyplaus_time.png; uploading output.log; uploading wandb-summary.json (+ 4 more)
+wandb: uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed1_stealth0_lieonlyplaus_episodes.png; uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed1_stealth0_lieonlyplaus_time.png; uploading output.log; uploading wandb-summary.json; uploading config.yaml (+ 3 more)
+wandb: uploading media/table/calibration_table_0_7f6ed419c156b0c05f4e.table.json; uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed1_stealth0_lieonlyplaus.md
+wandb: 🚀 View run tier3_behaviour_adv_seed1_stealth0_lieonlyplaus at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/86dgcq0o
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 3 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20261009_050923-86dgcq0o/logs
+# Behaviour -- `adv_seed1_stealth0_lieonlyplaus` (spec item 7)
+
+200 paired episodes (own-seed confirmatory vs clean, seed 1); figures show the first 10. Broadcasts recorded. These are the numbers the plain-language description must agree with.
+
+| observation | attacked | clean | paired p |
+|---|---|---|---|
+| honest goal error, episode mean (m) | 0.726 | 0.719 | 0.4947 |
+| adversary's OWN goal error change vs same drone clean (m) | +0.093 | 0 | 0.0000 |
+| team collisions per episode | 0.61 | 0.34 | 0.0000 |
+| honest–honest minimum separation (m) | 0.134 | 0.140 | 0.0695 |
+| collision steps whose closest pair INCLUDES the adversary's slot | 0.31 | 0.10 | 0.0000 |
+| collision steps between two honest drones | 0.30 | 0.23 | 0.1359 |
+| adversary-slot ↔ nearest honest, minimum separation (m) | 0.139 | 0.175 | 0.0000 |
+| honest speed (m/s) | 1.024 | 1.019 | 0.5695 |
+| honest jitter, mean ‖Δv‖ per step (m/s) | 0.0243 | 0.0238 | 0.1718 |
+
+**When.** Share of the honest goal-error increase accrued in the first / middle / last third of the episode: +0.38 / +0.34 / +0.27.
+**Where.** Spearman correlation of an honest drone's goal-error increase with its mean distance to the adversary's slot in the same scenario, clean: ρ = -0.093 (p = 0.000461). Mean increase for the 2 honest drones nearest that slot +0.055 m vs the 2 farthest -0.075 m.
+**The phantom** (first 10 episodes). Distance from honest drones to the adversary's broadcast position: median 1.98 m, vs to its true position 0.62 m.
+
+![](behaviour_adv_seed1_stealth0_lieonlyplaus_episodes.png)
+
+![](behaviour_adv_seed1_stealth0_lieonlyplaus_time.png)
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/86dgcq0o
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20261009_050936-3uumcp1p
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier3_stealth_adv_seed2_stealth0_lieonlyplaus
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/3uumcp1p
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-3uumcp1p-calibration_table; uploading summary
+wandb: uploading artifact run-3uumcp1p-calibration_table
+wandb: uploading byzantine_experiments/results_v2/tier3_report/stealth_adv_seed2_stealth0_lieonlyplaus.png; uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json
+wandb: 🚀 View run tier3_stealth_adv_seed2_stealth0_lieonlyplaus at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/3uumcp1p
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 2 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20261009_050936-3uumcp1p/logs
+# Stealth analysis -- `adv_seed2_stealth0_lieonlyplaus` (spec item 6)
+
+Own-seed confirmatory run, n = 200 episodes, paired clean run at seed 2. Broadcasts **recorded**. Thresholds set on the clean run only.
+
+## Action level
+
+| statistic | value |
+|---|---|
+| action-norm ratio adversary / honest | 1.054 |
+| AUC, episode-mean action norm, adversary vs honest | 0.544 |
+| control: same slot in the CLEAN run -- ratio / AUC | 1.008 / 0.507 |
+| naive action detector (> clean p99 = 0.467): adversary episodes flagged | 2.5 % |
+| same detector, honest drones flagged | 0.5 % |
+
+## Broadcast physics (naive plausibility checks)
+
+Thresholds (max over every honest drone-step of the clean run): speed 15.33 m/s, acceleration 1531.2 m/s², kinematic residual 0.1271 m; bounds = the 10 x 10 x 10 m room.
+
+| check | adversary steps failing | adversary episodes flagged | honest episodes flagged |
+|---|---|---|---|
+| bounds | 0.0 % | 0.0 % | 0.1 % |
+| speed | 0.0 % | 0.0 % | 0.0 % |
+| consistency | 0.0 % | 0.0 % | 0.0 % |
+| accel | 0.0 % | 0.0 % | 0.0 % |
+| **any check** | | **0.0 %** | 0.1 % |
+
+Broadcast below the floor: 0.0 % of steps. Broadcast speed mean 1.29 m/s (true 1.02). Offset |claim − truth| mean 1.72 m, p99 2.00 m.
+
+**Reading.** An action-level detector sees this adversary iff the AUC is well away from 0.5 *and* from the same-slot clean control. A broadcast check catches it iff "any check" flags its episodes at a rate well above the honest false-alarm rate. The spec asks to say so plainly if a naive detector catches the stealthy adversary.
+
+![](stealth_adv_seed2_stealth0_lieonlyplaus.png)
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/3uumcp1p
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20261009_050958-sfv327d8
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier3_behaviour_adv_seed2_stealth0_lieonlyplaus
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/sfv327d8
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-sfv327d8-calibration_table; uploading summary
+wandb: uploading artifact run-sfv327d8-calibration_table
+wandb: uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed2_stealth0_lieonlyplaus_episodes.png; uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed2_stealth0_lieonlyplaus_time.png; uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json (+ 2 more)
+wandb: uploading history steps 0-0, summary, console lines 0-3
+wandb: 🚀 View run tier3_behaviour_adv_seed2_stealth0_lieonlyplaus at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/sfv327d8
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 3 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20261009_050958-sfv327d8/logs
+# Behaviour -- `adv_seed2_stealth0_lieonlyplaus` (spec item 7)
+
+200 paired episodes (own-seed confirmatory vs clean, seed 2); figures show the first 10. Broadcasts recorded. These are the numbers the plain-language description must agree with.
+
+| observation | attacked | clean | paired p |
+|---|---|---|---|
+| honest goal error, episode mean (m) | 0.720 | 0.709 | 0.2952 |
+| adversary's OWN goal error change vs same drone clean (m) | +0.088 | 0 | 0.0033 |
+| team collisions per episode | 0.62 | 0.36 | 0.0015 |
+| honest–honest minimum separation (m) | 0.133 | 0.136 | 0.4851 |
+| collision steps whose closest pair INCLUDES the adversary's slot | 0.28 | 0.10 | 0.0002 |
+| collision steps between two honest drones | 0.34 | 0.26 | 0.1800 |
+| adversary-slot ↔ nearest honest, minimum separation (m) | 0.138 | 0.176 | 0.0000 |
+| honest speed (m/s) | 0.957 | 0.934 | 0.0098 |
+| honest jitter, mean ‖Δv‖ per step (m/s) | 0.0235 | 0.0226 | 0.0192 |
+
+**When.** Share of the honest goal-error increase accrued in the first / middle / last third of the episode: +0.50 / +0.29 / +0.21.
+**Where.** Spearman correlation of an honest drone's goal-error increase with its mean distance to the adversary's slot in the same scenario, clean: ρ = -0.117 (p = 1.16e-05). Mean increase for the 2 honest drones nearest that slot +0.079 m vs the 2 farthest -0.103 m.
+**The phantom** (first 10 episodes). Distance from honest drones to the adversary's broadcast position: median 1.97 m, vs to its true position 0.58 m.
+
+![](behaviour_adv_seed2_stealth0_lieonlyplaus_episodes.png)
+
+![](behaviour_adv_seed2_stealth0_lieonlyplaus_time.png)
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/sfv327d8
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run gluzod7z
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20261009_051011-gluzod7z
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier3_stealth_adv_seed2_stealth0_lieonly
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/gluzod7z
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-gluzod7z-calibration_table; uploading summary
+wandb: uploading artifact run-gluzod7z-calibration_table
+wandb: uploading byzantine_experiments/results_v2/tier3_report/stealth_adv_seed2_stealth0_lieonly.png; uploading output.log; uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json (+ 2 more)
+wandb: 🚀 View run tier3_stealth_adv_seed2_stealth0_lieonly at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/gluzod7z
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 2 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20261009_051011-gluzod7z/logs
+# Stealth analysis -- `adv_seed2_stealth0_lieonly` (spec item 6)
+
+Own-seed confirmatory run, n = 200 episodes, paired clean run at seed 2. Broadcasts **recorded**. Thresholds set on the clean run only.
+
+## Action level
+
+| statistic | value |
+|---|---|
+| action-norm ratio adversary / honest | 1.052 |
+| AUC, episode-mean action norm, adversary vs honest | 0.547 |
+| control: same slot in the CLEAN run -- ratio / AUC | 1.008 / 0.507 |
+| naive action detector (> clean p99 = 0.467): adversary episodes flagged | 0.5 % |
+| same detector, honest drones flagged | 1.4 % |
+
+## Broadcast physics (naive plausibility checks)
+
+Thresholds (max over every honest drone-step of the clean run): speed 15.33 m/s, acceleration 1531.2 m/s², kinematic residual 0.1271 m; bounds = the 10 x 10 x 10 m room.
+
+| check | adversary steps failing | adversary episodes flagged | honest episodes flagged |
+|---|---|---|---|
+| bounds | 100.0 % | 100.0 % | 0.1 % |
+| speed | 0.1 % | 18.0 % | 0.1 % |
+| consistency | 16.3 % | 100.0 % | 0.1 % |
+| accel | 0.0 % | 29.0 % | 0.1 % |
+| **any check** | | **100.0 %** | 0.1 % |
+
+Broadcast below the floor: 85.7 % of steps. Broadcast speed mean 10.06 m/s (true 1.03). Offset |claim − truth| mean 17.01 m, p99 17.32 m.
+
+**Reading.** An action-level detector sees this adversary iff the AUC is well away from 0.5 *and* from the same-slot clean control. A broadcast check catches it iff "any check" flags its episodes at a rate well above the honest false-alarm rate. The spec asks to say so plainly if a naive detector catches the stealthy adversary.
+
+![](stealth_adv_seed2_stealth0_lieonly.png)
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/gluzod7z
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20261009_051034-7yvf2tr4
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier3_behaviour_adv_seed2_stealth0_lieonly
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/7yvf2tr4
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-7yvf2tr4-calibration_table; uploading summary
+wandb: uploading artifact run-7yvf2tr4-calibration_table
+wandb: uploading requirements.txt; uploading media/table/calibration_table_0_48a3d9c1670f3cedf43a.table.json; uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed2_stealth0_lieonly.md; uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed2_stealth0_lieonly_time.png; uploading output.log (+ 4 more)
+wandb: uploading byzantine_experiments/results_v2/tier3_report/behaviour_adv_seed2_stealth0_lieonly_episodes.png
+wandb: 🚀 View run tier3_behaviour_adv_seed2_stealth0_lieonly at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/7yvf2tr4
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 3 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20261009_051034-7yvf2tr4/logs
+# Behaviour -- `adv_seed2_stealth0_lieonly` (spec item 7)
+
+200 paired episodes (own-seed confirmatory vs clean, seed 2); figures show the first 10. Broadcasts recorded. These are the numbers the plain-language description must agree with.
+
+| observation | attacked | clean | paired p |
+|---|---|---|---|
+| honest goal error, episode mean (m) | 0.726 | 0.709 | 0.1285 |
+| adversary's OWN goal error change vs same drone clean (m) | +0.103 | 0 | 0.0010 |
+| team collisions per episode | 0.62 | 0.36 | 0.0007 |
+| honest–honest minimum separation (m) | 0.133 | 0.136 | 0.4189 |
+| collision steps whose closest pair INCLUDES the adversary's slot | 0.33 | 0.10 | 0.0001 |
+| collision steps between two honest drones | 0.29 | 0.26 | 0.5330 |
+| adversary-slot ↔ nearest honest, minimum separation (m) | 0.132 | 0.176 | 0.0000 |
+| honest speed (m/s) | 0.959 | 0.934 | 0.0025 |
+| honest jitter, mean ‖Δv‖ per step (m/s) | 0.0238 | 0.0226 | 0.0013 |
+
+**When.** Share of the honest goal-error increase accrued in the first / middle / last third of the episode: +0.38 / +0.47 / -0.15.
+**Where.** Spearman correlation of an honest drone's goal-error increase with its mean distance to the adversary's slot in the same scenario, clean: ρ = -0.049 (p = 0.0657). Mean increase for the 2 honest drones nearest that slot +0.056 m vs the 2 farthest -0.075 m.
+**The phantom** (first 10 episodes). Distance from honest drones to the adversary's broadcast position: median 17.34 m, vs to its true position 0.59 m.
+
+![](behaviour_adv_seed2_stealth0_lieonly_episodes.png)
+
+![](behaviour_adv_seed2_stealth0_lieonly_time.png)
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/7yvf2tr4
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20261009_051049-8uqnsygw
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier3_stealth_adv_seed3_stealth0_lieonlyplaus
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/8uqnsygw
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-8uqnsygw-calibration_table; uploading summary
+wandb: uploading artifact run-8uqnsygw-calibration_table
+wandb: uploading requirements.txt; uploading media/table/calibration_table_0_9ec7bd32b4832928095e.table.json; uploading byzantine_experiments/results_v2/tier3_report/stealth_adv_seed3_stealth0_lieonlyplaus.md; uploading byzantine_experiments/results_v2/tier3_report/stealth_adv_seed3_stealth0_lieonlyplaus.png; uploading output.log (+ 3 more)
+wandb: uploading byzantine_experiments/results_v2/tier3_report/stealth_adv_seed3_stealth0_lieonlyplaus.png; uploading wandb-summary.json; uploading config.yaml
+wandb: 🚀 View run tier3_stealth_adv_seed3_stealth0_lieonlyplaus at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/8uqnsygw
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 2 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20261009_051049-8uqnsygw/logs
+# Stealth analysis -- `adv_seed3_stealth0_lieonlyplaus` (spec item 6)
+
+Own-seed confirmatory run, n = 200 episodes, paired clean run at seed 3. Broadcasts **recorded**. Thresholds set on the clean run only.
+
+## Action level
+
+| statistic | value |
+|---|---|
+| action-norm ratio adversary / honest | 1.071 |
+| AUC, episode-mean action norm, adversary vs honest | 0.554 |
+| control: same slot in the CLEAN run -- ratio / AUC | 0.986 / 0.489 |
+| naive action detector (> clean p99 = 0.538): adversary episodes flagged | 1.0 % |
+| same detector, honest drones flagged | 1.7 % |
+
+## Broadcast physics (naive plausibility checks)
+
+Thresholds (max over every honest drone-step of the clean run): speed 14.01 m/s, acceleration 1444.3 m/s², kinematic residual 0.1158 m; bounds = the 10 x 10 x 10 m room.
+
+| check | adversary steps failing | adversary episodes flagged | honest episodes flagged |
+|---|---|---|---|
+| bounds | 0.0 % | 0.0 % | 0.0 % |
+| speed | 0.0 % | 0.0 % | 0.0 % |
+| consistency | 0.0 % | 0.0 % | 0.4 % |
+| accel | 0.0 % | 0.5 % | 0.1 % |
+| **any check** | | **0.5 %** | 0.4 % |
+
+Broadcast below the floor: 0.0 % of steps. Broadcast speed mean 1.51 m/s (true 1.10). Offset |claim − truth| mean 1.65 m, p99 2.00 m.
+
+**Reading.** An action-level detector sees this adversary iff the AUC is well away from 0.5 *and* from the same-slot clean control. A broadcast check catches it iff "any check" flags its episodes at a rate well above the honest false-alarm rate. The spec asks to say so plainly if a naive detector catches the stealthy adversary.
+
+![](stealth_adv_seed3_stealth0_lieonlyplaus.png)
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/8uqnsygw
+................s....................................................... [ 97%]
+..                                                                       [100%]
+=============================== warnings summary ===============================
+byzantine_experiments/tests/test_tier3.py: 26 warnings
+  /scratch/bmugizi/conda_envs/swarm_r311_v2/lib/python3.11/site-packages/gymnasium/spaces/box.py:130: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+    gym.logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+
+byzantine_experiments/tests/test_tier3.py: 24 warnings
+  /scratch/bmugizi/conda_envs/swarm_r311_v2/lib/python3.11/site-packages/sample_factory/algo/learning/learner.py:281: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+    checkpoint_dict = torch.load(latest_checkpoint, map_location=device)
+
+byzantine_experiments/tests/test_tier3.py::test_honest_damage_uses_matched_drone_subsets
+  /scratch/bmugizi/conda_envs/swarm_r311_v2/lib/python3.11/site-packages/scipy/stats/_axis_nan_policy.py:573: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+    res = hypotest_fun_out(*samples, **kwds)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+73 passed, 1 skipped, 51 warnings in 47.97s
+========================================
+All C-series experiments completed successfully.
+Finished: Fri Oct  9 05:11:45 EDT 2026
+Log saved to: logs/run_C_20261009_030341.log
+Next: bash scripts/byz_matched_triple.sh  (block D)
+========================================

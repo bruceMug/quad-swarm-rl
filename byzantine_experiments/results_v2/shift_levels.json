@@ -1,0 +1,78 @@
+{
+  "levels": {
+    "mild": {
+      "dr_ratio": 0.03,
+      "wind_accel": 0.0,
+      "gust": 0.0,
+      "tau": 1.0,
+      "effect_pct": 9.598993442331357,
+      "ci": [
+        3.1444360995317835,
+        16.05355078513093
+      ],
+      "weak": false,
+      "scanned": [
+        "dr0.01",
+        "dr0.02",
+        "dr0.03",
+        "dr0.04",
+        "dr0.05",
+        "dr0.1",
+        "dr0.2",
+        "dr0.3"
+      ]
+    },
+    "mild_v1": {
+      "dr_ratio": 0.05,
+      "wind_accel": 0.0,
+      "gust": 0.0,
+      "tau": 1.0,
+      "effect_pct": 32.59372392294475,
+      "ci": [
+        24.3169619306299,
+        40.87048591525959
+      ],
+      "weak": false,
+      "grid": "v1: DR 0.05 0.1 0.2 0.3, wind 0.5 1 2"
+    },
+    "severe_v1": {
+      "dr_ratio": 0.1,
+      "wind_accel": 0.5,
+      "gust": 0.25,
+      "tau": 1.0,
+      "effect_pct": 139.77926492713354,
+      "ci": [
+        126.46866639852762,
+        153.08986345573945
+      ],
+      "weak": false,
+      "grid": "v1: DR 0.05 0.1 0.2 0.3, wind 0.5 1 2"
+    },
+    "severe": {
+      "dr_ratio": 0.06,
+      "wind_accel": 0.1,
+      "gust": 0.05,
+      "tau": 1.0,
+      "effect_pct": 60.10563260293204,
+      "ci": [
+        49.67006144653732,
+        70.54120375932676
+      ],
+      "weak": false,
+      "scanned": [
+        "dr0.06_wind0.1",
+        "dr0.06_wind0.25",
+        "dr0.06_wind0.5",
+        "dr0.06_wind1.0"
+      ]
+    }
+  },
+  "rules": {
+    "mild_min_pct": 5.0,
+    "severe_min_pct": 25.0,
+    "alpha": 0.05,
+    "dr_cap": 0.3,
+    "fixed": "2026-09-26, before any calibration data"
+  },
+  "amendment": "2026-10-12: grid extended (DR 0.01-0.04; stage-2 wind 0.1-1.0), rules unchanged. mild/severe = amended-grid picks (primary); mild_v1/severe_v1 = original picks, also run. All levels reported. See module docstring."
+}

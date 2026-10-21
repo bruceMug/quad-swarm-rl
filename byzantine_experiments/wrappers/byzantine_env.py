@@ -103,6 +103,11 @@ class ByzantineEnvWrapper(gym.Wrapper):
         self._jacobian_inv = {}
         self.ego_updates = 0
         self.broadcast_rewrites = 0
+        # {drone: (6,) claimed state} from the most recent step, with the true post-step state
+        # it was derived from. Kept so the collector can record what liars actually claimed --
+        # the stealth analysis checks the claims themselves, not a reconstruction of them.
+        self.last_reported = {}
+        self.last_reported_truth = {}
 
         self.compromised_indices = list(self._requested_indices)
         self.byz_agents = {}
@@ -200,6 +205,7 @@ class ByzantineEnvWrapper(gym.Wrapper):
                 jacobian=self._jacobian_inv[i][0],
                 jacobian_inv=self._jacobian_inv[i][1],
                 room_box=np.array(envs[i].room_box, dtype=np.float64),
+                control_dt=1.0 / float(envs[i].control_freq),
             )
             self.ego_updates += 1
 
@@ -251,6 +257,8 @@ class ByzantineEnvWrapper(gym.Wrapper):
                     f'{self.tier_name} agent {i} returned a broadcast state of shape '
                     f'{out.shape}, expected (6,) = [x, y, z, vx, vy, vz]')
             reported[i] = out
+            self.last_reported_truth[i] = true_state
+        self.last_reported = reported
 
         for observer in range(self.num_agents):
             if observer in liars:

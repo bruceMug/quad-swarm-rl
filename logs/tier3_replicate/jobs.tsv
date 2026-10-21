@@ -1,0 +1,6 @@
+rep_clean_s3_r1	clean	1003
+rep_attack_s3_r1	attack	1003
+rep_clean_s3_r2	clean	2003
+rep_attack_s3_r2	attack	2003
+rep_clean_s3_r3	clean	3003
+rep_attack_s3_r3	attack	3003

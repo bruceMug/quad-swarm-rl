@@ -98,6 +98,11 @@ def compute_metrics(data, action_low=-1.0, action_high=1.0):
         dev_byz_mean = dev_byz_max = perturbed_frac = 0.0
     dev_honest_mean = _masked_mean(dev[..., honest_mask], step_mask) if honest_mask.any() else 0.0
 
+    # Absolute action magnitude, for the Tier 3 gate's "action magnitude ratio vs honest".
+    act_norm = np.linalg.norm(executed, axis=-1)                     # (E, T, N)
+    norm_byz = _masked_mean(act_norm[..., byz_mask], step_mask) if byz_mask.any() else float('nan')
+    norm_honest = _masked_mean(act_norm[..., honest_mask], step_mask) if honest_mask.any() else float('nan')
+
     # ---- clip saturation -------------------------------------------------------------
     at_bound = ((executed <= action_low + SATURATION_EPS)
                 | (executed >= action_high - SATURATION_EPS)).astype(float)   # (E, T, N, A)
@@ -174,6 +179,10 @@ def compute_metrics(data, action_low=-1.0, action_high=1.0):
         action_deviation_byzantine_mean=dev_byz_mean,
         action_deviation_byzantine_max=dev_byz_max,
         action_deviation_honest_mean=dev_honest_mean,
+        action_norm_byzantine_mean=norm_byz,
+        action_norm_honest_mean=norm_honest,
+        action_norm_ratio=(norm_byz / norm_honest
+                           if np.isfinite(norm_honest) and norm_honest > 1e-9 else float('nan')),
         perturbed_step_fraction=perturbed_frac,
         saturation_rate_byzantine=sat_byz,
         saturation_rate_honest=sat_honest,

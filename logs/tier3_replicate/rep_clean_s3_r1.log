@@ -1,0 +1,148 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+[36m[2026-09-20 11:31:59,006][1157953] register_encoder_factory: <function make_quadmulti_encoder at 0x7fbd6bb40720>[0m
+[33m[2026-09-20 11:31:59,026][1157953] Loading existing experiment configuration from train_dir/exp1_baseline_seed3/config.json[0m
+[36m[2026-09-20 11:31:59,026][1157953] Overriding arg 'train_dir' with value 'train_dir' passed from command line[0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'fps'=0 that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'eval_env_frameskip'=None that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'no_render'=False that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'save_video'=False that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'video_frames'=1000000000.0 that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'video_name'=None that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'max_num_frames'=1000000000.0 that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'max_num_episodes'=1000000000.0 that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'push_to_hub'=False that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'hf_repository'=None that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'policy_index'=0 that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'eval_deterministic'=False that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,027][1157953] Adding new argument 'train_script'=None that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,028][1157953] Adding new argument 'enjoy_script'=None that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,028][1157953] Adding new argument 'byzantine_enabled'=False that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,028][1157953] Adding new argument 'byzantine_tier'='' that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,028][1157953] Adding new argument 'byzantine_indices'='' that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,028][1157953] Adding new argument 'byzantine_config'='{}' that is not in the saved config file![0m
+[36m[2026-09-20 11:31:59,028][1157953] Adding new argument 'byzantine_seed'=0 that is not in the saved config file![0m
+/scratch/bmugizi/conda_envs/swarm_r311_v2/lib/python3.11/site-packages/gymnasium/spaces/box.py:130: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  gym.logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+[33m[2026-09-20 11:32:00,533][1157953] Loading state from checkpoint train_dir/exp1_baseline_seed3/checkpoint_p0/checkpoint_000976566_1000003584.pth...[0m
+/scratch/bmugizi/conda_envs/swarm_r311_v2/lib/python3.11/site-packages/sample_factory/algo/learning/learner.py:281: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint_dict = torch.load(latest_checkpoint, map_location=device)
+[37m[1m[2026-09-20 11:32:00,559][1157953] Loaded checkpoint: train_dir/exp1_baseline_seed3/checkpoint_p0/checkpoint_000976566_1000003584.pth[0m
+[37m[1m[2026-09-20 11:32:03,888][1157953] Collecting 50 episodes | tier=none | compromised=[][0m
+[37m[1m[2026-09-20 11:33:29,276][1157953]   episode 5/50 | len=1501 | reward=4.094[0m
+[37m[1m[2026-09-20 11:34:44,241][1157953]   episode 10/50 | len=1501 | reward=-1.440[0m
+[37m[1m[2026-09-20 11:35:57,971][1157953]   episode 15/50 | len=1501 | reward=-6.069[0m
+[37m[1m[2026-09-20 11:37:07,428][1157953]   episode 20/50 | len=1501 | reward=1.347[0m
+[37m[1m[2026-09-20 11:38:20,005][1157953]   episode 25/50 | len=1501 | reward=-9.835[0m
+[37m[1m[2026-09-20 11:39:37,031][1157953]   episode 30/50 | len=1501 | reward=-2.226[0m
+[37m[1m[2026-09-20 11:40:55,716][1157953]   episode 35/50 | len=1501 | reward=-2.471[0m
+[37m[1m[2026-09-20 11:42:15,028][1157953]   episode 40/50 | len=1501 | reward=-7.587[0m
+[37m[1m[2026-09-20 11:43:34,026][1157953]   episode 45/50 | len=1501 | reward=4.439[0m
+[37m[1m[2026-09-20 11:44:53,822][1157953]   episode 50/50 | len=1501 | reward=-4.897[0m
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /afs/andrew.cmu.edu/usr6/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run 51d4iitu
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20260920_114505-51d4iitu
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run rep_clean_s3_r1
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/51d4iitu
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-51d4iitu-episodes
+wandb: uploading artifact run-51d4iitu-episodes
+wandb: 
+wandb: Run history:
+wandb: episode/action_deviation_byzantine ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 episode/collisions ▁▁▁▁▁▁▁█▁█▁▁▁▁▁▅▁▁▁▅▅▁█▁▁█▁▁▅▁▁▅▅▁▅▁█▁▅▁
+wandb:             episode/episode_length ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             episode/episode_reward ▇▄█▇▇▆▆▇▅▄▇▇▃▇▃▆▃▄▄▁▄█▆▆▄▆▇█▄▇▅▂▆▅▁█▇█▆▃
+wandb:      episode/episode_reward_honest ▇▄██▇▆▇▇▅▄▇▇▃▆▇▆▆▃▄▄▁▄█▆▆▇▇█▄▇▆▅▂▆▆▇▇█▆▃
+wandb:                  episode/goal_rmse ▃▅▂▂▁▃▃▂▅▅▃▃▇▃▇▃▆▅▅█▆▁▃▃▅▃▂▂▆▄▄▇▄▄▇▂▃▂▄▇
+wandb:           episode/goal_rmse_honest ▂▄▂▁▁▃▂▂▄▄▃▃▆▄▃▃▃▅▄▄█▅▁▃▃▂▃▂▂▅▄▃▃▆▃▂▂▂▄▆
+wandb:          episode/low_altitude_frac ▁▁▂▁▂▁▂▁▁▃▂▂▂▂▂▃▃▂▁█▂▁▂▁▁▃▁▁▄▁▁▅▆▃▂▁▃▁▃▂
+wandb:             episode/min_separation ▄▂▄▇▂▁▁▅▇▂▇▂▂▅▆▂▁▂▂▂▂▁▅▂▁▆▅▁▁▂▇▂██▅▅▃▃▇▂
+wandb:       episode/saturation_byzantine ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                 +5 ...
+wandb: 
+wandb: Run summary:
+wandb:  action_deviation_byzantine_max 0
+wandb: action_deviation_byzantine_mean 0
+wandb:  action_deviation_byzantine_sem 0
+wandb:  action_deviation_byzantine_std 0
+wandb:    action_deviation_honest_mean 0
+wandb:         action_norm_honest_mean 0.26778
+wandb:                 collisions_mean 0.44
+wandb:                  collisions_sem 0.10643
+wandb:                  collisions_std 0.7526
+wandb:                    curve_stride 10
+wandb:                             +47 ...
+wandb: 
+wandb: 🚀 View run rep_clean_s3_r1 at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/51d4iitu
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20260920_114505-51d4iitu/logs
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Added new collision event to buffer at 0
+Added new collision event to buffer at 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Added new collision event to buffer at 2
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Added new collision event to buffer at 3
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 1
+
+Wrote byzantine_experiments/results/tier3_replicate/rep_clean_s3_r1.npz
+  obs                  (50, 1501, 8, 54)            float32
+  actions_honest       (50, 1501, 8, 4)             float32
+  actions_executed     (50, 1501, 8, 4)             float32
+  rewards              (50, 1501, 8)                float32
+  positions            (50, 1501, 8, 3)             float32
+  velocities           (50, 1501, 8, 3)             float32
+  collisions           (50, 1501)                   float32
+  episode_lengths      (50,)                        int32
+  byzantine_mask       (8,)                         bool
+Wrote byzantine_experiments/results/tier3_replicate/rep_clean_s3_r1.json
+
+mean episode reward   : -0.101023 ± 4.038490  (n=50)
+goal_rmse_mean        : 1.209080
+goal_rmse_honest_mean : 1.209080
+collisions_mean       : 0.440000
+action_deviation_byzantine_mean: 0.000000
+saturation_rate_byzantine: 0.000000
+min_separation_mean   : 0.350802
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/51d4iitu

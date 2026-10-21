@@ -12,6 +12,7 @@ from byzantine_experiments.agents.base import (  # noqa: F401
 from byzantine_experiments.agents import noop  # noqa: F401,E402
 from byzantine_experiments.agents import tier1_stochastic  # noqa: F401,E402
 from byzantine_experiments.agents import tier2_structured  # noqa: F401,E402
+from byzantine_experiments.agents import tier3_learned  # noqa: F401,E402
 
 __all__ = [
     'BYZANTINE_REGISTRY',

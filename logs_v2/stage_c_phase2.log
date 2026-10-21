@@ -1,0 +1,147 @@
+
+=== 2026-09-25 03:26:06  Tier 3 horizon sweep (screening, n=50 per checkpoint)
+Tier 3 HORIZON SWEEP: 42 rollouts, 12 at a time
+  adversaries : adv_seed1_stealth0 adv_seed1_stealth0_f250 adv_seed1_stealth0_lie adv_seed1_stealth0_lieonly adv_seed3_stealth0_lieonly adv_seed3_stealth0_lieonlyego
+  results     -> byzantine_experiments/results_v2/tier3      logs -> logs_v2/tier3
+
+START t3_adv_seed1_stealth0_on_s1_m006M  (adv=adv_seed1_stealth0 cfg={"checkpoint":"train_dir/adv_seed1_stealth0","milestone":6000000} baseline=s1)
+START t3_adv_seed1_stealth0_on_s1_m025M  (adv=adv_seed1_stealth0 cfg={"checkpoint":"train_dir/adv_seed1_stealth0","milestone":25000000} baseline=s1)
+START t3_adv_seed1_stealth0_on_s1_m050M  (adv=adv_seed1_stealth0 cfg={"checkpoint":"train_dir/adv_seed1_stealth0","milestone":50000000} baseline=s1)
+START t3_adv_seed1_stealth0_on_s1_m075M  (adv=adv_seed1_stealth0 cfg={"checkpoint":"train_dir/adv_seed1_stealth0","milestone":75000000} baseline=s1)
+START t3_adv_seed1_stealth0_on_s1_m100M  (adv=adv_seed1_stealth0 cfg={"checkpoint":"train_dir/adv_seed1_stealth0","milestone":100000000} baseline=s1)
+START t3_adv_seed1_stealth0_on_s1_m150M  (adv=adv_seed1_stealth0 cfg={"checkpoint":"train_dir/adv_seed1_stealth0","milestone":150000000} baseline=s1)
+START t3_adv_seed1_stealth0_f250_on_s1_m006M  (adv=adv_seed1_stealth0_f250 cfg={"checkpoint":"train_dir/adv_seed1_stealth0_f250","milestone":6000000} baseline=s1)
+START t3_adv_seed1_stealth0_on_s1_m194M  (adv=adv_seed1_stealth0 cfg={"checkpoint":"train_dir/adv_seed1_stealth0","milestone":194000000} baseline=s1)
+START t3_adv_seed1_stealth0_f250_on_s1_m025M  (adv=adv_seed1_stealth0_f250 cfg={"checkpoint":"train_dir/adv_seed1_stealth0_f250","milestone":25000000} baseline=s1)
+START t3_adv_seed1_stealth0_f250_on_s1_m075M  (adv=adv_seed1_stealth0_f250 cfg={"checkpoint":"train_dir/adv_seed1_stealth0_f250","milestone":75000000} baseline=s1)
+START t3_adv_seed1_stealth0_f250_on_s1_m100M  (adv=adv_seed1_stealth0_f250 cfg={"checkpoint":"train_dir/adv_seed1_stealth0_f250","milestone":100000000} baseline=s1)
+START t3_adv_seed1_stealth0_f250_on_s1_m050M  (adv=adv_seed1_stealth0_f250 cfg={"checkpoint":"train_dir/adv_seed1_stealth0_f250","milestone":50000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_on_s1_m075M  (1126s)  goal_rmse_mean        : 1.588208
+START t3_adv_seed1_stealth0_f250_on_s1_m150M  (adv=adv_seed1_stealth0_f250 cfg={"checkpoint":"train_dir/adv_seed1_stealth0_f250","milestone":150000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_on_s1_m050M  (1129s)  goal_rmse_mean        : 1.628313
+START t3_adv_seed1_stealth0_f250_on_s1_m194M  (adv=adv_seed1_stealth0_f250 cfg={"checkpoint":"train_dir/adv_seed1_stealth0_f250","milestone":194000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_on_s1_m194M  (1139s)  goal_rmse_mean        : 1.597909
+START t3_adv_seed1_stealth0_lie_on_s1_m006M  (adv=adv_seed1_stealth0_lie cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lie","milestone":6000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_on_s1_m100M  (1143s)  goal_rmse_mean        : 1.544812
+START t3_adv_seed1_stealth0_lie_on_s1_m025M  (adv=adv_seed1_stealth0_lie cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lie","milestone":25000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_on_s1_m006M  (1144s)  goal_rmse_mean        : 1.623902
+START t3_adv_seed1_stealth0_lie_on_s1_m050M  (adv=adv_seed1_stealth0_lie cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lie","milestone":50000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_on_s1_m150M  (1150s)  goal_rmse_mean        : 1.600300
+START t3_adv_seed1_stealth0_lie_on_s1_m075M  (adv=adv_seed1_stealth0_lie cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lie","milestone":75000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_on_s1_m025M  (1180s)  goal_rmse_mean        : 1.603436
+START t3_adv_seed1_stealth0_lie_on_s1_m100M  (adv=adv_seed1_stealth0_lie cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lie","milestone":100000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_f250_on_s1_m025M  (1402s)  goal_rmse_mean        : 1.934876
+START t3_adv_seed1_stealth0_lie_on_s1_m150M  (adv=adv_seed1_stealth0_lie cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lie","milestone":150000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_f250_on_s1_m006M  (1412s)  goal_rmse_mean        : 1.964852
+START t3_adv_seed1_stealth0_lie_on_s1_m194M  (adv=adv_seed1_stealth0_lie cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lie","milestone":194000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_f250_on_s1_m075M  (1413s)  goal_rmse_mean        : 1.898149
+START t3_adv_seed1_stealth0_lieonly_on_s1_m006M  (adv=adv_seed1_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonly","milestone":6000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_f250_on_s1_m050M  (1417s)  goal_rmse_mean        : 1.953259
+START t3_adv_seed1_stealth0_lieonly_on_s1_m025M  (adv=adv_seed1_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonly","milestone":25000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_f250_on_s1_m100M  (1420s)  goal_rmse_mean        : 1.911551
+START t3_adv_seed1_stealth0_lieonly_on_s1_m050M  (adv=adv_seed1_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonly","milestone":50000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_lie_on_s1_m075M  (1177s)  goal_rmse_mean        : 1.592955
+START t3_adv_seed1_stealth0_lieonly_on_s1_m075M  (adv=adv_seed1_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonly","milestone":75000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_lie_on_s1_m025M  (1194s)  goal_rmse_mean        : 1.607040
+START t3_adv_seed1_stealth0_lieonly_on_s1_m100M  (adv=adv_seed1_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonly","milestone":100000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_lie_on_s1_m006M  (1202s)  goal_rmse_mean        : 1.625064
+START t3_adv_seed1_stealth0_lieonly_on_s1_m150M  (adv=adv_seed1_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonly","milestone":150000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_lie_on_s1_m100M  (1204s)  goal_rmse_mean        : 1.604006
+START t3_adv_seed1_stealth0_lieonly_on_s1_m194M  (adv=adv_seed1_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed1_stealth0_lieonly","milestone":194000000} baseline=s1)
+DONE  t3_adv_seed1_stealth0_lie_on_s1_m050M  (1251s)  goal_rmse_mean        : 1.585467
+START t3_adv_seed3_stealth0_lieonly_on_s3_m006M  (adv=adv_seed3_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonly","milestone":6000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_f250_on_s1_m150M  (1388s)  goal_rmse_mean        : 1.925929
+START t3_adv_seed3_stealth0_lieonly_on_s3_m025M  (adv=adv_seed3_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonly","milestone":25000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_f250_on_s1_m194M  (1392s)  goal_rmse_mean        : 1.913157
+START t3_adv_seed3_stealth0_lieonly_on_s3_m050M  (adv=adv_seed3_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonly","milestone":50000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lie_on_s1_m194M  (1176s)  goal_rmse_mean        : 1.579357
+START t3_adv_seed3_stealth0_lieonly_on_s3_m075M  (adv=adv_seed3_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonly","milestone":75000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lie_on_s1_m150M  (1208s)  goal_rmse_mean        : 1.567896
+START t3_adv_seed3_stealth0_lieonly_on_s3_m100M  (adv=adv_seed3_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonly","milestone":100000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lieonly_on_s1_m006M  (1205s)  goal_rmse_mean        : 1.121327
+START t3_adv_seed3_stealth0_lieonly_on_s3_m150M  (adv=adv_seed3_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonly","milestone":150000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lieonly_on_s1_m025M  (1211s)  goal_rmse_mean        : 1.229332
+START t3_adv_seed3_stealth0_lieonly_on_s3_m194M  (adv=adv_seed3_stealth0_lieonly cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonly","milestone":194000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lieonly_on_s1_m050M  (1232s)  goal_rmse_mean        : 1.132699
+START t3_adv_seed3_stealth0_lieonlyego_on_s3_m006M  (adv=adv_seed3_stealth0_lieonlyego cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonlyego","milestone":6000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lieonly_on_s1_m075M  (1203s)  goal_rmse_mean        : 1.219219
+START t3_adv_seed3_stealth0_lieonlyego_on_s3_m025M  (adv=adv_seed3_stealth0_lieonlyego cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonlyego","milestone":25000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lieonly_on_s1_m150M  (1212s)  goal_rmse_mean        : 1.177770
+START t3_adv_seed3_stealth0_lieonlyego_on_s3_m050M  (adv=adv_seed3_stealth0_lieonlyego cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonlyego","milestone":50000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lieonly_on_s1_m100M  (1233s)  goal_rmse_mean        : 1.200231
+START t3_adv_seed3_stealth0_lieonlyego_on_s3_m075M  (adv=adv_seed3_stealth0_lieonlyego cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonlyego","milestone":75000000} baseline=s3)
+DONE  t3_adv_seed1_stealth0_lieonly_on_s1_m194M  (1214s)  goal_rmse_mean        : 1.185151
+START t3_adv_seed3_stealth0_lieonlyego_on_s3_m100M  (adv=adv_seed3_stealth0_lieonlyego cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonlyego","milestone":100000000} baseline=s3)
+DONE  t3_adv_seed3_stealth0_lieonly_on_s3_m006M  (1233s)  goal_rmse_mean        : 1.230921
+START t3_adv_seed3_stealth0_lieonlyego_on_s3_m150M  (adv=adv_seed3_stealth0_lieonlyego cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonlyego","milestone":150000000} baseline=s3)
+DONE  t3_adv_seed3_stealth0_lieonly_on_s3_m050M  (1193s)  goal_rmse_mean        : 1.163538
+START t3_adv_seed3_stealth0_lieonlyego_on_s3_m194M  (adv=adv_seed3_stealth0_lieonlyego cfg={"checkpoint":"train_dir/adv_seed3_stealth0_lieonlyego","milestone":194000000} baseline=s3)
+DONE  t3_adv_seed3_stealth0_lieonly_on_s3_m025M  (1210s)  goal_rmse_mean        : 1.154949
+DONE  t3_adv_seed3_stealth0_lieonly_on_s3_m075M  (1211s)  goal_rmse_mean        : 1.239576
+DONE  t3_adv_seed3_stealth0_lieonly_on_s3_m100M  (1210s)  goal_rmse_mean        : 1.246327
+DONE  t3_adv_seed3_stealth0_lieonly_on_s3_m150M  (1215s)  goal_rmse_mean        : 1.216339
+DONE  t3_adv_seed3_stealth0_lieonly_on_s3_m194M  (1230s)  goal_rmse_mean        : 1.223826
+DONE  t3_adv_seed3_stealth0_lieonlyego_on_s3_m006M  (1258s)  goal_rmse_mean        : 1.219248
+DONE  t3_adv_seed3_stealth0_lieonlyego_on_s3_m025M  (1179s)  goal_rmse_mean        : 1.197526
+DONE  t3_adv_seed3_stealth0_lieonlyego_on_s3_m075M  (1149s)  goal_rmse_mean        : 1.145855
+DONE  t3_adv_seed3_stealth0_lieonlyego_on_s3_m150M  (1125s)  goal_rmse_mean        : 1.231439
+DONE  t3_adv_seed3_stealth0_lieonlyego_on_s3_m050M  (1205s)  goal_rmse_mean        : 1.167522
+DONE  t3_adv_seed3_stealth0_lieonlyego_on_s3_m100M  (1167s)  goal_rmse_mean        : 1.149472
+DONE  t3_adv_seed3_stealth0_lieonlyego_on_s3_m194M  (1142s)  goal_rmse_mean        : 1.170488
+
+Finished in 80 min
+Sidecars present: 42
+
+Next: python -m byzantine_experiments.analysis.gate_tier3 --horizon
+
+=== 2026-09-25 04:47:02  Gate table
+Loaded 42 Tier 3 rollouts and 3 clean references
+Wrote byzantine_experiments/results_v2/tier3_gate.csv  (42 rows)
+Wrote byzantine_experiments/results_v2/tier3_gate.md
+
+run                                       honest%           95% CI      p    own%  surv   sat  gate
+t3_adv_seed1_stealth0_lieonly_on_s1_m006     -3.7     [-11.0, 3.6]  0.333   -10.0    98     0  fail
+t3_adv_seed1_stealth0_lie_on_s1_m006M        -4.2     [-13.2, 4.9]  0.380   197.9     0    76  fail
+t3_adv_seed1_stealth0_on_s1_m006M             2.3     [-5.6, 10.2]  0.559   179.4     0    97  fail
+t3_adv_seed1_stealth0_f250_on_s1_m006M       -1.8     [-10.4, 6.9]  0.689   188.2     0    93  fail
+t3_adv_seed1_stealth0_lie_on_s1_m025M        -1.9      [-9.6, 5.7]  0.619   185.0     0    94  fail
+t3_adv_seed1_stealth0_on_s1_m025M            -0.8      [-8.0, 6.5]  0.834   183.1     0    97  fail
+t3_adv_seed1_stealth0_f250_on_s1_m025M       -6.4     [-16.4, 3.6]  0.227   187.4     0    97  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m025      6.4     [-2.2, 15.0]  0.125    -4.7   100     0  fail
+t3_adv_seed1_stealth0_on_s1_m050M             1.7      [-5.4, 8.7]  0.628   186.2     0    99  fail
+t3_adv_seed1_stealth0_f250_on_s1_m050M       -3.5     [-12.4, 5.5]  0.451   187.7     0    97  fail
+t3_adv_seed1_stealth0_lie_on_s1_m050M        -3.5     [-10.4, 3.4]  0.327   183.5     0   100  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m050     -3.7     [-13.2, 5.9]  0.460    -2.4    98     0  fail
+t3_adv_seed1_stealth0_lie_on_s1_m075M        -2.6      [-9.9, 4.7]  0.484   183.0     0   100  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m075      4.3     [-3.6, 12.3]  0.257    -1.3    98     0  fail
+t3_adv_seed1_stealth0_on_s1_m075M            -2.4     [-10.5, 5.6]  0.555   181.9     0   100  fail
+t3_adv_seed1_stealth0_f250_on_s1_m075M       -9.4    [-18.0, -0.9]  0.051   183.2     0    90  fail
+t3_adv_seed1_stealth0_on_s1_m100M            -6.6     [-15.7, 2.5]  0.180   177.5     0   100  fail
+t3_adv_seed1_stealth0_f250_on_s1_m100M       -6.9     [-15.9, 2.2]  0.159   182.7     0    94  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m100      2.8     [-5.3, 10.9]  0.487    -2.3   100     0  fail
+t3_adv_seed1_stealth0_lie_on_s1_m100M        -0.5      [-7.9, 6.9]  0.894   182.5     0   100  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m150      1.9      [-3.4, 7.2]  0.459   -10.3   100     0  fail
+t3_adv_seed1_stealth0_lie_on_s1_m150M        -5.4     [-13.2, 2.4]  0.195   182.6     0   100  fail
+t3_adv_seed1_stealth0_on_s1_m150M            -0.2      [-7.2, 6.9]  0.960   180.5     0   100  fail
+t3_adv_seed1_stealth0_f250_on_s1_m150M       -6.4     [-15.0, 2.2]  0.167   185.5     0    97  fail
+t3_adv_seed1_stealth0_f250_on_s1_m194M       -6.9     [-14.9, 1.1]  0.113   184.1     0    96  fail
+t3_adv_seed1_stealth0_lie_on_s1_m194M        -4.4     [-13.5, 4.8]  0.362   184.3     0   100  fail
+t3_adv_seed1_stealth0_lieonly_on_s1_m194      2.4      [-5.1, 9.8]  0.522    -7.1   100     0  fail
+t3_adv_seed1_stealth0_on_s1_m194M            -1.5      [-8.5, 5.5]  0.672   183.1     0   100  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m006     11.5      [3.1, 20.0]  0.007    15.3    98     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m      9.2      [0.7, 17.7]  0.033    19.4    98     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m025      4.8     [-1.2, 10.8]  0.115     7.6   100     0  fail
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m      8.6     [-0.7, 17.9]  0.070    12.2   100     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m050      7.6      [0.8, 14.3]  0.027    -0.3    98     0  fail
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m      5.2     [-3.6, 13.9]  0.233    10.0    98     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m075     11.3      [0.4, 22.2]  0.043    21.5   100     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m      2.4      [-3.8, 8.7]  0.435    12.8    96     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m100     14.2      [2.4, 25.9]  0.019    10.7    98     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m      4.4     [-4.6, 13.3]  0.329    11.8    98     0  fail
+t3_adv_seed3_stealth0_lieonly_on_s3_m150      9.4     [-0.5, 19.2]  0.061    21.8    98     0  fail
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m     12.6      [1.8, 23.4]  0.022    13.0    96     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonly_on_s3_m194     13.0      [3.0, 22.9]  0.011     1.4    98     0  CANDIDATE
+t3_adv_seed3_stealth0_lieonlyego_on_s3_m      5.5     [-1.8, 12.9]  0.134    14.6   100     0  fail
+
+Phase 2 done. Rows marked CANDIDATE cleared the gate on screening data (n=50, 57 %
+power). The decision is the confirmatory run on the best one -- readme step 15.

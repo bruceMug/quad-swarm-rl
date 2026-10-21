@@ -16,13 +16,16 @@
 #     EXTRA_MODES=1    include the dropout mode='zero' side-sweep (default 1)
 #     REFINE=1         run the in-band refinement grid instead of the main matrix (33 runs)
 #     STALL=1          run the 1C' burst-stall grid instead (27 runs)
+#     ONLY=clean       collect only the 3 clean references (run these first in a fresh root)
 #     DRY_RUN=1        print the job list and exit
 #
 # Safe to re-run: completed configs are skipped, so an interrupted sweep resumes.
 
 set -uo pipefail
 
-PY=${PY:-/scratch/bmugizi/conda_envs/swarm_r311_recovered/bin/python}
+[[ -f scripts/byz_wandb_env.sh ]] && source scripts/byz_wandb_env.sh
+
+PY=${PY:-/scratch/bmugizi/conda_envs/swarm_r311_v2/bin/python}
 PARALLEL=${PARALLEL:-10}
 N_EPISODES=${N_EPISODES:-50}
 WANDB=${WANDB:-1}
@@ -30,8 +33,10 @@ FORCE=${FORCE:-0}
 EXTRA_MODES=${EXTRA_MODES:-1}
 DRY_RUN=${DRY_RUN:-0}
 
-RESULTS=byzantine_experiments/results/tier1
-LOGS=logs/tier1
+# v2 root: data from the fixed collector must never mix with the legacy folders, and the
+# skip-if-exists logic below would otherwise silently reuse the invalid legacy files.
+RESULTS=${BYZ_RESULTS_ROOT:-byzantine_experiments/results_v2}/tier1
+LOGS=${BYZ_LOGS_ROOT:-logs_v2}/tier1
 JOBS=$LOGS/jobs.tsv
 
 # ----------------------------------------------------------------- single-run worker
@@ -204,6 +209,9 @@ for seed in 1 2 3; do
     # Clean reference. Needed per seed: degradation is measured against the same
     # checkpoint under the same collector, not against the older evaluate.py JSONs.
     emit "t1_clean_s${seed}" clean '{}' none "$seed" "clean_baseline"
+    # ONLY=clean: just the three clean references. Every Tier 1/2/3 result pairs against these,
+    # so they are the first thing to collect in a fresh results root.
+    [[ "${ONLY:-all}" == "clean" ]] && continue
 
     for f in 0125 025; do
         if [[ "$f" == "0125" ]]; then indices="0"; else indices="0,1"; fi

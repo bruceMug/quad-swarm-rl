@@ -20,10 +20,18 @@ and a second severity axis -- **goal RMSE degradation** -- is reported alongside
 (RMS distance to the assigned goal, i.e. formation error) has a true zero, is bounded below,
 and its SEM is a few percent, which makes it the metric that can actually rank severities.
 
+The 20-40 % band (decision D1, 2026-09-26)
+-------------------------------------------
+The spec's 20-40 % band was set on legacy numbers the seeding bug inflated; no v2 config
+reaches it. It is replaced by family-level validation (`family_validation.py`): a fault family
+passes when its runs together significantly damage the honest team on the PAIRED metric. The
+per-config `†` marks candidates for the matched triple (validated family, f = 0.125).
+
 Usage:
     python -m byzantine_experiments.analysis.aggregate_tier1 [--no-wandb]
 """
 
+from byzantine_experiments.paths import RESULTS_ROOT, results_dir
 import argparse
 import csv
 import glob
@@ -34,17 +42,19 @@ from collections import defaultdict
 
 import numpy as np
 
+from byzantine_experiments.analysis.family_validation import markdown as family_markdown
+from byzantine_experiments.analysis.family_validation import validated
 from byzantine_experiments.analysis.metrics import degradation_vs_clean
+from byzantine_experiments.analysis.paired import paired_columns
 from byzantine_experiments.analysis.wandb_logging import log_summary_table
 
-RESULTS_DIR = 'byzantine_experiments/results/tier1'
-OUT_CSV = 'byzantine_experiments/results/tier1_calibration.csv'
-OUT_MD = 'byzantine_experiments/results/tier1_calibration.md'
+RESULTS_DIR = results_dir('tier1')
+OUT_CSV = os.path.join(RESULTS_ROOT, 'tier1_calibration.csv')
+OUT_MD = os.path.join(RESULTS_ROOT, 'tier1_calibration.md')
 
-# The band the spec wants flagged: these configs are the ones Tier 3's adversary must be
-# tuned to match, so that the detector is separating malicious from degraded rather than
-# high-damage from low-damage.
-BAND_LO, BAND_HI = 20.0, 40.0
+# The spec flagged configs in a 20-40 % band as the ones Tier 3 must be matched to. That band is
+# retired (D1, see module docstring); matching is now done by analysis/matched_triple.py.
+TRIPLE_F = 0.125
 
 NAME_RE = re.compile(
     r'^t1_(?P<variant>clean|gaussian|ou|dropout|stall)_s(?P<seed>\d+)'
@@ -107,9 +117,14 @@ def build_rows(byz_runs, clean_by_seed):
             continue
         m = run['metrics']
         deg = degradation_vs_clean(m, clean_by_seed[seed]['metrics'])
+        # The only reportable degradation in the v2 corpus: paired against the clean run at
+        # the same seed (design 6.18). The unpaired columns below are kept for comparison.
+        pc = paired_columns(os.path.join(RESULTS_DIR, run['stem'] + '.npz'),
+                            os.path.join(results_dir('tier1'), f't1_clean_s{seed}.npz'))
         cfg = run['sidecar'].get('tier_config', {})
 
         rows.append(dict(
+            **pc,
             config=f"{run['variant']}_{run['severity']}_f{run['f']}",
             variant=run['variant'],
             severity=run['severity'],
@@ -190,10 +205,17 @@ def aggregate_over_seeds(rows):
         sems = sems[np.isfinite(sems)]
         agg['reward_degradation_pct_sem'] = (float(np.sqrt((sems ** 2).sum()) / len(sems))
                                              if sems.size else float('nan'))
-        agg['in_20_40_band'] = bool(BAND_LO <= agg['reward_degradation_pct'] <= BAND_HI)
-        agg['in_20_40_band_goal_rmse'] = bool(BAND_LO <= agg['goal_rmse_degradation_pct'] <= BAND_HI)
+        # Paired honest degradation, averaged over the seeds whose pairing verified.
+        pd = np.array([r['paired_honest_deg_pct'] for r in group if r.get('paired')], dtype=float)
+        agg['paired_honest_deg_pct'] = float(pd.mean()) if pd.size else float('nan')
+        agg['paired_seeds'] = int(pd.size)
         out.append(agg)
 
+    fams = validated(rows)
+    for agg in out:
+        agg['family_validated'] = agg['variant'] in fams
+        agg['triple_candidate'] = bool(agg['family_validated']
+                                       and abs(agg['f_fraction'] - TRIPLE_F) < 1e-9)
     return sorted(out, key=lambda r: (r['variant'], r['f_fraction'], r['severity_value'], r['mode']))
 
 
@@ -232,16 +254,18 @@ def write_markdown(agg, per_seed, path):
                  'a true zero and a few-percent SEM, and is the axis that actually ranks '
                  'severities.\n')
 
-    header = ('| config | f | reward | reward deg % | ±SEM | σ | goal RMSE | goal RMSE deg % | '
-              'honest goal RMSE deg % | collisions Δ | action dev | saturation | min sep |')
-    sep = '|' + '---|' * 13
+    header = ('| config | f | **paired honest deg %** | reward | reward deg % | ±SEM | σ | goal RMSE '
+              '| goal RMSE deg % | honest goal RMSE deg % | collisions Δ | action dev | saturation '
+              '| min sep |')
+    sep = '|' + '---|' * 14
     lines.append(header)
     lines.append(sep)
 
     for r in agg:
-        flag = ' **★**' if r['in_20_40_band'] else ''
+        flag = ' **†**' if r['triple_candidate'] else ''
         lines.append(
             f"| `{r['variant']}` {r['severity']}{flag} | {r['f_fraction']:.3f} "
+            f"| {fmt(r['paired_honest_deg_pct'], 1)} ({r['paired_seeds']} seeds) "
             f"| {fmt(r['episode_reward'])} | {fmt(r['reward_degradation_pct'], 1)} "
             f"| {fmt(r['reward_degradation_pct_sem'], 1)} | {fmt(r['reward_drop_sigma'], 1)} "
             f"| {fmt(r['goal_rmse'], 3)} | {fmt(r['goal_rmse_degradation_pct'], 1)} "
@@ -249,19 +273,13 @@ def write_markdown(agg, per_seed, path):
             f"| {fmt(r['collision_delta'], 2)} | {fmt(r['action_deviation'], 3)} "
             f"| {fmt(100 * r['saturation_rate'], 1)}% | {fmt(r['min_separation'], 3)} |")
 
-    lines.append('\n★ = mean reward degradation falls in the 20–40 % band.\n')
-
-    for label, key in (('reward', 'in_20_40_band'), ('goal RMSE', 'in_20_40_band_goal_rmse')):
-        hits = [r for r in agg if r[key]]
-        lines.append(f'\n## Configs in the 20–40 % band by **{label}** degradation\n')
-        if not hits:
-            lines.append('_None._\n')
-            continue
-        for r in hits:
-            pct = r['reward_degradation_pct'] if key == 'in_20_40_band' else r['goal_rmse_degradation_pct']
-            lines.append(f"- `{r['variant']}` {r['severity']} at f={r['f_fraction']:.3f} "
-                         f"— {fmt(pct, 1)} %")
-        lines.append('')
+    lines.append('\n**paired honest deg %** is the only reportable degradation in the v2 corpus '
+                 '(per-episode paired against the clean run at the same seed; design 6.18). The '
+                 'unpaired columns are kept for comparison with the legacy tables.\n')
+    lines.append(f'† = matched-triple candidate: family validated below, f = {TRIPLE_F}. '
+                 '(Replaces the retired 20–40 % band ★; decision D1.)\n')
+    lines.append(family_markdown(per_seed, 'Family-level validation (decision D1, replaces the '
+                                 '20–40 % band)'))
 
     lines.append('\n## Saturation check\n')
     lines.append('The spec flags >~30 % clip saturation as disqualifying for a clean '
@@ -298,15 +316,18 @@ def main():
     write_csv(per_seed, OUT_CSV)
     write_markdown(agg, per_seed, OUT_MD)
 
-    print(f'\n{len(agg)} configs; '
-          f"{sum(r['in_20_40_band'] for r in agg)} in the 20-40% reward band, "
-          f"{sum(r['in_20_40_band_goal_rmse'] for r in agg)} in the band by goal RMSE")
+    fams = sorted(validated(per_seed))
+    print(f'\n{len(agg)} configs; validated families (paired, family p < 0.05, damaging): '
+          f"{', '.join(fams) or 'none'}")
     for r in agg:
-        star = '*' if r['in_20_40_band'] else ' '
-        print(f"{star} {r['config']:34s} rew_deg={fmt(r['reward_degradation_pct'],1):>8s}% "
+        star = '+' if r['triple_candidate'] else ' '
+        print(f"{star} {r['config']:34s} paired={fmt(r['paired_honest_deg_pct'],1):>6s}% "
+              f"rew_deg={fmt(r['reward_degradation_pct'],1):>8s}% "
               f"±{fmt(r['reward_degradation_pct_sem'],1):>6s}  "
               f"goal_deg={fmt(r['goal_rmse_degradation_pct'],1):>7s}%  "
               f"sat={fmt(100*r['saturation_rate'],1):>5s}%")
+    print('+ = matched-triple candidate (validated family, f = 0.125)')
+    print(family_markdown(per_seed))
 
     if not args.no_wandb:
         url = log_summary_table(
@@ -315,8 +336,8 @@ def main():
             extra_summary={
                 'n_configs': len(agg),
                 'n_runs': len(per_seed),
-                'n_in_reward_band': sum(r['in_20_40_band'] for r in agg),
-                'n_in_goal_rmse_band': sum(r['in_20_40_band_goal_rmse'] for r in agg),
+                'validated_families': ','.join(fams),
+                'n_validated_families': len(fams),
             },
             artifacts=[OUT_CSV, OUT_MD],
         )

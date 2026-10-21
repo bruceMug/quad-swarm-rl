@@ -1,5 +1,61 @@
 # Tier 1 — reading the outputs
 
+> **Read §0 first (updated 2026-10-21).** The rest of this guide was written on the legacy corpus
+> (`results/`, collected before the 2026-09-24 seeding fix). Its descriptions of files, tokens and
+> drone behaviour are still right; its numbers are not all citable. §0 gives the v2 equivalents.
+> The full claim-by-claim check is in [`tier1_design.md`](../design/tier1_design.md) §0.
+
+---
+
+## 0. Updated for v2 (2026-10-21)
+
+**Where the current files are.** Same names, new folder: `byzantine_experiments/results_v2/`
+(`tier1/*.npz|.json`, `tier1_calibration.md|.csv`, `tier1_behaviour.json`,
+`figures/behaviour_t1_*.png`). Every v2 sidecar carries `"seeding": "per_episode_v2"`; a file
+without it is legacy. There are **90 v2 runs**, not 123: the 33-run refinement grid (gaussian
+σ 0.30–0.40, OU σ_ou 0.04–0.08, dropout p 0.5–0.98) was not re-collected.
+
+**What changed for a reader of this guide:**
+- **Drone behaviour and swarm-wide damage replicate.** Every description in §3 and §6 holds; the
+  damage figures below are within a few points of the legacy ones.
+- **The 20–40 % band and the ★ marks are retired.** The project now matches tiers on the *honest*
+  drones, where no Tier 1 fault comes near 20 %.
+- **The new primary column** in `tier1_calibration.md` is **paired honest deg %**: the honest
+  drones' goal-error change against the clean run of the same episodes. Quote that, not the
+  legacy `honest deg %`, whose values did not replicate.
+- **One fault does reach the honest drones:** `stall`, +2.6 % on average (p = 0.0004). The others
+  stay on the faulty drone.
+
+**At a glance, v2** (f = 0.125, swarm-wide goal-RMSE degradation; descriptions unchanged):
+
+| figure | v2 damage | one-line read |
+|---|---|---|
+| `dropout_*_p0.05/0.15/0.3_hold` | −1 to +2 % | indistinguishable from clean |
+| `dropout_*_p0.15_zero` | 6 % | slightly visible |
+| `gaussian_*_sigma0.1` | 1 % | twitchy command, normal flight |
+| `gaussian_*_sigma0.25` | 22 % | wobbles, strays, no consistent direction |
+| `gaussian_*_sigma0.5` | 53 % | falls — about half the time on the floor |
+| `ou_*_sigmaou0.1/0.2/0.4` | 45–56 % | sustained drift; on the floor 54–92 % of the time |
+| `stall_*_d0.10_ms*` | 4–10 % | occasional lurch, mostly fine |
+| `stall_*_d0.25_ms0.3/1.0` | 21–23 % | lurches, recovers, repeats |
+| `stall_*_d0.50_ms0.1/0.3/1.0` | 20–43 % | stalled half the time |
+
+**§7's carry-forward results, re-checked:**
+1. *The team is barely affected* — **holds**, with one refinement: stall's small effect on the
+   honest drones is real (+2.6 %).
+2. *Reward is not a usable severity metric* — **holds** (v2 reward SEMs are ±210–250 pp).
+3. *Correlated drift ≫ white noise per unit perturbation* — **holds** (OU σ_ou 0.1: 56 % at action
+   deviation 0.355; gaussian σ 0.25: 22 % at 0.467).
+4. *Per-step dropout is near-null; `stall` fixes it* — **holds**.
+5. *The validation gate is met with canonical σ 0.25 / σ_ou 0.06 / d0.25-ms0.3* — **superseded.**
+   Tier 1 is now validated at the family level (`stall`, spec amendment A1), and the
+   configuration matched against Tier 3 is `stall_d0.50_ms0.1_hold` by the pre-registered rule.
+
+---
+
+*The original guide follows (legacy numbers — see §0).*
+
+
 **Purpose of this file:** you should be able to pick up *any* file Tier 1 produced — a
 filename, a JSON key, a figure — and know what it is and why it exists, without reading code.
 

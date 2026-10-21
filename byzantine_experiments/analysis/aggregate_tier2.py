@@ -6,6 +6,12 @@ attacker survival, victim spillover, and time-to-impact. It also computes **matc
 pairs** against the Tier 1 canonical settings, which is what makes the paper's central
 comparison clean: same damage, different mechanism, does the detector tell them apart?
 
+Decision D1 (2026-09-26): the spec's 20-40 % band is retired -- it was set on legacy numbers the
+seeding bug inflated and no v2 config reaches it. A Tier 2 attack family is validated when its
+runs together significantly damage the honest team on the PAIRED metric
+(`family_validation.py`). The matched-damage pairs below use legacy Tier 1 numbers and are kept
+for the record only; the paper's matched comparison is `matched_triple.py` (paired, TOST).
+
 Clean references come from the Tier 1 results directory by default. Those runs used the same
 checkpoints, the same collector and the same 50 episodes, so re-collecting them for Tier 2
 would produce identical numbers at the cost of 45 minutes.
@@ -14,6 +20,7 @@ Usage:
     python -m byzantine_experiments.analysis.aggregate_tier2 [--no-wandb]
 """
 
+from byzantine_experiments.paths import RESULTS_ROOT, results_dir
 import argparse
 import csv
 import glob
@@ -24,15 +31,19 @@ from collections import defaultdict
 
 import numpy as np
 
+from byzantine_experiments.analysis.family_validation import markdown as family_markdown
+from byzantine_experiments.analysis.family_validation import validated
 from byzantine_experiments.analysis.metrics import degradation_vs_clean
+from byzantine_experiments.analysis.paired import paired_columns
 from byzantine_experiments.analysis.wandb_logging import log_summary_table
 
-RESULTS_DIR = 'byzantine_experiments/results/tier2'
-CLEAN_DIR = 'byzantine_experiments/results/tier1'
-OUT_CSV = 'byzantine_experiments/results/tier2_calibration.csv'
-OUT_MD = 'byzantine_experiments/results/tier2_calibration.md'
+RESULTS_DIR = results_dir('tier2')
+CLEAN_DIR = results_dir('tier1')
+OUT_CSV = os.path.join(RESULTS_ROOT, 'tier2_calibration.csv')
+OUT_MD = os.path.join(RESULTS_ROOT, 'tier2_calibration.md')
 
-BAND_LO, BAND_HI = 20.0, 40.0
+# The 20-40 % band is retired (D1); matched-triple candidates are validated families at this f.
+TRIPLE_F = 0.125
 
 NAME_RE = re.compile(
     r'^t2_(?P<variant>signflip|waypoint|liar|collusion)_s(?P<seed>\d+)'
@@ -96,7 +107,12 @@ def build_rows(byz_runs, clean_by_seed):
             continue
         m = run['metrics']
         deg = degradation_vs_clean(m, clean_by_seed[seed])
+        # The only reportable degradation in the v2 corpus: paired against the clean run at
+        # the same seed (design 6.18). The unpaired columns below are kept for comparison.
+        pc = paired_columns(os.path.join(RESULTS_DIR, run['stem'] + '.npz'),
+                            os.path.join(results_dir('tier1'), f't1_clean_s{seed}.npz'))
         rows.append(dict(
+            **pc,
             config=f"{run['variant']}_{run['severity']}_f{run['f_label']}",
             variant=run['variant'], severity=run['severity'],
             f_label=run['f_label'], f_fraction=m['f_fraction'],
@@ -164,10 +180,16 @@ def aggregate_over_seeds(rows):
         sems = sems[np.isfinite(sems)]
         agg['reward_degradation_pct_sem'] = (float(np.sqrt((sems ** 2).sum()) / len(sems))
                                              if sems.size else float('nan'))
-        agg['in_20_40_band'] = bool(BAND_LO <= agg['reward_degradation_pct'] <= BAND_HI)
-        agg['in_20_40_band_goal_rmse'] = bool(
-            BAND_LO <= agg['goal_rmse_degradation_pct'] <= BAND_HI)
+        # Paired honest degradation, averaged over the seeds whose pairing verified.
+        pd = np.array([r['paired_honest_deg_pct'] for r in group if r.get('paired')], dtype=float)
+        agg['paired_honest_deg_pct'] = float(pd.mean()) if pd.size else float('nan')
+        agg['paired_seeds'] = int(pd.size)
         out.append(agg)
+    fams = validated(rows)
+    for agg in out:
+        agg['family_validated'] = agg['variant'] in fams
+        agg['triple_candidate'] = bool(agg['family_validated']
+                                       and abs(agg['f_fraction'] - TRIPLE_F) < 1e-9)
     return sorted(out, key=lambda r: (r['variant'], r['f_fraction'], r['severity']))
 
 
@@ -221,13 +243,15 @@ def write_markdown(agg, per_seed, pairs, path):
              'the Tier 1 note; goal-RMSE degradation is the axis that can actually rank '
              'severities.\n')
 
-    L.append('| config | f | goal RMSE deg % | **spillover %** | reward deg % (±SEM) | '
-             '**survival** | guard rate | **t-to-impact s** | action dev | collisions Δ |')
-    L.append('|' + '---|' * 10)
+    L.append('| config | f | **paired honest deg %** | goal RMSE deg % | **spillover %** '
+             '| reward deg % (±SEM) | **survival** | guard rate | **t-to-impact s** | action dev '
+             '| collisions Δ |')
+    L.append('|' + '---|' * 11)
     for r in agg:
-        star = ' **★**' if r['in_20_40_band_goal_rmse'] else ''
+        star = ' **†**' if r['triple_candidate'] else ''
         L.append(
             f"| `{r['variant']}` {r['severity']}{star} | {r['f_fraction']:.3f} "
+            f"| {fmt(r['paired_honest_deg_pct'], 1)} ({r['paired_seeds']} seeds) "
             f"| {fmt(r['goal_rmse_degradation_pct'], 1)} "
             f"| {fmt(r['victim_spillover_goal_rmse_pct'], 1)} "
             f"| {fmt(r['reward_degradation_pct'], 0)} ± {fmt(r['reward_degradation_pct_sem'], 0)} "
@@ -236,7 +260,9 @@ def write_markdown(agg, per_seed, pairs, path):
             f"| {fmt(r['time_to_impact_s'], 1)} "
             f"| {fmt(r['action_deviation'], 3)} | {fmt(r['collision_delta'], 2)} |")
 
-    L.append('\n★ = goal-RMSE degradation inside the 20–40 % band.\n')
+    L.append(f'\n† = matched-triple candidate: family validated below, f = {TRIPLE_F}. '
+             '(Replaces the retired 20–40 % band ★; decision D1.) **paired honest deg %** is '
+             'the only reportable degradation in the v2 corpus (design 6.18).\n')
     L.append('**spillover %** = degradation of the *honest* drones\' goal RMSE. This is the '
              'column that distinguishes Tier 2 from Tier 1: Tier 1 never exceeded ~10 % here.\n')
     L.append('**survival** = fraction of episodes the attacker is still airborne at the end. '
@@ -248,8 +274,12 @@ def write_markdown(agg, per_seed, pairs, path):
     L.append('**t-to-impact** = seconds until cumulative team reward departs from the clean '
              'run by more than 2 clean σ, sustained. `n/a` = never separated.\n')
 
-    L.append('\n## Matched-damage pairs against Tier 1\n')
-    L.append('The paper\'s central comparison: *same damage, different mechanism*.\n')
+    L.append(family_markdown(per_seed, 'Family-level validation (decision D1, replaces the '
+                             '20–40 % band)'))
+    L.append('\n## Matched-damage pairs against Tier 1 (legacy, superseded)\n')
+    L.append('Kept for the record: these use the legacy (unpaired, seeding-bug) Tier 1 canonical '
+             'numbers. The paper\'s *same damage, different mechanism* comparison is the '
+             'pre-registered matched triple (`analysis/matched_triple.py`, paired TOST).\n')
     L.append('| Tier 1 canonical | its goal-RMSE deg | closest Tier 2 config | its deg | gap | '
              'T1 action dev | T2 action dev | T2 spillover |')
     L.append('|' + '---|' * 8)
@@ -286,22 +316,26 @@ def main():
     write_csv(per_seed, OUT_CSV)
     write_markdown(agg, per_seed, pairs, OUT_MD)
 
-    print(f'\n{len(agg)} configs; '
-          f"{sum(r['in_20_40_band_goal_rmse'] for r in agg)} in the 20-40% goal-RMSE band")
+    fams = sorted(validated(per_seed))
+    print(f'\n{len(agg)} configs; validated families (paired, family p < 0.05, damaging): '
+          f"{', '.join(fams) or 'none'}")
     for r in agg:
-        star = '*' if r['in_20_40_band_goal_rmse'] else ' '
-        print(f"{star} {r['config']:38s} goal_deg={fmt(r['goal_rmse_degradation_pct'],1):>7s}% "
+        star = '+' if r['triple_candidate'] else ' '
+        print(f"{star} {r['config']:38s} paired={fmt(r['paired_honest_deg_pct'],1):>6s}% goal_deg={fmt(r['goal_rmse_degradation_pct'],1):>7s}% "
               f"spill={fmt(r['victim_spillover_goal_rmse_pct'],1):>7s}% "
               f"surv={fmt(100*r['attacker_survival_rate'],0):>4s}% "
               f"guard={fmt(100*r['guard_exposure'],0):>4s}% "
               f"tti={fmt(r['time_to_impact_s'],1):>5s}s")
+    print('+ = matched-triple candidate (validated family, f = 0.125)')
+    print(family_markdown(per_seed))
 
     if not args.no_wandb:
         url = log_summary_table(
             rows=agg, run_name=args.wandb_name, group='tier2_analysis',
             tags=['tier2', 'calibration', 'analysis'],
             extra_summary={'n_configs': len(agg), 'n_runs': len(per_seed),
-                           'n_in_goal_rmse_band': sum(r['in_20_40_band_goal_rmse'] for r in agg)},
+                           'validated_families': ','.join(fams),
+                           'n_validated_families': len(fams)},
             artifacts=[OUT_CSV, OUT_MD],
         )
         if url:

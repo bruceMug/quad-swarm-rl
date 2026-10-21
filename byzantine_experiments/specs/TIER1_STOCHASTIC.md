@@ -3,6 +3,11 @@
 **Audience:** claude code
 **Prerequisite:** `TIER0_INFRASTRUCTURE.md` complete and its validation gate passed.
 
+> **Amendments.** Changes decided after this spec was written are recorded in dated blocks
+> next to the text they change; the original text is kept. **A1 (2026-09-26, decision D1):**
+> the 20–40 % band is replaced by family-level validation — see *Severity calibration* and
+> *Validation gate* below.
+
 ---
 
 ## What this tier is for — read this before coding
@@ -128,6 +133,32 @@ otherwise your detector might be separating "high damage" from "low damage" rath
 Identify and flag the Tier 1 configurations that produce **20–40% team reward degradation**.
 Those are the ones that will be matched against Tier 3 in the paper's headline comparison.
 
+> **Amendment A1 — 2026-09-26 (decision D1). The 20–40 % band is retired.** It was set on
+> numbers from a collector with two seeding bugs (runs at one `--seed` did not share
+> scenarios; `design/tier3_design.md` §6.16–6.18), which inflated degradations roughly 3×. On
+> the re-collected corpus (`results_v2/`), measured on the honest drones and paired per episode
+> against clean, **no Tier 1 configuration reaches 20 %** (best family mean +2.6 %, best single
+> run +12.6 %), and at n = 50 a single configuration's significance barely beats chance.
+>
+> **Replacement.** A fault family is *validated* when its runs together significantly damage
+> the honest team: one-sample t-test over the per-run paired honest goal-RMSE degradations,
+> mean > 0, p < 0.05 (`analysis/family_validation.py`; table in
+> `results_v2/tier1_calibration.md`). Result: **`stall` validated** (+2.6 %, 21 of 27 runs
+> positive, p = 0.0004); gaussian, OU and dropout have no family-level effect on the honest
+> drones — the damage of those faults stays on the faulty drone, which is itself a finding
+> about the baseline's robustness, not a failure of the tier.
+>
+> The configuration matched against Tier 3 is not chosen from a band but by the pre-registered
+> matched-triple rule (`analysis/matched_triple.py`): from a validated family, at f = 0.125,
+> the configuration whose pooled paired damage is closest to Tier 3's confirmed effect.
+>
+> **Clarification — 2026-10-21.** "Inflated roughly 3×" above is true of the *honest-drone*
+> effects, not of every Tier 1 figure. On the band's original axis — goal-RMSE degradation over
+> all 8 drones, dominated by the faulty drone — the v2 numbers replicate the legacy ones (20 of 29
+> configs within 5 pp), and five v2 configurations still fall in 20–40 %. The retirement stands for
+> the reason that holds on v2 data: tiers are matched on the honest drones, where no Tier 1
+> configuration comes near 20 % (`design/tier1_design.md` §0).
+
 ---
 
 ## Tests — `byzantine_experiments/tests/test_tier1.py`
@@ -152,6 +183,11 @@ Tier 1 is done when all eight tests pass, the 54-run matrix has completed, and t
 calibration table exists with at least one configuration per variant landing in the 20–40%
 degradation band.
 
+> **Amended (A1, 2026-09-26):** "at least one configuration per variant in the 20–40 % band"
+> is replaced by "at least one fault family validated at the family level, with the table
+> reporting every family's status". **Met:** `stall`. Families without a family-level effect
+> are reported as such.
+
 ---
 
 ## Required output: `byzantine_experiments/design/tier1_design.md`
@@ -164,6 +200,8 @@ Include:
    rate, formation RMSE, mean action deviation, saturation rate.
 3. **The 20–40% band** — which configurations land there, and your recommendation for which
    single config per variant should be the paper's canonical Tier 1 setting.
+   *(Amended A1: the family-level validation table and the matched-triple candidates, i.e.
+   validated-family configurations at f = 0.125, replace the band.)*
 4. **Clipping analysis** — saturation rates at each sigma, and whether zero-mean holds
    post-clipping. Be explicit if it does not.
 5. **Behavioural observations** — render 5 episodes per variant and describe in plain

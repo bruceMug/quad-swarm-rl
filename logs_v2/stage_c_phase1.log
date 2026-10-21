@@ -1,0 +1,450 @@
+
+=== 2026-09-24 22:59:37  Tier 2, block 2a
+Tier 2 matrix: 12 runs x 50 episodes, 12 at a time
+  results -> byzantine_experiments/results_v2/tier2      logs -> logs_v2/tier2
+  clean references reused from byzantine_experiments/results_v2/tier1/t1_clean_s{1,2,3}
+  wandb   -> enabled
+
+START t2_signflip_s1_partial_f0125  (tier=tier2_signflip cfg={"scale":1.0,"dims":[1,2],"space":"body"} idx=[0] seed=1)
+START t2_signflip_s1_partial_f025  (tier=tier2_signflip cfg={"scale":1.0,"dims":[1,2],"space":"body"} idx=[0,1] seed=1)
+START t2_signflip_s1_full_f0125  (tier=tier2_signflip cfg={"scale":1.0,"dims":"all","space":"motor"} idx=[0] seed=1)
+START t2_signflip_s2_partial_f0125  (tier=tier2_signflip cfg={"scale":1.0,"dims":[1,2],"space":"body"} idx=[0] seed=2)
+START t2_signflip_s1_full_f025  (tier=tier2_signflip cfg={"scale":1.0,"dims":"all","space":"motor"} idx=[0,1] seed=1)
+START t2_signflip_s2_full_f0125  (tier=tier2_signflip cfg={"scale":1.0,"dims":"all","space":"motor"} idx=[0] seed=2)
+START t2_signflip_s2_full_f025  (tier=tier2_signflip cfg={"scale":1.0,"dims":"all","space":"motor"} idx=[0,1] seed=2)
+START t2_signflip_s2_partial_f025  (tier=tier2_signflip cfg={"scale":1.0,"dims":[1,2],"space":"body"} idx=[0,1] seed=2)
+START t2_signflip_s3_partial_f0125  (tier=tier2_signflip cfg={"scale":1.0,"dims":[1,2],"space":"body"} idx=[0] seed=3)
+START t2_signflip_s3_full_f0125  (tier=tier2_signflip cfg={"scale":1.0,"dims":"all","space":"motor"} idx=[0] seed=3)
+START t2_signflip_s3_partial_f025  (tier=tier2_signflip cfg={"scale":1.0,"dims":[1,2],"space":"body"} idx=[0,1] seed=3)
+START t2_signflip_s3_full_f025  (tier=tier2_signflip cfg={"scale":1.0,"dims":"all","space":"motor"} idx=[0,1] seed=3)
+DONE  t2_signflip_s2_full_f0125  (885s)  mean episode reward   : -2.127231 ± 3.525988  (n=50)
+DONE  t2_signflip_s3_full_f025  (888s)  mean episode reward   : -5.226705 ± 4.899840  (n=50)
+DONE  t2_signflip_s3_full_f0125  (889s)  mean episode reward   : -2.456222 ± 4.555187  (n=50)
+DONE  t2_signflip_s2_partial_f0125  (890s)  mean episode reward   : -2.769241 ± 4.201510  (n=50)
+DONE  t2_signflip_s1_partial_f025  (894s)  mean episode reward   : -6.969919 ± 4.192423  (n=50)
+DONE  t2_signflip_s1_partial_f0125  (914s)  mean episode reward   : -3.126267 ± 3.885747  (n=50)
+DONE  t2_signflip_s2_partial_f025  (916s)  mean episode reward   : -6.112326 ± 3.654947  (n=50)
+DONE  t2_signflip_s1_full_f0125  (921s)  mean episode reward   : -2.664140 ± 3.888299  (n=50)
+DONE  t2_signflip_s1_full_f025  (922s)  mean episode reward   : -5.401633 ± 4.152029  (n=50)
+DONE  t2_signflip_s3_partial_f025  (925s)  mean episode reward   : -6.643214 ± 4.657079  (n=50)
+DONE  t2_signflip_s3_partial_f0125  (928s)  mean episode reward   : -3.060937 ± 4.102220  (n=50)
+DONE  t2_signflip_s2_full_f025  (931s)  mean episode reward   : -4.755894 ± 3.798769  (n=50)
+
+Matrix finished in 15 min
+Logs consolidated: 2 files in logs_v2/tier2
+Completed configs: 30 / 12
+
+Next: python -m byzantine_experiments.analysis.aggregate_tier2
+
+=== 2026-09-24 23:15:08  Tier 2, block 2b
+Tier 2 matrix: 18 runs x 50 episodes, 12 at a time
+  results -> byzantine_experiments/results_v2/tier2      logs -> logs_v2/tier2
+  clean references reused from byzantine_experiments/results_v2/tier1/t1_clean_s{1,2,3}
+  wandb   -> enabled
+
+START t2_waypoint_s1_a0.6_f0125  (tier=tier2_waypoint_pull cfg={"alpha":0.6} idx=[0] seed=1)
+START t2_waypoint_s1_a0.3_f0125  (tier=tier2_waypoint_pull cfg={"alpha":0.3} idx=[0] seed=1)
+START t2_waypoint_s1_a1.0_f0125  (tier=tier2_waypoint_pull cfg={"alpha":1.0} idx=[0] seed=1)
+START t2_waypoint_s1_a0.6_f025  (tier=tier2_waypoint_pull cfg={"alpha":0.6} idx=[0,1] seed=1)
+START t2_waypoint_s1_a1.0_f025  (tier=tier2_waypoint_pull cfg={"alpha":1.0} idx=[0,1] seed=1)
+START t2_waypoint_s1_a0.3_f025  (tier=tier2_waypoint_pull cfg={"alpha":0.3} idx=[0,1] seed=1)
+START t2_waypoint_s2_a0.3_f0125  (tier=tier2_waypoint_pull cfg={"alpha":0.3} idx=[0] seed=2)
+START t2_waypoint_s2_a0.6_f0125  (tier=tier2_waypoint_pull cfg={"alpha":0.6} idx=[0] seed=2)
+START t2_waypoint_s2_a1.0_f0125  (tier=tier2_waypoint_pull cfg={"alpha":1.0} idx=[0] seed=2)
+START t2_waypoint_s2_a0.3_f025  (tier=tier2_waypoint_pull cfg={"alpha":0.3} idx=[0,1] seed=2)
+START t2_waypoint_s2_a0.6_f025  (tier=tier2_waypoint_pull cfg={"alpha":0.6} idx=[0,1] seed=2)
+START t2_waypoint_s2_a1.0_f025  (tier=tier2_waypoint_pull cfg={"alpha":1.0} idx=[0,1] seed=2)
+DONE  t2_waypoint_s2_a0.6_f0125  (883s)  mean episode reward   : -3.601148 ± 2.881339  (n=50)
+START t2_waypoint_s3_a0.3_f0125  (tier=tier2_waypoint_pull cfg={"alpha":0.3} idx=[0] seed=3)
+DONE  t2_waypoint_s1_a0.3_f0125  (887s)  mean episode reward   : -3.495074 ± 4.590114  (n=50)
+START t2_waypoint_s3_a0.6_f0125  (tier=tier2_waypoint_pull cfg={"alpha":0.6} idx=[0] seed=3)
+DONE  t2_waypoint_s1_a0.6_f0125  (895s)  mean episode reward   : -4.377896 ± 3.601921  (n=50)
+START t2_waypoint_s3_a1.0_f0125  (tier=tier2_waypoint_pull cfg={"alpha":1.0} idx=[0] seed=3)
+DONE  t2_waypoint_s1_a1.0_f0125  (899s)  mean episode reward   : -4.050609 ± 3.557597  (n=50)
+START t2_waypoint_s3_a0.3_f025  (tier=tier2_waypoint_pull cfg={"alpha":0.3} idx=[0,1] seed=3)
+DONE  t2_waypoint_s2_a0.3_f0125  (900s)  mean episode reward   : -2.776525 ± 3.200674  (n=50)
+START t2_waypoint_s3_a0.6_f025  (tier=tier2_waypoint_pull cfg={"alpha":0.6} idx=[0,1] seed=3)
+DONE  t2_waypoint_s1_a1.0_f025  (902s)  mean episode reward   : -8.604859 ± 3.450085  (n=50)
+START t2_waypoint_s3_a1.0_f025  (tier=tier2_waypoint_pull cfg={"alpha":1.0} idx=[0,1] seed=3)
+DONE  t2_waypoint_s2_a0.6_f025  (903s)  mean episode reward   : -8.770942 ± 3.579499  (n=50)
+DONE  t2_waypoint_s2_a1.0_f0125  (911s)  mean episode reward   : -3.463725 ± 2.919925  (n=50)
+DONE  t2_waypoint_s2_a0.3_f025  (928s)  mean episode reward   : -6.622153 ± 3.795379  (n=50)
+DONE  t2_waypoint_s1_a0.3_f025  (929s)  mean episode reward   : -5.544331 ± 4.261945  (n=50)
+DONE  t2_waypoint_s2_a1.0_f025  (932s)  mean episode reward   : -8.803180 ± 3.374299  (n=50)
+DONE  t2_waypoint_s1_a0.6_f025  (938s)  mean episode reward   : -8.398682 ± 3.638778  (n=50)
+DONE  t2_waypoint_s3_a0.6_f0125  (795s)  mean episode reward   : -3.558091 ± 3.916436  (n=50)
+DONE  t2_waypoint_s3_a0.6_f025  (810s)  mean episode reward   : -8.190156 ± 3.967056  (n=50)
+DONE  t2_waypoint_s3_a1.0_f025  (818s)  mean episode reward   : -8.704755 ± 4.043247  (n=50)
+DONE  t2_waypoint_s3_a0.3_f0125  (858s)  mean episode reward   : -2.909423 ± 4.051264  (n=50)
+DONE  t2_waypoint_s3_a1.0_f0125  (866s)  mean episode reward   : -3.720980 ± 3.903927  (n=50)
+DONE  t2_waypoint_s3_a0.3_f025  (866s)  mean episode reward   : -6.313107 ± 4.458098  (n=50)
+
+Matrix finished in 29 min
+Logs consolidated: 3 files in logs_v2/tier2
+Completed configs: 48 / 18
+
+Next: python -m byzantine_experiments.analysis.aggregate_tier2
+
+=== 2026-09-24 23:44:33  Tier 2, block 2d
+Tier 2 matrix: 9 runs x 50 episodes, 12 at a time
+  results -> byzantine_experiments/results_v2/tier2      logs -> logs_v2/tier2
+  clean references reused from byzantine_experiments/results_v2/tier1/t1_clean_s{1,2,3}
+  wandb   -> enabled
+
+START t2_collusion_s1_same_waypoint_f025  (tier=tier2_collusion cfg={"mode":"same_waypoint","alpha":0.6} idx=[0,1] seed=1)
+START t2_collusion_s1_mirror_pair_f025  (tier=tier2_collusion cfg={"mode":"mirror_pair","alpha":0.6} idx=[0,1] seed=1)
+START t2_collusion_s1_pincer_f025  (tier=tier2_collusion cfg={"mode":"pincer","alpha":0.6} idx=[0,1] seed=1)
+START t2_collusion_s2_same_waypoint_f025  (tier=tier2_collusion cfg={"mode":"same_waypoint","alpha":0.6} idx=[0,1] seed=2)
+START t2_collusion_s2_mirror_pair_f025  (tier=tier2_collusion cfg={"mode":"mirror_pair","alpha":0.6} idx=[0,1] seed=2)
+START t2_collusion_s2_pincer_f025  (tier=tier2_collusion cfg={"mode":"pincer","alpha":0.6} idx=[0,1] seed=2)
+START t2_collusion_s3_same_waypoint_f025  (tier=tier2_collusion cfg={"mode":"same_waypoint","alpha":0.6} idx=[0,1] seed=3)
+START t2_collusion_s3_pincer_f025  (tier=tier2_collusion cfg={"mode":"pincer","alpha":0.6} idx=[0,1] seed=3)
+START t2_collusion_s3_mirror_pair_f025  (tier=tier2_collusion cfg={"mode":"mirror_pair","alpha":0.6} idx=[0,1] seed=3)
+DONE  t2_collusion_s1_mirror_pair_f025  (873s)  mean episode reward   : -6.950321 ± 4.319865  (n=50)
+DONE  t2_collusion_s3_same_waypoint_f025  (885s)  mean episode reward   : -8.016160 ± 3.912640  (n=50)
+DONE  t2_collusion_s2_mirror_pair_f025  (890s)  mean episode reward   : -6.240702 ± 4.100473  (n=50)
+DONE  t2_collusion_s2_same_waypoint_f025  (892s)  mean episode reward   : -8.424993 ± 3.583314  (n=50)
+DONE  t2_collusion_s3_mirror_pair_f025  (892s)  mean episode reward   : -7.085430 ± 5.543506  (n=50)
+DONE  t2_collusion_s1_pincer_f025  (905s)  mean episode reward   : -8.511431 ± 3.545209  (n=50)
+DONE  t2_collusion_s1_same_waypoint_f025  (905s)  mean episode reward   : -8.774202 ± 3.307471  (n=50)
+DONE  t2_collusion_s2_pincer_f025  (912s)  mean episode reward   : -7.923112 ± 3.495066  (n=50)
+DONE  t2_collusion_s3_pincer_f025  (921s)  mean episode reward   : -7.924525 ± 3.846657  (n=50)
+
+Matrix finished in 15 min
+Logs consolidated: 4 files in logs_v2/tier2
+Completed configs: 57 / 9
+
+Next: python -m byzantine_experiments.analysis.aggregate_tier2
+
+=== 2026-09-24 23:59:54  Tier 1, main matrix
+Tier 1 matrix: 63 runs x 50 episodes, 12 at a time
+  results -> byzantine_experiments/results_v2/tier1
+  logs    -> logs_v2/tier1
+  wandb   -> enabled
+
+SKIP  t1_clean_s1 (already done)
+START t1_gaussian_s1_sigma0.1_f0125  (tier=tier1_gaussian cfg={"sigma":0.1} idx=[0] seed=1)
+START t1_gaussian_s1_sigma0.5_f0125  (tier=tier1_gaussian cfg={"sigma":0.5} idx=[0] seed=1)
+START t1_ou_s1_sigmaou0.1_f0125  (tier=tier1_ou cfg={"sigma_ou":0.1} idx=[0] seed=1)
+START t1_ou_s1_sigmaou0.2_f0125  (tier=tier1_ou cfg={"sigma_ou":0.2} idx=[0] seed=1)
+START t1_gaussian_s1_sigma0.25_f0125  (tier=tier1_gaussian cfg={"sigma":0.25} idx=[0] seed=1)
+START t1_ou_s1_sigmaou0.4_f0125  (tier=tier1_ou cfg={"sigma_ou":0.4} idx=[0] seed=1)
+START t1_dropout_s1_p0.05_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.05,"mode":"hold"} idx=[0] seed=1)
+START t1_dropout_s1_p0.15_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"hold"} idx=[0] seed=1)
+START t1_dropout_s1_p0.3_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.3,"mode":"hold"} idx=[0] seed=1)
+START t1_dropout_s1_p0.15_zero_f0125  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"zero"} idx=[0] seed=1)
+START t1_gaussian_s1_sigma0.1_f025  (tier=tier1_gaussian cfg={"sigma":0.1} idx=[0,1] seed=1)
+START t1_gaussian_s1_sigma0.25_f025  (tier=tier1_gaussian cfg={"sigma":0.25} idx=[0,1] seed=1)
+DONE  t1_gaussian_s1_sigma0.5_f0125  (884s)  mean episode reward   : -3.325633 ± 4.255425  (n=50)
+START t1_gaussian_s1_sigma0.5_f025  (tier=tier1_gaussian cfg={"sigma":0.5} idx=[0,1] seed=1)
+DONE  t1_gaussian_s1_sigma0.25_f0125  (886s)  mean episode reward   : -1.405763 ± 5.049193  (n=50)
+START t1_ou_s1_sigmaou0.1_f025  (tier=tier1_ou cfg={"sigma_ou":0.1} idx=[0,1] seed=1)
+DONE  t1_ou_s1_sigmaou0.1_f0125  (892s)  mean episode reward   : -3.573241 ± 4.136721  (n=50)
+START t1_ou_s1_sigmaou0.2_f025  (tier=tier1_ou cfg={"sigma_ou":0.2} idx=[0,1] seed=1)
+DONE  t1_dropout_s1_p0.15_zero_f0125  (893s)  mean episode reward   : -0.057000 ± 4.042413  (n=50)
+START t1_ou_s1_sigmaou0.4_f025  (tier=tier1_ou cfg={"sigma_ou":0.4} idx=[0,1] seed=1)
+DONE  t1_dropout_s1_p0.05_hold_f0125  (894s)  mean episode reward   : 0.249483 ± 3.852541  (n=50)
+START t1_dropout_s1_p0.05_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.05,"mode":"hold"} idx=[0,1] seed=1)
+DONE  t1_dropout_s1_p0.15_hold_f0125  (894s)  mean episode reward   : 0.187396 ± 3.751236  (n=50)
+START t1_dropout_s1_p0.15_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"hold"} idx=[0,1] seed=1)
+DONE  t1_gaussian_s1_sigma0.25_f025  (894s)  mean episode reward   : -2.118177 ± 4.775442  (n=50)
+START t1_dropout_s1_p0.3_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.3,"mode":"hold"} idx=[0,1] seed=1)
+DONE  t1_ou_s1_sigmaou0.4_f0125  (894s)  mean episode reward   : -4.455057 ± 4.378499  (n=50)
+START t1_dropout_s1_p0.15_zero_f025  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"zero"} idx=[0,1] seed=1)
+DONE  t1_ou_s1_sigmaou0.2_f0125  (904s)  mean episode reward   : -3.970644 ± 4.206920  (n=50)
+SKIP  t1_clean_s2 (already done)
+START t1_gaussian_s2_sigma0.1_f0125  (tier=tier1_gaussian cfg={"sigma":0.1} idx=[0] seed=2)
+DONE  t1_gaussian_s1_sigma0.1_f025  (914s)  mean episode reward   : 0.035457 ± 3.852759  (n=50)
+START t1_gaussian_s2_sigma0.25_f0125  (tier=tier1_gaussian cfg={"sigma":0.25} idx=[0] seed=2)
+DONE  t1_dropout_s1_p0.3_hold_f0125  (928s)  mean episode reward   : 0.431132 ± 3.876434  (n=50)
+START t1_gaussian_s2_sigma0.5_f0125  (tier=tier1_gaussian cfg={"sigma":0.5} idx=[0] seed=2)
+DONE  t1_gaussian_s1_sigma0.1_f0125  (928s)  mean episode reward   : 0.121904 ± 4.011743  (n=50)
+START t1_ou_s2_sigmaou0.1_f0125  (tier=tier1_ou cfg={"sigma_ou":0.1} idx=[0] seed=2)
+DONE  t1_gaussian_s1_sigma0.5_f025  (895s)  mean episode reward   : -7.316091 ± 5.087076  (n=50)
+START t1_ou_s2_sigmaou0.2_f0125  (tier=tier1_ou cfg={"sigma_ou":0.2} idx=[0] seed=2)
+DONE  t1_ou_s1_sigmaou0.1_f025  (898s)  mean episode reward   : -7.604262 ± 4.698543  (n=50)
+START t1_ou_s2_sigmaou0.4_f0125  (tier=tier1_ou cfg={"sigma_ou":0.4} idx=[0] seed=2)
+DONE  t1_dropout_s1_p0.3_hold_f025  (891s)  mean episode reward   : 0.201686 ± 4.303026  (n=50)
+START t1_dropout_s2_p0.05_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.05,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_dropout_s1_p0.05_hold_f025  (898s)  mean episode reward   : 0.275594 ± 3.905366  (n=50)
+START t1_dropout_s2_p0.15_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_dropout_s1_p0.15_zero_f025  (900s)  mean episode reward   : 0.114075 ± 3.965496  (n=50)
+START t1_dropout_s2_p0.3_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.3,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_dropout_s1_p0.15_hold_f025  (904s)  mean episode reward   : 0.144721 ± 3.936688  (n=50)
+START t1_dropout_s2_p0.15_zero_f0125  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"zero"} idx=[0] seed=2)
+DONE  t1_ou_s1_sigmaou0.4_f025  (906s)  mean episode reward   : -9.170774 ± 4.442532  (n=50)
+START t1_gaussian_s2_sigma0.1_f025  (tier=tier1_gaussian cfg={"sigma":0.1} idx=[0,1] seed=2)
+DONE  t1_ou_s1_sigmaou0.2_f025  (911s)  mean episode reward   : -7.758628 ± 4.207863  (n=50)
+START t1_gaussian_s2_sigma0.25_f025  (tier=tier1_gaussian cfg={"sigma":0.25} idx=[0,1] seed=2)
+DONE  t1_gaussian_s2_sigma0.5_f0125  (891s)  mean episode reward   : -2.900282 ± 4.308416  (n=50)
+START t1_gaussian_s2_sigma0.5_f025  (tier=tier1_gaussian cfg={"sigma":0.5} idx=[0,1] seed=2)
+DONE  t1_ou_s2_sigmaou0.1_f0125  (898s)  mean episode reward   : -2.902553 ± 3.321402  (n=50)
+START t1_ou_s2_sigmaou0.1_f025  (tier=tier1_ou cfg={"sigma_ou":0.1} idx=[0,1] seed=2)
+DONE  t1_gaussian_s2_sigma0.1_f0125  (931s)  mean episode reward   : 0.734870 ± 3.382189  (n=50)
+START t1_ou_s2_sigmaou0.2_f025  (tier=tier1_ou cfg={"sigma_ou":0.2} idx=[0,1] seed=2)
+DONE  t1_gaussian_s2_sigma0.25_f0125  (947s)  mean episode reward   : -0.824966 ± 4.502127  (n=50)
+START t1_ou_s2_sigmaou0.4_f025  (tier=tier1_ou cfg={"sigma_ou":0.4} idx=[0,1] seed=2)
+DONE  t1_ou_s2_sigmaou0.2_f0125  (888s)  mean episode reward   : -3.467446 ± 3.914710  (n=50)
+START t1_dropout_s2_p0.05_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.05,"mode":"hold"} idx=[0,1] seed=2)
+DONE  t1_ou_s2_sigmaou0.4_f0125  (884s)  mean episode reward   : -3.971644 ± 3.707222  (n=50)
+START t1_dropout_s2_p0.15_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"hold"} idx=[0,1] seed=2)
+DONE  t1_dropout_s2_p0.3_hold_f0125  (890s)  mean episode reward   : 0.814935 ± 3.331482  (n=50)
+START t1_dropout_s2_p0.3_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.3,"mode":"hold"} idx=[0,1] seed=2)
+DONE  t1_dropout_s2_p0.05_hold_f0125  (899s)  mean episode reward   : 0.807891 ± 3.338113  (n=50)
+START t1_dropout_s2_p0.15_zero_f025  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"zero"} idx=[0,1] seed=2)
+DONE  t1_gaussian_s2_sigma0.1_f025  (889s)  mean episode reward   : 0.357074 ± 3.408277  (n=50)
+SKIP  t1_clean_s3 (already done)
+START t1_gaussian_s3_sigma0.1_f0125  (tier=tier1_gaussian cfg={"sigma":0.1} idx=[0] seed=3)
+DONE  t1_dropout_s2_p0.15_hold_f0125  (896s)  mean episode reward   : 1.007537 ± 3.252204  (n=50)
+START t1_gaussian_s3_sigma0.25_f0125  (tier=tier1_gaussian cfg={"sigma":0.25} idx=[0] seed=3)
+DONE  t1_gaussian_s2_sigma0.25_f025  (887s)  mean episode reward   : -1.647452 ± 4.580418  (n=50)
+START t1_gaussian_s3_sigma0.5_f0125  (tier=tier1_gaussian cfg={"sigma":0.5} idx=[0] seed=3)
+DONE  t1_dropout_s2_p0.15_zero_f0125  (913s)  mean episode reward   : 0.055831 ± 3.602985  (n=50)
+START t1_ou_s3_sigmaou0.1_f0125  (tier=tier1_ou cfg={"sigma_ou":0.1} idx=[0] seed=3)
+DONE  t1_gaussian_s2_sigma0.5_f025  (899s)  mean episode reward   : -6.118073 ± 4.291158  (n=50)
+START t1_ou_s3_sigmaou0.2_f0125  (tier=tier1_ou cfg={"sigma_ou":0.2} idx=[0] seed=3)
+DONE  t1_ou_s2_sigmaou0.1_f025  (907s)  mean episode reward   : -6.793945 ± 3.652036  (n=50)
+START t1_ou_s3_sigmaou0.4_f0125  (tier=tier1_ou cfg={"sigma_ou":0.4} idx=[0] seed=3)
+DONE  t1_ou_s2_sigmaou0.2_f025  (936s)  mean episode reward   : -7.501390 ± 4.005142  (n=50)
+START t1_dropout_s3_p0.05_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.05,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_ou_s2_sigmaou0.4_f025  (924s)  mean episode reward   : -9.392557 ± 4.357538  (n=50)
+START t1_dropout_s3_p0.15_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_dropout_s2_p0.05_hold_f025  (903s)  mean episode reward   : 0.783657 ± 3.235406  (n=50)
+START t1_dropout_s3_p0.3_hold_f0125  (tier=tier1_dropout cfg={"p_drop":0.3,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_dropout_s2_p0.15_hold_f025  (903s)  mean episode reward   : 0.542968 ± 3.792143  (n=50)
+START t1_dropout_s3_p0.15_zero_f0125  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"zero"} idx=[0] seed=3)
+DONE  t1_dropout_s2_p0.3_hold_f025  (895s)  mean episode reward   : 0.566575 ± 3.049828  (n=50)
+START t1_gaussian_s3_sigma0.1_f025  (tier=tier1_gaussian cfg={"sigma":0.1} idx=[0,1] seed=3)
+DONE  t1_dropout_s2_p0.15_zero_f025  (899s)  mean episode reward   : 0.571484 ± 3.508145  (n=50)
+START t1_gaussian_s3_sigma0.25_f025  (tier=tier1_gaussian cfg={"sigma":0.25} idx=[0,1] seed=3)
+DONE  t1_gaussian_s3_sigma0.1_f0125  (899s)  mean episode reward   : 0.513389 ± 3.919769  (n=50)
+START t1_gaussian_s3_sigma0.5_f025  (tier=tier1_gaussian cfg={"sigma":0.5} idx=[0,1] seed=3)
+DONE  t1_gaussian_s3_sigma0.25_f0125  (907s)  mean episode reward   : -1.558408 ± 4.798436  (n=50)
+START t1_ou_s3_sigmaou0.1_f025  (tier=tier1_ou cfg={"sigma_ou":0.1} idx=[0,1] seed=3)
+DONE  t1_gaussian_s3_sigma0.5_f0125  (917s)  mean episode reward   : -3.046928 ± 4.792494  (n=50)
+START t1_ou_s3_sigmaou0.2_f025  (tier=tier1_ou cfg={"sigma_ou":0.2} idx=[0,1] seed=3)
+DONE  t1_ou_s3_sigmaou0.1_f0125  (914s)  mean episode reward   : -3.255189 ± 4.313699  (n=50)
+START t1_ou_s3_sigmaou0.4_f025  (tier=tier1_ou cfg={"sigma_ou":0.4} idx=[0,1] seed=3)
+DONE  t1_ou_s3_sigmaou0.4_f0125  (903s)  mean episode reward   : -4.246090 ± 4.069545  (n=50)
+START t1_dropout_s3_p0.05_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.05,"mode":"hold"} idx=[0,1] seed=3)
+DONE  t1_ou_s3_sigmaou0.2_f0125  (924s)  mean episode reward   : -3.372386 ± 4.163056  (n=50)
+START t1_dropout_s3_p0.15_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"hold"} idx=[0,1] seed=3)
+DONE  t1_dropout_s3_p0.15_hold_f0125  (907s)  mean episode reward   : 0.257578 ± 4.358113  (n=50)
+START t1_dropout_s3_p0.3_hold_f025  (tier=tier1_dropout cfg={"p_drop":0.3,"mode":"hold"} idx=[0,1] seed=3)
+DONE  t1_dropout_s3_p0.05_hold_f0125  (940s)  mean episode reward   : 0.237057 ± 4.273546  (n=50)
+START t1_dropout_s3_p0.15_zero_f025  (tier=tier1_dropout cfg={"p_drop":0.15,"mode":"zero"} idx=[0,1] seed=3)
+DONE  t1_dropout_s3_p0.3_hold_f0125  (886s)  mean episode reward   : 0.651060 ± 4.262107  (n=50)
+DONE  t1_dropout_s3_p0.15_zero_f0125  (889s)  mean episode reward   : 0.364727 ± 4.970514  (n=50)
+DONE  t1_gaussian_s3_sigma0.25_f025  (892s)  mean episode reward   : -2.425091 ± 5.533820  (n=50)
+DONE  t1_gaussian_s3_sigma0.5_f025  (889s)  mean episode reward   : -6.365420 ± 4.485449  (n=50)
+DONE  t1_ou_s3_sigmaou0.2_f025  (888s)  mean episode reward   : -7.505853 ± 4.753658  (n=50)
+DONE  t1_ou_s3_sigmaou0.1_f025  (912s)  mean episode reward   : -6.752873 ± 4.592009  (n=50)
+DONE  t1_ou_s3_sigmaou0.4_f025  (886s)  mean episode reward   : -9.343254 ± 4.662695  (n=50)
+DONE  t1_gaussian_s3_sigma0.1_f025  (948s)  mean episode reward   : 0.384866 ± 4.398793  (n=50)
+DONE  t1_dropout_s3_p0.15_hold_f025  (895s)  mean episode reward   : 1.011692 ± 3.679429  (n=50)
+DONE  t1_dropout_s3_p0.05_hold_f025  (907s)  mean episode reward   : 0.640725 ± 4.101002  (n=50)
+DONE  t1_dropout_s3_p0.3_hold_f025  (886s)  mean episode reward   : 0.607952 ± 4.027562  (n=50)
+DONE  t1_dropout_s3_p0.15_zero_f025  (867s)  mean episode reward   : 0.474539 ± 4.511061  (n=50)
+
+Matrix finished in 76 min (xargs rc=0)
+Logs consolidated: 4 files in logs_v2/tier1
+Completed configs: 63 / 63
+
+Next: python -m byzantine_experiments.analysis.aggregate_tier1
+
+=== 2026-09-25 01:16:13  Tier 1, stall grid
+Tier 1C' STALL grid: 27 runs x 50 episodes, 12 at a time
+
+START t1_stall_s1_d0.10_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s1_d0.10_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s1_d0.10_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s1_d0.25_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s1_d0.25_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s1_d0.25_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s1_d0.50_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s1_d0.50_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s1_d0.50_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=1)
+START t1_stall_s2_d0.10_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=2)
+START t1_stall_s2_d0.10_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=2)
+START t1_stall_s2_d0.10_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_stall_s2_d0.10_ms0.1_hold_f0125  (885s)  mean episode reward   : 0.500253 ± 3.218409  (n=50)
+START t1_stall_s2_d0.25_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_stall_s1_d0.10_ms0.3_hold_f0125  (886s)  mean episode reward   : -0.499063 ± 4.035591  (n=50)
+START t1_stall_s2_d0.25_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_stall_s1_d0.25_ms0.1_hold_f0125  (889s)  mean episode reward   : -0.548516 ± 4.303115  (n=50)
+START t1_stall_s2_d0.25_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_stall_s1_d0.50_ms0.1_hold_f0125  (891s)  mean episode reward   : -1.324654 ± 4.227292  (n=50)
+START t1_stall_s2_d0.50_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_stall_s2_d0.10_ms0.3_hold_f0125  (892s)  mean episode reward   : 0.227423 ± 3.275898  (n=50)
+START t1_stall_s2_d0.50_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_stall_s1_d0.10_ms0.1_hold_f0125  (893s)  mean episode reward   : -0.297485 ± 4.330298  (n=50)
+START t1_stall_s2_d0.50_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=2)
+DONE  t1_stall_s1_d0.50_ms1.0_hold_f0125  (893s)  mean episode reward   : -2.682516 ± 4.915244  (n=50)
+START t1_stall_s3_d0.10_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s1_d0.10_ms1.0_hold_f0125  (896s)  mean episode reward   : -0.361894 ± 4.386013  (n=50)
+START t1_stall_s3_d0.10_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s1_d0.25_ms0.3_hold_f0125  (900s)  mean episode reward   : -1.228136 ± 3.661857  (n=50)
+START t1_stall_s3_d0.10_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.10,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s1_d0.50_ms0.3_hold_f0125  (902s)  mean episode reward   : -2.668982 ± 4.345196  (n=50)
+START t1_stall_s3_d0.25_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s1_d0.25_ms1.0_hold_f0125  (920s)  mean episode reward   : -0.990470 ± 3.990228  (n=50)
+START t1_stall_s3_d0.25_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s2_d0.10_ms1.0_hold_f0125  (932s)  mean episode reward   : 0.155253 ± 3.378285  (n=50)
+START t1_stall_s3_d0.25_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.25,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s2_d0.25_ms0.1_hold_f0125  (891s)  mean episode reward   : 0.139323 ± 3.303706  (n=50)
+START t1_stall_s3_d0.50_ms0.1_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":0.1,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s2_d0.25_ms0.3_hold_f0125  (896s)  mean episode reward   : -0.808873 ± 3.621541  (n=50)
+START t1_stall_s3_d0.50_ms0.3_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":0.3,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s3_d0.10_ms0.1_hold_f0125  (890s)  mean episode reward   : 0.335007 ± 4.331185  (n=50)
+START t1_stall_s3_d0.50_ms1.0_hold_f0125  (tier=tier1_stall cfg={"duty_cycle":0.50,"mean_stall_s":1.0,"mode":"hold"} idx=[0] seed=3)
+DONE  t1_stall_s2_d0.50_ms0.3_hold_f0125  (893s)  mean episode reward   : -1.741725 ± 3.542463  (n=50)
+DONE  t1_stall_s3_d0.10_ms0.3_hold_f0125  (891s)  mean episode reward   : -0.147275 ± 4.439981  (n=50)
+DONE  t1_stall_s2_d0.50_ms1.0_hold_f0125  (894s)  mean episode reward   : -1.989349 ± 3.566550  (n=50)
+DONE  t1_stall_s2_d0.25_ms1.0_hold_f0125  (898s)  mean episode reward   : -0.761026 ± 4.299666  (n=50)
+DONE  t1_stall_s3_d0.10_ms1.0_hold_f0125  (894s)  mean episode reward   : -0.184120 ± 4.099157  (n=50)
+DONE  t1_stall_s2_d0.50_ms0.1_hold_f0125  (908s)  mean episode reward   : -1.020872 ± 4.008444  (n=50)
+DONE  t1_stall_s3_d0.25_ms0.1_hold_f0125  (909s)  mean episode reward   : 0.056689 ± 4.442318  (n=50)
+DONE  t1_stall_s3_d0.25_ms0.3_hold_f0125  (900s)  mean episode reward   : -0.947719 ± 4.218119  (n=50)
+DONE  t1_stall_s3_d0.25_ms1.0_hold_f0125  (917s)  mean episode reward   : -1.388678 ± 4.619117  (n=50)
+DONE  t1_stall_s3_d0.50_ms0.1_hold_f0125  (721s)  mean episode reward   : -0.928094 ± 4.290049  (n=50)
+DONE  t1_stall_s3_d0.50_ms1.0_hold_f0125  (716s)  mean episode reward   : -2.531537 ± 4.456686  (n=50)
+DONE  t1_stall_s3_d0.50_ms0.3_hold_f0125  (755s)  mean episode reward   : -2.263343 ± 4.662169  (n=50)
+
+Stall grid finished in 42 min
+Logs consolidated: 5 files in logs_v2/tier1
+
+=== 2026-09-25 01:58:30  Analysis
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20260925_015957-nbag09p8
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier1_calibration
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/nbag09p8
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-nbag09p8-calibration_table; uploading summary
+wandb: uploading artifact run-nbag09p8-calibration_table
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json; uploading requirements.txt; uploading media/table/calibration_table_0_e424e55ce1d99c570fad.table.json (+ 3 more)
+wandb: uploading byzantine_experiments/results_v2/tier1_calibration.csv; uploading output.log
+wandb: 
+wandb: Run summary:
+wandb:           n_configs 29
+wandb: n_in_goal_rmse_band 5
+wandb:    n_in_reward_band 2
+wandb:              n_runs 87
+wandb: 
+wandb: 🚀 View run tier1_calibration at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/nbag09p8
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 2 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20260925_015957-nbag09p8/logs
+Loaded 87 Byzantine runs and 3 clean references (seeds [1, 2, 3])
+Wrote byzantine_experiments/results_v2/tier1_calibration.csv  (87 rows)
+Wrote byzantine_experiments/results_v2/tier1_calibration.md
+
+29 configs; 2 in the 20-40% reward band, 5 in the band by goal RMSE
+  dropout_p0.05_hold_f0125           rew_deg=    -3.7% ± 215.0  goal_deg=    1.6%  sat=  0.0%
+  dropout_p0.15_hold_f0125           rew_deg=     3.8% ± 212.6  goal_deg=    0.8%  sat=  0.0%
+  dropout_p0.15_zero_f0125           rew_deg=    99.1% ± 220.0  goal_deg=    5.5%  sat=  0.0%
+  dropout_p0.3_hold_f0125            rew_deg=   -65.8% ± 215.5  goal_deg=   -1.1%  sat=  0.0%
+  dropout_p0.05_hold_f025            rew_deg=   -24.3% ± 216.1  goal_deg=    0.5%  sat=  0.0%
+  dropout_p0.15_hold_f025            rew_deg=     5.0% ± 216.9  goal_deg=   -0.2%  sat=  0.0%
+* dropout_p0.15_zero_f025            rew_deg=    31.4% ± 217.9  goal_deg=    2.2%  sat=  0.0%
+  dropout_p0.3_hold_f025             rew_deg=     4.2% ± 225.7  goal_deg=    1.8%  sat=  0.0%
+* gaussian_sigma0.1_f0125            rew_deg=    21.7% ± 218.6  goal_deg=    0.6%  sat=  0.0%
+  gaussian_sigma0.25_f0125           rew_deg=   549.8% ± 246.3  goal_deg=   21.8%  sat=  0.8%
+  gaussian_sigma0.5_f0125            rew_deg=  1176.9% ± 225.5  goal_deg=   52.9%  sat= 13.9%
+  gaussian_sigma0.1_f025             rew_deg=    63.1% ± 215.1  goal_deg=    2.6%  sat=  0.0%
+  gaussian_sigma0.25_f025            rew_deg=   796.0% ± 239.4  goal_deg=   29.3%  sat=  0.8%
+  gaussian_sigma0.5_f025             rew_deg=  2446.7% ± 247.0  goal_deg=   90.2%  sat= 14.1%
+  ou_sigmaou0.1_f0125                rew_deg=  1248.2% ± 221.8  goal_deg=   55.8%  sat=  0.4%
+  ou_sigmaou0.2_f0125                rew_deg=  1376.2% ± 223.8  goal_deg=   49.5%  sat=  6.8%
+  ou_sigmaou0.4_f0125                rew_deg=  1552.0% ± 227.9  goal_deg=   45.4%  sat= 24.3%
+  ou_sigmaou0.1_f025                 rew_deg=  2560.8% ± 236.4  goal_deg=   96.6%  sat=  0.4%
+  ou_sigmaou0.2_f025                 rew_deg=  2655.1% ± 224.2  goal_deg=   84.0%  sat=  6.8%
+  ou_sigmaou0.4_f025                 rew_deg=  3157.6% ± 230.2  goal_deg=   81.3%  sat= 24.4%
+  stall_d0.10_ms0.1_hold_f0125       rew_deg=   145.0% ± 226.6  goal_deg=    4.4%  sat=  0.0%
+  stall_d0.10_ms0.3_hold_f0125       rew_deg=   224.9% ± 219.4  goal_deg=    8.7%  sat=  0.0%
+  stall_d0.10_ms1.0_hold_f0125       rew_deg=   193.7% ± 228.0  goal_deg=    9.6%  sat=  0.0%
+  stall_d0.25_ms0.1_hold_f0125       rew_deg=   233.5% ± 226.0  goal_deg=    7.4%  sat=  0.0%
+  stall_d0.25_ms0.3_hold_f0125       rew_deg=   481.1% ± 210.6  goal_deg=   21.3%  sat=  0.0%
+  stall_d0.25_ms1.0_hold_f0125       rew_deg=   434.4% ± 218.9  goal_deg=   23.0%  sat=  0.0%
+  stall_d0.50_ms0.1_hold_f0125       rew_deg=   513.3% ± 224.4  goal_deg=   19.5%  sat=  0.0%
+  stall_d0.50_ms0.3_hold_f0125       rew_deg=   935.2% ± 227.3  goal_deg=   38.0%  sat=  0.0%
+  stall_d0.50_ms1.0_hold_f0125       rew_deg=   957.9% ± 242.1  goal_deg=   42.9%  sat=  0.0%
+
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/nbag09p8
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/wandb_home/wandb/run-20260925_020101-5r0dd1ze
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run tier2_calibration
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/5r0dd1ze
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+wandb: WARNING The get_url method is deprecated and will be removed in a future release. Please use `run.url` instead.
+wandb: updating run metadata; uploading artifact run-5r0dd1ze-calibration_table; uploading summary
+wandb: uploading artifact run-5r0dd1ze-calibration_table
+wandb: uploading media/table/calibration_table_0_b54b22c8463ae9044489.table.json; uploading byzantine_experiments/results_v2/tier2_calibration.csv; uploading byzantine_experiments/results_v2/tier2_calibration.md
+wandb: 
+wandb: Run summary:
+wandb:           n_configs 19
+wandb: n_in_goal_rmse_band 2
+wandb:              n_runs 57
+wandb: 
+wandb: 🚀 View run tier2_calibration at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/5r0dd1ze
+wandb: ⭐️ View project at: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: Synced 5 W&B file(s), 1 media file(s), 2 artifact file(s) and 2 other file(s)
+wandb: Find logs at: /scratch/bmugizi/wandb_home/wandb/run-20260925_020101-5r0dd1ze/logs
+Loaded 57 Tier 2 runs and 3 clean references (seeds [1, 2, 3])
+Wrote byzantine_experiments/results_v2/tier2_calibration.csv  (57 rows)
+Wrote byzantine_experiments/results_v2/tier2_calibration.md
+
+19 configs; 2 in the 20-40% goal-RMSE band
+  collusion_mirror_pair_f025             goal_deg=   66.3% spill=   -1.9% surv=  51% guard=  94% tti=  0.4s
+  collusion_pincer_f025                  goal_deg=  172.9% spill=   -1.7% surv=  99% guard=   8% tti=  8.5s
+  collusion_same_waypoint_f025           goal_deg=  157.9% spill=   -2.9% surv=  77% guard=  30% tti= 10.2s
+  liar_mirror_f0125                      goal_deg=    5.4% spill=    5.0% surv=  99% guard=   5% tti=  n/as
+  liar_offset_f0125                      goal_deg=    5.9% spill=    5.3% surv=  99% guard=   5% tti=  n/as
+  liar_stale_f0125                       goal_deg=    6.7% spill=    6.3% surv=  98% guard=   4% tti=  n/as
+  liar_mirror_f025                       goal_deg=   10.9% spill=    8.7% surv=  98% guard=   5% tti=  n/as
+  liar_offset_f025                       goal_deg=    9.3% spill=    5.7% surv= 100% guard=   6% tti=  n/as
+  liar_stale_f025                        goal_deg=    9.8% spill=    7.4% surv=  97% guard=   5% tti=  n/as
+* signflip_full_f0125                    goal_deg=   35.6% spill=    0.1% surv=  72% guard=  83% tti=  n/as
+* signflip_partial_f0125                 goal_deg=   39.2% spill=   -1.0% surv=  63% guard=  66% tti=  n/as
+  signflip_full_f025                     goal_deg=   58.6% spill=   -2.8% surv=  51% guard=  82% tti=  0.8s
+  signflip_partial_f025                  goal_deg=   67.5% spill=   -2.5% surv=  48% guard=  67% tti=  0.7s
+  waypoint_a0.3_f0125                    goal_deg=   73.6% spill=    2.8% surv=  93% guard=  22% tti=  n/as
+  waypoint_a0.6_f0125                    goal_deg=  103.7% spill=    1.8% surv=  97% guard=  12% tti=  n/as
+  waypoint_a1.0_f0125                    goal_deg=  106.2% spill=   -0.9% surv=  99% guard=   7% tti=  n/as
+  waypoint_a0.3_f025                     goal_deg=  117.1% spill=   -1.1% surv=  85% guard=  22% tti= 13.3s
+  waypoint_a0.6_f025                     goal_deg=  157.0% spill=   -0.1% surv=  73% guard=  30% tti=  7.6s
+  waypoint_a1.0_f025                     goal_deg=  159.5% spill=   -0.7% surv=  63% guard=  40% tti=  7.2s
+
+wandb: https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/5r0dd1ze
+  tables: byzantine_experiments/results_v2/tier1_calibration.{csv,md}, byzantine_experiments/results_v2/tier2_calibration.{csv,md}, byzantine_experiments/results_v2/channel_ceiling.md
+
+=== 2026-09-25 02:02:13  GATE CALIBRATION CHECK -- read this before running phase 2
+Gate calibration check (results root: byzantine_experiments/results_v2); current gate 10 %
+
+  family                       runs    mean    best signif sig>=gate
+  Tier 1 dropout                 24   +0.5%   +9.0%      0         0
+  Tier 1 gaussian                18   +1.9%  +12.6%      2         2
+  Tier 1 ou                      18   -0.8%   +5.9%      0         0
+  Tier 1 stall                   27   +2.6%   +9.6%      0         0
+  Tier 2 collusion                9   -2.8%   +4.5%      0         0
+  Tier 2 liar                    18   +5.7%  +13.1%      3         3
+  Tier 2 signflip                12   -2.2%   +2.1%      0         0
+  Tier 2 waypoint                18   -0.4%   +6.0%      0         0
+
+  Strongest significant hand-designed run: +13.1 % (Tier 2 liar_mirror_f025 s3).
+  -> within reach of the 10 % gate: consistent with "at least as damaging as the best hand-designed attack". Keep it.
+
+Phase 1 done. Log: logs_v2/stage_c_phase1.log
+Next: bash scripts/byz_stage_c.sh 2

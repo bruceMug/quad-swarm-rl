@@ -14,6 +14,7 @@ Usage:
     python -m byzantine_experiments.analysis.backfill_wandb --dry-run
 """
 
+from byzantine_experiments.paths import results_dir
 import argparse
 import glob
 import json
@@ -28,7 +29,7 @@ from byzantine_experiments.analysis.wandb_logging import (
     log_rollout,
 )
 
-DEFAULT_RESULTS = 'byzantine_experiments/results/tier1'
+DEFAULT_RESULTS = results_dir('tier1')
 
 
 def group_for(sidecar, stem):

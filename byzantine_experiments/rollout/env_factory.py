@@ -31,7 +31,7 @@ def byzantine_kwargs_from_cfg(cfg):
     )
 
 
-def make_byzantine_env(cfg, byzantine_kwargs=None, env_config=None, render_mode=None):
+def make_byzantine_env(cfg, byzantine_kwargs=None, env_config=None, render_mode=None, shift=None):
     """
     Build the batched quadrotor env, optionally with Byzantine injection.
 
@@ -49,6 +49,12 @@ def make_byzantine_env(cfg, byzantine_kwargs=None, env_config=None, render_mode=
         env_config = AttrDict(worker_index=0, vector_index=0, env_id=0)
 
     env = make_quadrotor_env(cfg.env, cfg=cfg, _env_config=env_config, render_mode=render_mode)
+
+    # D5: distribution shift sits BELOW the Byzantine wrapper, so attacks act inside the shifted
+    # world rather than on top of it, and the wrapper's `.unwrapped` still reaches the sim.
+    if shift and shift.get('level', 'none') != 'none':
+        from byzantine_experiments.wrappers.shift import ShiftWrapper
+        env = ShiftWrapper(env, **shift)
 
     byz_wrapper = None
     if byzantine_kwargs:

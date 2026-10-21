@@ -1,0 +1,46 @@
+{
+  "tier3": {
+    "members": [
+      "adv_seed1_stealth0_lieonlyplaus",
+      "adv_seed2_stealth0_lieonlyplaus",
+      "adv_seed3_stealth0_lieonlyplaus"
+    ],
+    "kind": "plausible (stealth)",
+    "target": 4.160394564684748,
+    "target_ci": [
+      1.7448835505009401,
+      6.575905578868555
+    ],
+    "significant": true,
+    "fallback": false
+  },
+  "tier1": {
+    "config": "stall_d0.50_ms0.1_hold_f0125",
+    "screening_pooled_pct": 4.377316196051809,
+    "candidates": {
+      "stall_d0.10_ms0.1_hold_f0125": 1.5111123975852052,
+      "stall_d0.10_ms0.3_hold_f0125": 2.147824478744624,
+      "stall_d0.10_ms1.0_hold_f0125": 1.4164967733487706,
+      "stall_d0.25_ms0.1_hold_f0125": 1.1484049015860975,
+      "stall_d0.25_ms0.3_hold_f0125": 3.667191930509432,
+      "stall_d0.25_ms1.0_hold_f0125": 2.0275970121353066,
+      "stall_d0.50_ms0.1_hold_f0125": 4.377316196051809,
+      "stall_d0.50_ms0.3_hold_f0125": 4.705604533725919,
+      "stall_d0.50_ms1.0_hold_f0125": 2.088237547716454
+    }
+  },
+  "tier2": {
+    "config": "liar_mirror_f0125",
+    "screening_pooled_pct": 4.185682181229223,
+    "candidates": {
+      "liar_mirror_f0125": 4.185682181229223,
+      "liar_offset_f0125": 4.506438892127695,
+      "liar_stale_f0125": 5.53737707317478
+    }
+  },
+  "margin_pp": 2.080197282342374,
+  "n_per_seed": 800,
+  "tost_power_if_equal": 0.9384092398834956,
+  "selected_at": "2026-10-09T07:59:39",
+  "rule": "pre-registered 2026-09-26, analysis/matched_triple.py docstring"
+}

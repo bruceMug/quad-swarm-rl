@@ -1,5 +1,68 @@
 # Tier 2 — reading the outputs
 
+> **Read §0 first (updated 2026-10-21).** The rest of this guide was written on the legacy corpus
+> (`results/`, collected before the 2026-09-24 seeding fix). Its descriptions of files, tokens and
+> attacker behaviour are still right; its numbers about the *honest* drones are not, and two of
+> its conclusions change. §0 gives the v2 picture; the full claim-by-claim check is in
+> [`tier2_design.md`](../design/tier2_design.md) §0.
+
+---
+
+## 0. Updated for v2 (2026-10-21)
+
+**Where the current files are.** Same names, new folder: `byzantine_experiments/results_v2/`
+(`tier2/*.npz|.json`, `tier2_calibration.md|.csv`, `tier2_behaviour.json`,
+`figures/behaviour_t2_*.png`). There are **57 v2 runs**, not 69: the 12-run waypoint α refinement
+(α 0.05–0.20) was not re-collected, so `waypoint α = 0.20` and the control-authority cliff (§6)
+exist only in the legacy data. v2 figures cover the f = 0.125 configs, so there is no v2 collusion
+figure.
+
+**What still holds:** what each attack does to its own drone. Behaviour, survival, guard exposure
+and swarm-wide damage are all close to the legacy values: sign-flip still tumbles and is mostly
+rescued by the guard, waypoint still drifts purposefully, the liar still looks exactly like a
+clean drone.
+
+**What changed — the honest drones** (paired, family level; `tier2_calibration.md`):
+
+| family | effect on the honest drones | legacy said |
+|---|---|---|
+| `liar` | **+5.7 %, significant** (p = 2×10⁻⁵) | +2.9 to +9.5 %, read as noise |
+| `waypoint` | −0.4 %, none | −6.3 to +6.1 %, none |
+| `signflip` | **−2.2 %, significantly *helps*** (p = 0.011) | −6.8 to +5.7 %, not tested |
+| `collusion` | **−2.8 %, significantly *helps*** (p = 0.043) | **+5.8 to +7.9 % (hurts) — wrong sign** |
+
+So §6's "attacking one or two drones out of eight does not measurably damage the other six" is
+**partly wrong**: the liar does, by a few percent. Its "honest drones often do slightly *better*"
+is **confirmed**, and is now significant for sign-flip and collusion.
+
+**At a glance, v2** (f = 0.125 unless stated; swarm-wide goal-RMSE degradation, attacker survival):
+
+| figure | damage | survival | one-line read |
+|---|---|---|---|
+| `behaviour_t2_signflip_full/partial` | 36 / 39 % | 72 / 63 % | violent tumbling, on the floor ~26–29 % of the time |
+| `behaviour_t2_waypoint_a0.3` | 74 % | 93 % | purposeful drift, partly dragged back |
+| `behaviour_t2_waypoint_a1.0` | 106 % | 99 % | **the cleanest attack** — smooth drift to the wrong place |
+| `behaviour_t2_liar_*` | 5–7 % | 98–99 % | indistinguishable from clean; its victims collide more |
+| collusion pincer / mirror_pair (f = 0.25, no figure) | 173 / 66 % | 99 / 51 % | waypoint-like / sign-flip-like |
+
+**§7's carry-forward results, re-checked:**
+1. *The 30 % team-damage target is unreachable at f = 0.125* — **borne out.** The Tier 3 gate was
+   recalibrated to 10 % on the honest drones and is still unreached (best trained adversary
+   +8.0 %).
+2. *Build the Tier 2 story on `waypoint`* — **superseded.** On the honest drones waypoint has no
+   effect; the validated family is `liar`, and the matched triple uses `liar_mirror_f0125`.
+3. *The liar's signal is in victim collisions* — **confirmed** (collisions +0.35 to +0.47 per
+   episode), and the trained Tier 3 adversary found the same mechanism on its own.
+4. *Matched pair gaussian σ 0.25 vs waypoint α 0.20* — **superseded** by the pre-registered
+   matched triple (stall / liar mirror / plausible Tier 3 liar; `tier3_design.md` §6.32).
+5. *A trained adversary will sit above the control-authority cliff* — **did not apply**: the
+   adversaries that work do not use their motors at all.
+
+---
+
+*The original guide follows (legacy numbers — see §0).*
+
+
 **Purpose:** pick up *any* file Tier 2 produced — a filename, a JSON key, a figure — and know
 what it is and why it exists, without reading code. Companion to
 [`TIER1_explanation.md`](TIER1_explanation.md).

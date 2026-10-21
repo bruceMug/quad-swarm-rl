@@ -22,6 +22,8 @@ import subprocess
 import sys
 from datetime import datetime
 
+import random
+
 import numpy as np
 import torch
 
@@ -39,6 +41,7 @@ from sample_factory.utils.utils import log
 from swarm_rl.train import parse_swarm_cfg, register_swarm_components
 
 import byzantine_experiments.agents  # noqa: F401  (populates BYZANTINE_REGISTRY)
+from byzantine_experiments.paths import SEEDING_SCHEME
 from byzantine_experiments.agents.base import BYZANTINE_REGISTRY
 from byzantine_experiments.analysis.metrics import compute_metrics
 from byzantine_experiments.analysis.wandb_logging import (
@@ -132,13 +135,74 @@ def load_policy(cfg, env, device):
     return actor_critic, checkpoints[-1]
 
 
-def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True):
+def seed_every_rng(env, seed):
+    """
+    Pin every RNG the sim draws from, including the ones `np.random.seed` does not reach.
+
+    Seeding the global numpy stream is NOT enough, and believing it was is why every rollout
+    in this project up to 2026-09-21 was unreproducible:
+
+      * each `QuadrotorSingle` owns its own `np_random`, seeded from OS entropy at
+        construction (`quadrotor_single.py` calls `_seed()` with no argument), and **that** is
+        what picks the spawn positions and goals;
+      * the experience-replay buffer samples with Python's `random`.
+
+    The consequence was not subtle. Two clean rollouts with the identical `--seed 777` differed
+    by 2.9 m at t = 0 -- different scenarios entirely. Each run therefore drew an uncontrolled
+    scenario set, producing a run-to-run standard deviation of ~7 % in mean goal RMSE that no
+    reported confidence interval accounted for, because every interval was computed from
+    episode variance within a single run. Folding that component in turned 20 significant
+    findings into 0 across 245 rollouts.
+
+    With this, two runs at the same seed draw the same scenarios, so a clean run and an
+    attacked run become **paired** and the run-level offset cancels instead of being estimated.
+
+    One RNG remains out of reach: numba's JIT-internal state, when `quads_use_numba=True`.
+    That perturbs the dynamics but not the scenario draw, so trajectories may still diverge
+    slightly while initial conditions and goals match -- which is what pairing needs.
+
+    This is the same helper `tests/test_tier0.py::seed_all` has always used; it simply was
+    never wired into the collector.
+    """
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    # Resolve `.unwrapped` here and not earlier: ExperienceReplayWrapper swaps `self.env` for
+    # a deepcopy on reset, so a cached reference would seed an env that gets thrown away.
+    inner = env.unwrapped
+    for i, e in enumerate(getattr(inner, 'envs', []) or []):
+        if hasattr(e, '_seed'):
+            e._seed(seed + i)
+    return inner
+
+
+def episode_seed(base_seed, episode_index):
+    """
+    Seed for one episode, a function of (run seed, episode index) ONLY.
+
+    Seeding once per run is not enough for paired comparisons. Collisions draw from the global
+    `np.random` stream (`collisions/quadrotors.py`: 9 normal draws per drone-drone contact;
+    `collisions/room.py`: several uniforms per wall hit), so an attacked run -- which collides
+    ~2.3x as often -- advances that stream differently from its clean twin, and every later
+    episode's scenario diverges. Measured: a clean and a `mirror`-liar run at the same seed had
+    identical spawns for episodes 0-2 and different ones for 46 of the remaining 47, with the
+    per-episode correlation between arms at -0.08 (no pairing at all).
+
+    Re-seeding at every boundary makes episode i the same scenario in every arm regardless of
+    what happened in episodes 0..i-1. The multiplier keeps per-episode seeds far apart from the
+    per-drone offsets (+0..+7) that `seed_every_rng` adds.
+    """
+    return (int(base_seed) * 1_000_003 + int(episode_index) * 7_919) % (2 ** 31 - 1)
+
+
+def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True, shift=None):
     """Run n_episodes and return (per-episode trajectory dicts, wrapper, extra summary)."""
-    # The quadrotor env draws its spawn/goal randomisation from the global numpy RNG.
     np.random.seed(seed)
     torch.manual_seed(seed)
 
-    env, byz = make_byzantine_env(cfg, byzantine_kwargs)
+    env, byz = make_byzantine_env(cfg, byzantine_kwargs, shift=shift)
+    # Must come AFTER construction: the per-drone RNGs do not exist until the envs do.
+    seed_every_rng(env, seed)
     env_info = extract_env_info(env, cfg)
 
     device = torch.device('cpu' if cfg.device == 'cpu' else 'cuda')
@@ -151,10 +215,21 @@ def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True):
     episode_rewards = []
     cur = None
 
-    def new_episode_buffers():
-        return dict(obs=[], actions_honest=[], actions_executed=[], rewards=[],
-                    positions=[], velocities=[], collisions=[])
+    record_broadcast = bool(byz is not None and getattr(byz, 'any_lies', False))
 
+    def new_episode_buffers():
+        b = dict(obs=[], actions_honest=[], actions_executed=[], rewards=[],
+                 positions=[], velocities=[], collisions=[])
+        if record_broadcast:
+            # What each liar CLAIMED this step, and the true post-step state it claimed about
+            # (NaN for drones that did not lie). Only present in runs with a liar.
+            b['broadcast'] = []
+            b['broadcast_truth'] = []
+        return b
+
+    # Seed immediately before each reset -- not once per run -- so episode i's scenario is a
+    # function of (seed, i) alone and pairs across arms. See `episode_seed`.
+    seed_every_rng(env, episode_seed(seed, 0))
     obs, _ = env.reset()
     cur = new_episode_buffers()
     episode_reward = None
@@ -194,6 +269,14 @@ def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True):
             cur['positions'].append(pos)
             cur['velocities'].append(vel)
             cur['collisions'].append(step_collisions(env))
+            if record_broadcast:
+                bc = np.full((num_agents, 6), np.nan, dtype=np.float32)
+                bt = np.full((num_agents, 6), np.nan, dtype=np.float32)
+                for i, v in byz.last_reported.items():
+                    bc[i] = v
+                    bt[i] = byz.last_reported_truth[i]
+                cur['broadcast'].append(bc)
+                cur['broadcast_truth'].append(bt)
 
             if episode_reward is None:
                 episode_reward = rew.float().clone()
@@ -215,6 +298,8 @@ def run_rollouts(cfg, byzantine_kwargs, n_episodes, seed, deterministic=True):
                 episode_reward = None
                 rnn_states = torch.zeros([num_agents, get_rnn_size(cfg)],
                                          dtype=torch.float32, device=device)
+                if completed < n_episodes:
+                    seed_every_rng(env, episode_seed(seed, completed))
                 obs, _ = env.reset()
 
     summary = dict(
@@ -279,6 +364,15 @@ def main():
     p.add_argument('--no-byzantine', action='store_true',
                    help='Skip the wrapper entirely -- a pure unwrapped baseline rollout')
     p.add_argument('--device', default=None, choices=['cpu', 'gpu'], help='Override cfg.device')
+    sh = p.add_argument_group('distribution shift (D5, Phase 3)')
+    sh.add_argument('--shift', default='none',
+                    help="none | mild | severe (levels from results_v2/shift_levels.json, set by "
+                         "the calibration) | custom (use the explicit parameters below)")
+    sh.add_argument('--dr-ratio', type=float, default=0.0,
+                    help='relative spread of upstream dynamics randomisation, resampled per episode')
+    sh.add_argument('--wind-accel', type=float, default=0.0, help='mean horizontal wind, m/s^2')
+    sh.add_argument('--gust', type=float, default=0.0, help='OU gust std per axis, m/s^2')
+    sh.add_argument('--gust-tau', type=float, default=1.0, help='OU gust correlation time, s')
 
     w = p.add_argument_group('wandb')
     w.add_argument('--wandb', action='store_true', help='Log this run to Weights & Biases')
@@ -312,9 +406,15 @@ def main():
             assignment_mode=known.assignment_mode,
         )
 
+    from byzantine_experiments.paths import RESULTS_ROOT
+    from byzantine_experiments.wrappers.shift import shift_params
+    shift = shift_params(level=(None if known.shift in ('none', 'custom') else known.shift),
+                         dr_ratio=known.dr_ratio, wind_accel=known.wind_accel,
+                         gust=known.gust, tau=known.gust_tau, results_root=RESULTS_ROOT)
+
     episodes, byz_mask, byz_config, summary = run_rollouts(
         cfg, byzantine_kwargs, known.n_episodes, known.seed,
-        deterministic=not known.stochastic,
+        deterministic=not known.stochastic, shift=shift,
     )
 
     data = pad_and_stack(episodes)
@@ -330,6 +430,11 @@ def main():
         np.savez_compressed(out_path, **data)
 
     sidecar = dict(
+        # Which seeding scheme produced this file. Paired analyses refuse files without it.
+        seeding=SEEDING_SCHEME,
+        # D5. Recorded on every run, 'none' included, so pairing can refuse to compare runs
+        # under different conditions: they share spawns, so the spawn check alone would not.
+        shift=shift,
         checkpoint=known.checkpoint,
         checkpoint_file=summary['checkpoint_file'],
         experiment=cfg.experiment,

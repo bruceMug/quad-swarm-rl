@@ -28,7 +28,9 @@
 
 set -uo pipefail
 
-PY=${PY:-/scratch/bmugizi/conda_envs/swarm_r311_recovered/bin/python}
+[[ -f scripts/byz_wandb_env.sh ]] && source scripts/byz_wandb_env.sh
+
+PY=${PY:-/scratch/bmugizi/conda_envs/swarm_r311_v2/bin/python}
 PARALLEL=${PARALLEL:-10}
 N_EPISODES=${N_EPISODES:-50}
 WANDB=${WANDB:-1}
@@ -36,8 +38,10 @@ FORCE=${FORCE:-0}
 ONLY=${ONLY:-all}
 DRY_RUN=${DRY_RUN:-0}
 
-RESULTS=byzantine_experiments/results/tier2
-LOGS=logs/tier2
+# v2 root: data from the fixed collector must never mix with the legacy folders, and the
+# skip-if-exists logic below would otherwise silently reuse the invalid legacy files.
+RESULTS=${BYZ_RESULTS_ROOT:-byzantine_experiments/results_v2}/tier2
+LOGS=${BYZ_LOGS_ROOT:-logs_v2}/tier2
 JOBS=$LOGS/jobs.tsv
 
 # ----------------------------------------------------------------- single-run worker
@@ -178,7 +182,7 @@ done
 n_jobs=$(wc -l < "$JOBS")
 echo "Tier 2 matrix: $n_jobs runs x $N_EPISODES episodes, $PARALLEL at a time"
 echo "  results -> $RESULTS      logs -> $LOGS"
-echo "  clean references reused from byzantine_experiments/results/tier1/t1_clean_s{1,2,3}"
+echo "  clean references reused from ${BYZ_RESULTS_ROOT:-byzantine_experiments/results_v2}/tier1/t1_clean_s{1,2,3}"
 echo "  wandb   -> $([[ "$WANDB" == "1" ]] && echo enabled || echo disabled)"
 echo
 

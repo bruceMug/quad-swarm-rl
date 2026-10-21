@@ -51,10 +51,11 @@ class EgoState:
     for the position controller). It deliberately carries nothing about any other drone.
     """
 
-    __slots__ = ('pos', 'vel', 'rot', 'omega', 'jacobian', 'jacobian_inv', 'room_box')
+    __slots__ = ('pos', 'vel', 'rot', 'omega', 'jacobian', 'jacobian_inv', 'room_box',
+                 'control_dt')
 
     def __init__(self, pos, vel, rot, omega, jacobian=None, jacobian_inv=None,
-                 room_box=None):
+                 room_box=None, control_dt=None):
         self.pos = pos
         self.vel = vel
         self.rot = rot
@@ -62,6 +63,9 @@ class EgoState:
         self.jacobian = jacobian
         self.jacobian_inv = jacobian_inv
         self.room_box = room_box
+        # Seconds per control step. Needed by a plausible liar (Tier 3, D3) to keep its claimed
+        # velocity consistent with its claimed trajectory; describes only the drone's own clock.
+        self.control_dt = control_dt
 
 
 class ByzantineAgent(ABC):

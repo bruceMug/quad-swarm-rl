@@ -3,6 +3,11 @@
 **Audience:** claude code
 **Prerequisite:** `TIER0_INFRASTRUCTURE.md` and `TIER1_STOCHASTIC.md` complete.
 
+> **Amendments.** Changes decided after this spec was written are recorded in dated blocks
+> next to the text they change; the original text is kept. **A1 (2026-09-26, decision D1):**
+> the 20–40 % band is replaced by family-level validation — see *severity calibration* and
+> *Validation gate*.
+
 ---
 
 ## What this tier is for
@@ -159,6 +164,23 @@ team degradation band** as your chosen Tier 1 configs. Matched-damage pairs are 
 paper's central comparison clean: *same damage, different mechanism, does the detector tell
 them apart?*
 
+> **Amendment A1 — 2026-09-26 (decision D1). The 20–40 % band is retired**, for the reasons
+> given in the Tier 1 spec's A1 (seeding-bug inflation; no v2 configuration reaches 20 % on the
+> honest drones — best Tier 2 family mean +5.7 %, best single run +13.1 %). A Tier 2 attack
+> family is *validated* when its runs together significantly damage the honest team (paired
+> honest goal-RMSE, one-sample t-test over runs, mean > 0, p < 0.05;
+> `analysis/family_validation.py`). Result: **`liar` validated** (+5.7 %, 16 of 18 runs
+> positive, p = 2×10⁻⁵). `signflip` (−2.2 %, p = 0.011) and `collusion` (−2.8 %, p = 0.043)
+> significantly *reduce* the honest drones' goal error (why is not established; the attacker
+> often crashing out early is one candidate), and `waypoint` has no family-level effect. Matched
+> pairs are chosen by the pre-registered matched-triple rule (`analysis/matched_triple.py`),
+> not by a band; the legacy matched-pair table in `results_v2/tier2_calibration.md` is kept
+> for the record only.
+>
+> **Clarification — 2026-10-21.** As for Tier 1: the attacker-side figures (its own damage,
+> survival, guard exposure) replicate in v2; the honest-drone figures did not, and on v2 data
+> `collusion` changes sign (legacy +5.8 to +7.9 %, v2 −2.8 %). See `design/tier2_design.md` §0.
+
 ---
 
 ## Tests — `byzantine_experiments/tests/test_tier2.py`
@@ -172,6 +194,8 @@ them apart?*
 7. Determinism, range compliance, isolation (as Tier 0/1)
 8. Survival guard fires when altitude drops below threshold
 9. Efficacy: every canonical config degrades team reward ≥ 20%
+   *(Unchanged by A1: this remains a smoke check that each action-space attack does something,
+   on the all-drone team reward over 3 episodes. It is not the validation criterion.)*
 
 Tests 4 and 5 together are the definition of a state-misreporting attack. Write them first
 for 2C.
@@ -182,6 +206,10 @@ for 2C.
 
 All tests pass; matrix complete; at least one config per variant lands in the 20–40%
 degradation band; the observation-layout mapping for 2C is documented and verified.
+
+> **Amended (A1, 2026-09-26):** "at least one config per variant in the 20–40 % band" is
+> replaced by "at least one attack family validated at the family level, with every family's
+> status reported". **Met:** `liar`.
 
 ---
 

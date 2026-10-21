@@ -27,3 +27,19 @@ byzantine_experiments/results/*.json
 byzantine_experiments/results/tier1
 byzantine_experiments/results/tier2
 byzantine_experiments/results/tier3
+# v2 corpus (2026-10-21): commit tables, reports, figures and block logs -- never the rollouts
+# (88 GB, single files up to 2.3 GB) or the per-run logs. Mirrors the legacy rules above.
+byzantine_experiments/results/**/*.npz
+byzantine_experiments/results_v2/**/*.npz
+byzantine_experiments/results_v2/tier1/
+byzantine_experiments/results_v2/tier2/
+byzantine_experiments/results_v2/tier3/
+byzantine_experiments/results_v2/tier3_confirm/
+byzantine_experiments/results_v2/matched_triple/
+byzantine_experiments/results_v2/phase3/
+byzantine_experiments/results_v2/shift_calibration/
+logs_v2/*/
+logs_v2/run_B_*.log
+
+# pip editable clone of the bruceMug/quad-swarm-rl fork (py_environment/requirements.txt line 100)
+src/

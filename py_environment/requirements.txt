@@ -24,7 +24,6 @@ GitPython==3.1.50
 grpcio==1.81.0
 gym==0.26.2
 gym-notices==0.1.0
-gym-pybullet-drones==2.1.0
 gymnasium==0.28.1
 hf-xet==1.5.0
 huggingface_hub==0.36.2
@@ -97,7 +96,7 @@ sentry-sdk==2.61.1
 signal-slot-mp==1.0.3
 six==1.17.0
 smmap==5.0.3
-stable_baselines3==2.8.0
+stable_baselines3==2.3.0
 -e git+https://github.com/bruceMug/quad-swarm-rl.git@bd8b502c9366a9d6e9a0d4c1389f5dae0a0daea4#egg=swarm_rl
 sympy==1.13.1
 tenacity==9.1.4
@@ -111,7 +110,7 @@ transforms3d==0.4.2
 triton==3.1.0
 typeguard==4.3.0
 typing-inspection==0.4.2
-typing_extensions @ file:///croot/typing_extensions_1756280817316/work
+typing_extensions==4.16.0
 tzdata==2026.2
 urllib3==2.7.0
 wandb==0.27.2

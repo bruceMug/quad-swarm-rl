@@ -1,0 +1,264 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+[36m[2026-09-19 17:29:19,554][578483] register_encoder_factory: <function make_quadmulti_encoder at 0x7f1cd801c720>[0m
+[33m[2026-09-19 17:29:19,572][578483] Loading existing experiment configuration from train_dir/exp1_baseline_seed3/config.json[0m
+[36m[2026-09-19 17:29:19,573][578483] Overriding arg 'train_dir' with value 'train_dir' passed from command line[0m
+[36m[2026-09-19 17:29:19,573][578483] Adding new argument 'fps'=0 that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,573][578483] Adding new argument 'eval_env_frameskip'=None that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,573][578483] Adding new argument 'no_render'=False that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,573][578483] Adding new argument 'save_video'=False that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,573][578483] Adding new argument 'video_frames'=1000000000.0 that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,573][578483] Adding new argument 'video_name'=None that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,573][578483] Adding new argument 'max_num_frames'=1000000000.0 that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,573][578483] Adding new argument 'max_num_episodes'=1000000000.0 that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'push_to_hub'=False that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'hf_repository'=None that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'policy_index'=0 that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'eval_deterministic'=False that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'train_script'=None that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'enjoy_script'=None that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'byzantine_enabled'=False that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'byzantine_tier'='' that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'byzantine_indices'='' that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'byzantine_config'='{}' that is not in the saved config file![0m
+[36m[2026-09-19 17:29:19,574][578483] Adding new argument 'byzantine_seed'=0 that is not in the saved config file![0m
+/scratch/bmugizi/conda_envs/swarm_r311_v2/lib/python3.11/site-packages/gymnasium/spaces/box.py:130: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  gym.logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+[33m[2026-09-19 17:29:20,971][578483] Loading state from checkpoint train_dir/exp1_baseline_seed3/checkpoint_p0/checkpoint_000976566_1000003584.pth...[0m
+/scratch/bmugizi/conda_envs/swarm_r311_v2/lib/python3.11/site-packages/sample_factory/algo/learning/learner.py:281: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint_dict = torch.load(latest_checkpoint, map_location=device)
+[37m[1m[2026-09-19 17:29:21,001][578483] Loaded checkpoint: train_dir/exp1_baseline_seed3/checkpoint_p0/checkpoint_000976566_1000003584.pth[0m
+[37m[1m[2026-09-19 17:29:24,103][578483] Collecting 200 episodes | tier=none | compromised=[][0m
+[37m[1m[2026-09-19 17:30:48,149][578483]   episode 5/200 | len=1501 | reward=4.505[0m
+[37m[1m[2026-09-19 17:31:57,181][578483]   episode 10/200 | len=1501 | reward=0.167[0m
+[37m[1m[2026-09-19 17:33:04,221][578483]   episode 15/200 | len=1501 | reward=2.600[0m
+[37m[1m[2026-09-19 17:34:11,323][578483]   episode 20/200 | len=1501 | reward=3.652[0m
+[37m[1m[2026-09-19 17:35:19,922][578483]   episode 25/200 | len=1501 | reward=4.456[0m
+[37m[1m[2026-09-19 17:36:30,485][578483]   episode 30/200 | len=1501 | reward=3.444[0m
+[37m[1m[2026-09-19 17:37:38,350][578483]   episode 35/200 | len=1501 | reward=0.638[0m
+[37m[1m[2026-09-19 17:38:44,861][578483]   episode 40/200 | len=1501 | reward=0.237[0m
+[37m[1m[2026-09-19 17:39:51,126][578483]   episode 45/200 | len=1501 | reward=3.273[0m
+[37m[1m[2026-09-19 17:40:56,963][578483]   episode 50/200 | len=1501 | reward=1.770[0m
+[37m[1m[2026-09-19 17:42:03,044][578483]   episode 55/200 | len=1501 | reward=-12.467[0m
+[37m[1m[2026-09-19 17:43:07,977][578483]   episode 60/200 | len=1501 | reward=-9.147[0m
+[37m[1m[2026-09-19 17:44:10,841][578483]   episode 65/200 | len=1501 | reward=1.527[0m
+[37m[1m[2026-09-19 17:45:13,246][578483]   episode 70/200 | len=1501 | reward=1.029[0m
+[37m[1m[2026-09-19 17:46:17,286][578483]   episode 75/200 | len=1501 | reward=2.588[0m
+[37m[1m[2026-09-19 17:47:19,586][578483]   episode 80/200 | len=1501 | reward=-1.387[0m
+[37m[1m[2026-09-19 17:48:22,136][578483]   episode 85/200 | len=1501 | reward=-7.127[0m
+[37m[1m[2026-09-19 17:49:26,885][578483]   episode 90/200 | len=1501 | reward=4.172[0m
+[37m[1m[2026-09-19 17:50:35,872][578483]   episode 95/200 | len=1501 | reward=0.218[0m
+[37m[1m[2026-09-19 17:51:42,389][578483]   episode 100/200 | len=1501 | reward=-7.149[0m
+[37m[1m[2026-09-19 17:52:47,487][578483]   episode 105/200 | len=1501 | reward=2.810[0m
+[37m[1m[2026-09-19 17:53:53,044][578483]   episode 110/200 | len=1501 | reward=-2.411[0m
+[37m[1m[2026-09-19 17:54:58,517][578483]   episode 115/200 | len=1501 | reward=4.442[0m
+[37m[1m[2026-09-19 17:56:06,203][578483]   episode 120/200 | len=1501 | reward=3.155[0m
+[37m[1m[2026-09-19 17:57:15,159][578483]   episode 125/200 | len=1501 | reward=-1.021[0m
+[37m[1m[2026-09-19 17:58:21,689][578483]   episode 130/200 | len=1501 | reward=4.354[0m
+[37m[1m[2026-09-19 17:59:26,890][578483]   episode 135/200 | len=1501 | reward=-5.893[0m
+[37m[1m[2026-09-19 18:00:32,209][578483]   episode 140/200 | len=1501 | reward=-3.510[0m
+[37m[1m[2026-09-19 18:01:38,497][578483]   episode 145/200 | len=1501 | reward=3.356[0m
+[37m[1m[2026-09-19 18:02:46,146][578483]   episode 150/200 | len=1501 | reward=-4.506[0m
+[37m[1m[2026-09-19 18:03:48,767][578483]   episode 155/200 | len=1501 | reward=-2.714[0m
+[37m[1m[2026-09-19 18:04:55,708][578483]   episode 160/200 | len=1501 | reward=3.872[0m
+[37m[1m[2026-09-19 18:06:02,053][578483]   episode 165/200 | len=1501 | reward=4.439[0m
+[37m[1m[2026-09-19 18:07:08,482][578483]   episode 170/200 | len=1501 | reward=4.298[0m
+[37m[1m[2026-09-19 18:08:14,236][578483]   episode 175/200 | len=1501 | reward=-6.481[0m
+[37m[1m[2026-09-19 18:09:18,868][578483]   episode 180/200 | len=1501 | reward=1.286[0m
+[37m[1m[2026-09-19 18:10:22,615][578483]   episode 185/200 | len=1501 | reward=3.452[0m
+[37m[1m[2026-09-19 18:11:25,333][578483]   episode 190/200 | len=1501 | reward=1.334[0m
+[37m[1m[2026-09-19 18:12:27,696][578483]   episode 195/200 | len=1501 | reward=3.505[0m
+[37m[1m[2026-09-19 18:13:29,556][578483]   episode 200/200 | len=1501 | reward=3.929[0m
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /scratch/bmugizi/.netrc.
+2026/09/19 18:14:05 ERROR main: failed to get logger path error="error opening log file: open /afs/andrew.cmu.edu/usr6/bmugizi/.cache/wandb/logs/core-debug-20260919_181405.log: permission denied"
+2026/09/19 18:14:05 INFO server: will exit if parent process dies ppid=578483
+2026/09/19 18:14:05 INFO server: accepting connections addr=/tmp/wandb-578483-612537-2491609005/socket
+2026/09/19 18:14:05 INFO connection: ManageConnectionData: new connection created id=1(@)
+wandb: Currently logged in as: bmugizi (bmugizi-carnegie-mellon-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+2026/09/19 18:14:05 INFO handleInformInit: received streamId=2f9pp3rn id=1(@)
+2026/09/19 18:14:05 INFO handleInformInit: stream started streamId=2f9pp3rn id=1(@)
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run 2f9pp3rn
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /scratch/bmugizi/marl_research/quad-swarm-r1/wandb/run-20260919_181405-2f9pp3rn
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run confirm_clean_s3_n200
+wandb: ⭐️ View project at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp
+wandb: 🚀 View run at https://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/2f9pp3rn
+2026/09/19 18:14:06 INFO handleInformTeardown: server teardown initiated id=1(@)
+2026/09/19 18:14:06 INFO connection: closing id=1(@)
+2026/09/19 18:14:06 INFO server: is shutting down
+2026/09/19 18:14:06 INFO processOutgoingData: finished id=1(@)
+2026/09/19 18:14:06 INFO connection: closed successfully id=1(@)
+2026/09/19 18:14:06 ERROR analytics: failed to send telemetry to backend proxy error="failed to upload metrics: Post \"https://api.wandb.ai/sdk/otel/v1/metrics\": context canceled"
+2026/09/19 18:14:06 INFO server: listener closed addr=/tmp/wandb-578483-612537-2491609005/socket
+2026/09/19 18:14:07 ERROR analytics: failed to send telemetry to backend proxy error="failed to upload metrics: Post \"https://api.wandb.ai/sdk/otel/v1/metrics\": context canceled"
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mconfirm_clean_s3_n200[0m at: [34mhttps://wandb.ai/bmugizi-carnegie-mellon-university/byzantine_exp/runs/2f9pp3rn[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260919_181405-2f9pp3rn/logs[0m
+2026/09/19 18:14:07 INFO handleInformTeardown: server shutdown complete id=1(@)
+2026/09/19 18:14:07 ERROR analytics: failed to send telemetry to backend proxy error="failed to upload metrics: Post \"https://api.wandb.ai/sdk/otel/v1/metrics\": context canceled"
+2026/09/19 18:14:08 INFO connection: ManageConnectionData: connection closed id=1(@)
+2026/09/19 18:14:08 INFO server: all connections closed
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Observation components: ['xyz', 'vxyz', 'R', 'omega', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz', 'rxyz', 'rvxyz']
+Added new collision event to buffer at 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Added new collision event to buffer at 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Added new collision event to buffer at 2
+Replaying event at idx 1
+Added new collision event to buffer at 3
+Replaying event at idx 2
+Replaying event at idx 2
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 1
+Added new collision event to buffer at 4
+Added new collision event to buffer at 5
+Replaying event at idx 2
+Replaying event at idx 3
+Replaying event at idx 3
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 2
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 2
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Added new collision event to buffer at 6
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 2
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Added new collision event to buffer at 7
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Added new collision event to buffer at 8
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Added new collision event to buffer at 9
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Added new collision event to buffer at 10
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 0
+Added new collision event to buffer at 11
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 1
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+Replaying event at idx 0
+
+Wrote byzantine_experiments/results/tier3_confirm/confirm_clean_s3_n200.npz
+  obs                  (200, 1501, 8, 54)           float32
+  actions_honest       (200, 1501, 8, 4)            float32
+  actions_executed     (200, 1501, 8, 4)            float32
+  rewards              (200, 1501, 8)               float32
+  positions            (200, 1501, 8, 3)            float32
+  velocities           (200, 1501, 8, 3)            float32
+  collisions           (200, 1501)                  float32
+  episode_lengths      (200,)                       int32
+  byzantine_mask       (8,)                         bool
+Wrote byzantine_experiments/results/tier3_confirm/confirm_clean_s3_n200.json
+
+mean episode reward   : 0.288430 ± 3.832416  (n=200)
+goal_rmse_mean        : 1.182184
+goal_rmse_honest_mean : 1.182184
+collisions_mean       : 0.400000
+action_deviation_byzantine_mean: 0.000000
+saturation_rate_byzantine: 0.000000
+min_separation_mean   : 0.358768
+[wandb] logging FAILED (PermissionError: [Errno 13] Permission denied: '/afs/andrew.cmu.edu/usr6/bmugizi/.local/share/wandb/artifacts/staging/tmp3bwzd0yl'). Data is saved; re-log with backfill_wandb.

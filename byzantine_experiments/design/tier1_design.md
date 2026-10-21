@@ -1,5 +1,106 @@
 # Tier 1 — Stochastic Faults: design notes
 
+> **Read §0 first (updated 2026-10-21).** Sections 1–8 are the original notes, measured with the
+> pre-fix collector (before 2026-09-24 `--seed` did not fix the scenarios, and comparisons were
+> unpaired). §0 re-checks each quantitative claim against the re-collected v2 data. In short:
+> **the faulty drone's own behaviour, and the swarm-wide degradation it causes, replicate** (20 of
+> 29 shared configs within 5 pp); **the small effects on the honest drones do not** (their sign
+> changed in 10 of 29), so for those only v2 numbers may be quoted. This note replaces the
+> 2026-09-25 banner, which said every figure here was "inflated roughly 3×" — true of the
+> honest-drone effects and of single-run headline results, not of this document's swarm-wide or
+> behaviour figures.
+
+---
+
+## 0. v2 results (2026-10-21) — what holds and what changed
+
+**Data.** `results_v2/tier1/`: 90 runs (87 faulty + 3 clean), 50 episodes each, baseline seeds
+1–3, every sidecar tagged `seeding: per_episode_v2`, each run paired episode-for-episode with the
+clean run at its seed. Table: [`results_v2/tier1_calibration.md`](../results_v2/tier1_calibration.md).
+Behaviour: [`results_v2/tier1_behaviour.json`](../results_v2/tier1_behaviour.json) and
+`results_v2/figures/behaviour_t1_*.png` (seed 1, every f = 0.125 config).
+
+**Not re-collected:** the 33-run refinement grid (gaussian σ 0.30–0.40, OU σ_ou 0.04–0.08,
+dropout p 0.5–0.98). It existed only to find configurations in the 20–40 % band, which was retired
+(spec amendment A1). Its rows in §3 stay legacy and unconfirmed — including the old 1B canonical,
+OU σ_ou = 0.06.
+
+### 0.1 Severity: the swarm-wide numbers replicate
+
+On §3's own axis — goal-RMSE degradation over all 8 drones, which the faulty drone dominates:
+
+| config (f = 0.125) | legacy | v2 |
+|---|---|---|
+| gaussian σ 0.25 (old canonical 1A) | 23.6 % | 21.8 % |
+| gaussian σ 0.5 | 52.1 % | 52.9 % |
+| OU σ_ou 0.1 | 57.2 % | 55.8 % |
+| OU σ_ou 0.2 | 60.9 % | 49.5 % (the largest change) |
+| stall d0.25 / ms0.3 (old canonical 1C′) | 25.5 % | 21.3 % |
+| stall d0.50 / ms0.3 | 36.1 % | 38.0 % |
+| dropout p0.3 hold | 0.0 % | −1.1 % |
+
+Across all 29 configs in both corpora: median change −1.7 pp, 20 of 29 within 5 pp, largest
+11.4 pp. Five v2 configs still fall in 20–40 % on this axis (gaussian σ 0.25 at f = 0.125 and
+0.25; stall d0.25/ms0.3, d0.25/ms1.0, d0.50/ms0.3). The band was retired anyway, for the reason
+that still holds: the cross-tier comparison is on the **honest** drones (a Tier 3 liar does not
+degrade itself), and there no Tier 1 configuration comes near 20 %.
+
+### 0.2 The honest drones: small effects, now measured properly
+
+- §4's "the honest column never exceeds ~10 %" **holds**: per-config v2 paired means run from
+  −2.4 % to +6.6 %.
+- The per-config honest values in §3 (e.g. +9.7 % for OU σ_ou 0.2) **do not replicate** — 10 of 29
+  changed sign; that OU row is −0.3 % paired. Do not quote them.
+- **New in v2: the family-level test.** `stall` damages the honest drones, slightly but
+  significantly: +2.6 %, 21 of 27 runs positive, p = 0.0004. Gaussian (+1.9 %, p = 0.13), dropout
+  (+0.5 %, p = 0.51) and OU (−0.8 %, p = 0.40) have no detectable effect. So §4/§8's "the team
+  absorbs the fault almost perfectly" is true for three of the four faults and *almost* true for
+  the fourth: a lurching drone measurably disturbs its neighbours.
+- This is why the matched triple's Tier 1 member is a stall configuration (`d0.50/ms0.1`, +2.69 %
+  [+1.53, +3.85] at n = 800 per seed; `tier3_design.md` §6.32).
+
+### 0.3 Behaviour: every description in §6 holds
+
+Faulty drone, seed 1, legacy → v2 (from the two `tier1_behaviour.json` files):
+
+| config | jitter | action jitter | goal error (m) | persistence | floor time |
+|---|---|---|---|---|---|
+| clean | 0.024 → 0.026 | 0.022 → 0.022 | 0.80 → 0.81 | 0.685 → 0.682 | 0.7 → 1.1 % |
+| gaussian σ 0.25 | 0.060 → 0.066 | 0.666 → 0.665 | 1.39 → 1.65 | 0.66 → 0.69 | 6.2 → 8.0 % |
+| gaussian σ 0.5 | 0.141 → 0.142 | 1.132 → 1.136 | 3.60 → 3.49 | 0.91 → 0.92 | 50 → 54 % |
+| OU σ_ou 0.1 | 0.155 → 0.155 | 0.199 → 0.199 | 3.52 → 3.71 | 0.92 → 0.93 | 55 → 54 % |
+| OU σ_ou 0.4 | 0.107 → 0.107 | 0.629 → 0.629 | 3.15 → 3.37 | 0.97 → 0.97 | 92 → 92 % |
+| stall d0.25 / ms0.3 | 0.079 → 0.074 | 0.020 → 0.020 | 1.86 → 1.65 | 0.72 → 0.70 | 10.7 → 9.7 % |
+| stall d0.50 / ms1.0 | 0.108 → 0.112 | 0.013 → 0.013 | 2.60 → 2.71 | 0.80 → 0.79 | 26 → 28 % |
+| dropout p0.3 hold | 0.024 → 0.023 | 0.021 → 0.021 | 0.70 → 0.72 | 0.69 → 0.68 | 1.0 → 0.7 % |
+
+Gaussian **wobbles** without a direction; OU **drifts** with persistence 0.93–0.97 and spends
+54–92 % of the time on the floor; stall **lurches**, with a *smoother* command than clean (action
+jitter 0.013 at ms1.0) but a wider one; dropout is **indistinguishable** from clean. (A few
+action-jitter values in §6's prose do not match even the legacy JSON — e.g. gaussian σ 0.1 is
+0.19 in the text and 0.272 in the file; cite the JSON values.)
+
+### 0.4 §8's surprises, re-checked
+
+| # | claim | v2 |
+|---|---|---|
+| 1 | per-step dropout is near-null at 100 Hz | **holds** — family +0.5 % on the honest drones; action deviation 0.001–0.008 unchanged |
+| 2 | OU's stationary std is 1.9× σ_ou | property of the code, unaffected |
+| 3 | OU does more damage per unit perturbation | **holds** — σ_ou 0.1: 55.8 % at action deviation 0.355; gaussian σ 0.25: 21.8 % at 0.467 |
+| 4 | OU saturates and turns down; stall rises monotonically | **holds** — OU 55.8 → 49.5 → 45.4 %; stall rises with duty at every stall length |
+| 5 | the team absorbs the fault | **mostly** — not quite for stall (0.2) |
+| 6 | the `.unwrapped` collector bug | historical, fixed before both corpora |
+
+### 0.5 What §4's matching advice became
+§4 proposed matching Tier 3 on a per-agent axis. The project instead matched all three tiers on
+the honest drones with a pre-registered equivalence test (TOST, ±2.08 pp, n = 800 per seed;
+`tier3_design.md` §6.27, §6.32): Tier 3 is equivalent to this tier's stall member.
+
+---
+
+*Original notes follow (legacy collector — see §0 before quoting a number).*
+
+
 Implementation record for [specs/TIER1_STOCHASTIC.md](../specs/TIER1_STOCHASTIC.md).
 Branch `feature/byzantine`. Built on the Tier 0 infrastructure
 ([tier0_design.md](tier0_design.md)); no upstream files were modified for Tier 1.

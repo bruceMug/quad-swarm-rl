@@ -25,6 +25,7 @@ Usage:
     python -m byzantine_experiments.analysis.behaviour --plots --wandb
 """
 
+from byzantine_experiments.paths import RESULTS_ROOT, results_dir
 import argparse
 import glob
 import json
@@ -32,10 +33,10 @@ import os
 
 import numpy as np
 
-RESULTS_DIR = 'byzantine_experiments/results/tier1'
-FIG_DIR = 'byzantine_experiments/results/figures'
-OUT_JSON = 'byzantine_experiments/results/tier1_behaviour.json'
-OUT_JSON_BY_PREFIX = {'t1': OUT_JSON, 't2': 'byzantine_experiments/results/tier2_behaviour.json'}
+RESULTS_DIR = results_dir('tier1')
+FIG_DIR = os.path.join(RESULTS_ROOT, 'figures')
+OUT_JSON = os.path.join(RESULTS_ROOT, 'tier1_behaviour.json')
+OUT_JSON_BY_PREFIX = {'t1': OUT_JSON, 't2': os.path.join(RESULTS_ROOT, 'tier2_behaviour.json')}
 
 PERSISTENCE_LAG = 50   # steps = 0.5 s at the env's 100 Hz control rate
 FLOOR_Z = 0.15
